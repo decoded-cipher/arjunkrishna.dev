@@ -26,7 +26,7 @@ const updated = lastUpdated('src/content/home.mdx');
     <Portrait />
     <Bio />
     <Margin>Some things I've made</Margin>
-    <ul class="made span">
+    <ul class="made">
       {
         made.map(({ data }) => (
           <li>
@@ -36,7 +36,7 @@ const updated = lastUpdated('src/content/home.mdx');
       }
       <li class="small">More on the <a href="/work/">work</a> page.</li>
     </ul>
-    <p class="small span">
+    <p class="small">
       Last updated on {longDate(updated)}. I can be reached at{' '}
       <a class="u-email" href={`mailto:${site.email}`}>{site.email}</a>, and I'm on{' '}
       {
@@ -50,7 +50,7 @@ const updated = lastUpdated('src/content/home.mdx');
     </p>
   </section>
 
-  <div class="fleuron" aria-hidden="true">⁂</div>
+  <div class="fleuron" aria-hidden="true">* * *</div>
 
   <section class="grid" aria-labelledby="writing">
     <h2 class="section-title" id="writing">Writing</h2>

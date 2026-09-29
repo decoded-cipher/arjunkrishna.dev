@@ -58,10 +58,12 @@ h3 {
   font-weight: 600;
   line-height: 1.1;
   margin: 0;
+  text-wrap: balance;
 }
 
 p {
   margin: 0;
+  text-wrap: pretty;
 }
 
 .skip {
@@ -137,8 +139,8 @@ main {
 
 .grid {
   display: grid;
-  grid-template-columns: 190px minmax(0, 1fr) 320px;
-  column-gap: 56px;
+  grid-template-columns: 170px minmax(0, 40rem) minmax(0, 1fr);
+  column-gap: 48px;
   row-gap: 1.375rem;
   align-items: start;
 }
@@ -164,11 +166,6 @@ main {
   text-decoration: none;
 }
 
-.grid > .span {
-  grid-column: 2 / span 2;
-  max-width: 760px;
-}
-
 /* Home */
 
 .masthead {
@@ -192,14 +189,17 @@ main {
 .portrait {
   grid-column: 3;
   grid-row: 1 / span 4;
+  width: 100%;
+  max-width: 300px;
   margin: 0;
 }
 
 .portrait img,
 .portrait .placeholder {
   display: block;
-  width: 320px;
-  height: 400px;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4 / 5;
   object-fit: cover;
   background: var(--placeholder);
 }
@@ -263,9 +263,8 @@ main {
 
 .fleuron {
   text-align: center;
-  font-family: var(--font-display);
-  font-size: 2rem;
-  letter-spacing: 0.5em;
+  font-size: 1.375rem;
+  letter-spacing: 0.6em;
   color: var(--accent);
 }
 
@@ -411,6 +410,25 @@ main {
   }
 }
 
+/* Laptops and tablets: drop the aside column; the portrait sits under the name. */
+
+@media (max-width: 1100px) and (min-width: 901px) {
+  .grid {
+    grid-template-columns: 170px minmax(0, 40rem);
+    column-gap: 40px;
+  }
+
+  .portrait {
+    grid-column: 2;
+    grid-row: auto;
+    max-width: 280px;
+  }
+
+  .row > .aside {
+    display: none;
+  }
+}
+
 /* Phones and narrow windows: one column, notes above their paragraphs. */
 
 @media (max-width: 900px) {
@@ -423,7 +441,8 @@ main {
   }
 
   .site-header {
-    gap: 1rem;
+    flex-wrap: wrap;
+    gap: 0.25rem 1rem;
   }
 
   .site-header nav {
@@ -444,7 +463,6 @@ main {
 
   .grid > *,
   .grid > .margin,
-  .grid > .span,
   .portrait,
   .section-title,
   .year,
@@ -471,13 +489,11 @@ main {
 
   .tagline {
     font-size: 0.8125rem;
+    letter-spacing: 0.1em;
   }
 
-  .portrait img,
-  .portrait .placeholder {
-    width: 100%;
-    height: auto;
-    aspect-ratio: 4 / 5;
+  .portrait {
+    max-width: 15rem;
   }
 
   .quote blockquote {
@@ -487,6 +503,22 @@ main {
   .rows,
   .row {
     row-gap: 0;
+  }
+
+  .project > .when {
+    flex-direction: row;
+    gap: 0.5rem;
+    padding: 0 0 0.25rem;
+  }
+
+  .project .status::before {
+    content: '·';
+    margin-right: 0.5rem;
+    font-style: normal;
+  }
+
+  .site-footer {
+    flex-direction: column;
   }
 
   .row > .when {
