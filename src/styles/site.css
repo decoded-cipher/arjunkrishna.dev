@@ -1,0 +1,522 @@
+:root {
+  --bg: #f3f2ee;
+  --text: #2a2826;
+  --muted: #6f6b64;
+  --rule: #dedbd4;
+  --accent: #c5370f;
+  --placeholder: #d6d4cf;
+  color-scheme: light dark;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #1b1a18;
+    --text: #e9e6df;
+    --muted: #9d998f;
+    --rule: #34322e;
+    --accent: #ff6a3d;
+    --placeholder: #2c2a27;
+  }
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 1.3125rem;
+  line-height: 1.6;
+  font-kerning: normal;
+  text-rendering: optimizeLegibility;
+}
+
+a {
+  color: var(--accent);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.18em;
+}
+
+a:hover {
+  color: var(--text);
+  text-decoration-thickness: 2px;
+}
+
+a:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--bg);
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 600;
+  line-height: 1.1;
+  margin: 0;
+}
+
+p {
+  margin: 0;
+}
+
+.skip {
+  position: absolute;
+  left: -9999px;
+}
+
+.skip:focus {
+  left: 1rem;
+  top: 1rem;
+  padding: 0.5rem 1rem;
+  background: var(--bg);
+}
+
+.page {
+  max-width: calc(1180px + 3rem);
+  margin: 0 auto;
+  padding: 2.25rem 1.5rem 3rem;
+}
+
+.site-header {
+  display: flex;
+  align-items: baseline;
+  gap: 2rem;
+  padding-bottom: 0.9rem;
+  border-bottom: 1px solid var(--rule);
+  font-size: 1.125rem;
+}
+
+.site-header .name {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 600;
+  font-size: 1.625rem;
+  color: var(--text);
+  text-decoration: none;
+}
+
+.site-header nav {
+  display: flex;
+  gap: 2rem;
+  margin-left: auto;
+}
+
+.site-header nav a {
+  text-decoration: none;
+}
+
+.site-header nav a[aria-current='page'] {
+  color: var(--text);
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  gap: 2.75rem;
+  padding-top: 2.75rem;
+}
+
+.site-footer {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.5rem 2rem;
+  margin-top: 4rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--rule);
+  font-size: 1rem;
+  color: var(--muted);
+}
+
+/* The three-column page: margin notes, text, and an aside column. */
+
+.grid {
+  display: grid;
+  grid-template-columns: 190px minmax(0, 1fr) 320px;
+  column-gap: 56px;
+  row-gap: 1.375rem;
+  align-items: start;
+}
+
+.grid > * {
+  grid-column: 2;
+}
+
+.grid > .margin {
+  grid-column: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  padding-top: 0.35rem;
+  text-align: right;
+  font-size: 0.9375rem;
+  line-height: 1.45;
+  font-style: italic;
+  color: var(--muted);
+}
+
+.margin a {
+  text-decoration: none;
+}
+
+.grid > .span {
+  grid-column: 2 / span 2;
+  max-width: 760px;
+}
+
+/* Home */
+
+.masthead {
+  padding-top: 0.75rem;
+}
+
+.masthead h1 {
+  font-size: 6.5rem;
+  line-height: 0.92;
+  letter-spacing: -0.015em;
+}
+
+.tagline {
+  padding-top: 1.1rem;
+  font-size: 1rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.portrait {
+  grid-column: 3;
+  grid-row: 1 / span 4;
+  margin: 0;
+}
+
+.portrait img,
+.portrait .placeholder {
+  display: block;
+  width: 320px;
+  height: 400px;
+  object-fit: cover;
+  background: var(--placeholder);
+}
+
+.bio > p:first-of-type::first-letter {
+  float: left;
+  padding: 0.1em 0.12em 0 0;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 4.1em;
+  line-height: 0.8;
+  color: var(--accent);
+}
+
+@supports (initial-letter: 3) or (-webkit-initial-letter: 3) {
+  .bio > p:first-of-type::first-letter {
+    float: none;
+    padding: 0;
+    margin-right: 0.12em;
+    font-size: inherit;
+    line-height: inherit;
+    -webkit-initial-letter: 3;
+    initial-letter: 3;
+  }
+}
+
+.quote {
+  margin: 1rem 0 0.4rem;
+  padding: 0.25rem 0 0.25rem 1.75rem;
+  border-left: 3px solid var(--accent);
+}
+
+.quote blockquote {
+  margin: 0;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 500;
+  font-size: 2.125rem;
+  line-height: 1.25;
+}
+
+.quote figcaption {
+  padding-top: 0.6rem;
+  font-size: 1rem;
+  color: var(--muted);
+}
+
+.made {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.small {
+  font-size: 1.125rem;
+  color: var(--muted);
+}
+
+.fleuron {
+  text-align: center;
+  font-family: var(--font-display);
+  font-size: 2rem;
+  letter-spacing: 0.5em;
+  color: var(--accent);
+}
+
+/* Lists of posts and projects: rows that share the page grid. */
+
+.rows {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: subgrid;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.row {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: subgrid;
+  align-items: baseline;
+}
+
+.row > .when {
+  grid-column: 1;
+  padding: 0.55rem 0;
+  text-align: right;
+  font-size: 1rem;
+  color: var(--muted);
+  font-variant-numeric: oldstyle-nums;
+}
+
+.row > .what {
+  grid-column: 2;
+  padding: 0.35rem 0;
+}
+
+.row > .aside {
+  grid-column: 3;
+  padding: 0.55rem 0;
+  font-size: 0.9375rem;
+  line-height: 1.45;
+  font-style: italic;
+  color: var(--muted);
+}
+
+.posts .what a {
+  font-size: 1.375rem;
+  line-height: 1.4;
+  color: var(--text);
+  text-decoration: none;
+}
+
+.posts .row:hover .what a,
+.posts .row:focus-within .what a {
+  color: var(--accent);
+}
+
+.posts .aside {
+  align-self: start;
+  height: 0;
+  overflow: visible;
+  opacity: 0;
+}
+
+.posts .row:hover .aside,
+.posts .row:focus-within .aside {
+  opacity: 1;
+}
+
+.source {
+  font-size: 0.9375rem;
+  color: var(--muted);
+}
+
+.section-title {
+  grid-column: 1;
+  text-align: right;
+  font-size: 2.125rem;
+}
+
+.year {
+  grid-column: 1;
+  padding-top: 1.5rem;
+  text-align: right;
+  font-size: 1.75rem;
+}
+
+/* Work */
+
+.intro {
+  max-width: 680px;
+}
+
+.intro h1 {
+  padding-bottom: 0.75rem;
+  font-size: 3.25rem;
+}
+
+.project {
+  padding: 1.1rem 0;
+  border-top: 1px solid var(--rule);
+}
+
+.project > .when {
+  display: flex;
+  flex-direction: column;
+  padding-top: 0.3rem;
+}
+
+.project .status {
+  font-style: italic;
+}
+
+.project > .what {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  max-width: 680px;
+}
+
+.project h3 {
+  font-size: 1.75rem;
+}
+
+.links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 1.25rem;
+  font-size: 1.0625rem;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a,
+  .posts .aside {
+    transition:
+      color 120ms ease,
+      opacity 160ms ease;
+  }
+}
+
+@media (hover: none) {
+  .posts .aside {
+    display: none;
+  }
+}
+
+/* Phones and narrow windows: one column, notes above their paragraphs. */
+
+@media (max-width: 900px) {
+  body {
+    font-size: 1.1875rem;
+  }
+
+  .page {
+    padding: 1rem 1.375rem 2.5rem;
+  }
+
+  .site-header {
+    gap: 1rem;
+  }
+
+  .site-header nav {
+    gap: 1.25rem;
+  }
+
+  main {
+    gap: 2rem;
+    padding-top: 1.75rem;
+  }
+
+  .grid,
+  .rows,
+  .row {
+    grid-template-columns: minmax(0, 1fr);
+    row-gap: 1.25rem;
+  }
+
+  .grid > *,
+  .grid > .margin,
+  .grid > .span,
+  .portrait,
+  .section-title,
+  .year,
+  .row > .when,
+  .row > .what,
+  .row > .aside {
+    grid-column: 1;
+    grid-row: auto;
+  }
+
+  .grid > .margin {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 0 1rem;
+    margin-bottom: -0.9rem;
+    padding-top: 0;
+    text-align: left;
+    font-size: 0.875rem;
+  }
+
+  .masthead h1 {
+    font-size: 4rem;
+  }
+
+  .tagline {
+    font-size: 0.8125rem;
+  }
+
+  .portrait img,
+  .portrait .placeholder {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 4 / 5;
+  }
+
+  .quote blockquote {
+    font-size: 1.6875rem;
+  }
+
+  .rows,
+  .row {
+    row-gap: 0;
+  }
+
+  .row > .when {
+    padding: 0.6rem 0 0;
+    text-align: left;
+    font-size: 0.875rem;
+    font-style: italic;
+  }
+
+  .row > .what {
+    padding-top: 0;
+  }
+
+  .posts .aside {
+    display: none;
+  }
+
+  .section-title,
+  .year {
+    text-align: left;
+  }
+}
