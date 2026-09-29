@@ -2,7 +2,7 @@
 name: Reelity
 years: "2026"
 status: complete
-order: 5
+order: 4
 featured: true
 homeLine: paste a product pitch and a link, and get a short vertical video, rendered in the browser.
 stack: Cloudflare Workers, Vue, Claude API, ffmpeg.wasm

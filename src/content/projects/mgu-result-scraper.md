@@ -2,7 +2,7 @@
 name: MGU Result Scraper
 years: "2022"
 status: archived
-order: 7
+order: 12
 featured: true
 homeLine: fetched exam results from the university portal and emailed every student theirs as a PDF.
 stack: Node.js, Playwright, RabbitMQ
