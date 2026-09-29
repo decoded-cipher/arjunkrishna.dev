@@ -1,0 +1,28 @@
+---
+import { Picture } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+
+const images = import.meta.glob<{ default: ImageMetadata }>('/assets/portrait-1.{jpg,jpeg,png,webp}', {
+  eager: true,
+});
+const portrait = Object.values(images)[0]?.default;
+---
+
+<figure class="portrait">
+  {
+    portrait ? (
+      <Picture
+        class="u-photo"
+        src={portrait}
+        alt="Arjun Krishna, in black and white"
+        widths={[320, 640]}
+        sizes="(max-width: 900px) 100vw, 320px"
+        formats={['avif', 'webp']}
+        loading="eager"
+        fetchpriority="high"
+      />
+    ) : (
+      <div class="placeholder" role="img" aria-label="Portrait coming soon" />
+    )
+  }
+</figure>

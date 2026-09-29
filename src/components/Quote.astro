@@ -1,0 +1,14 @@
+---
+interface Props {
+  source: string;
+  href: string;
+  year: number;
+}
+
+const { source, href, year } = Astro.props;
+---
+
+<figure class="quote span">
+  <blockquote><slot /></blockquote>
+  <figcaption>— from <a href={href}>{source}</a>, {year}</figcaption>
+</figure>

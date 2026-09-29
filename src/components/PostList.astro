@@ -1,0 +1,35 @@
+---
+import { dayMonth, shortDate } from '../lib/date';
+
+export interface Post {
+  title: string;
+  url: string;
+  date: Date;
+  excerpt: string;
+  source?: string;
+}
+
+interface Props {
+  posts: Post[];
+  withYear?: boolean;
+}
+
+const { posts, withYear = true } = Astro.props;
+---
+
+<ol class="rows posts">
+  {
+    posts.map((post) => (
+      <li class="row">
+        <time class="when" datetime={post.date.toISOString()}>
+          {withYear ? shortDate(post.date) : dayMonth(post.date)}
+        </time>
+        <span class="what">
+          <a href={post.url}>{post.title}</a>
+          {post.source && <span class="source"> · {post.source}</span>}
+        </span>
+        <span class="aside">{post.excerpt}</span>
+      </li>
+    ))
+  }
+</ol>

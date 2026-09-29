@@ -1,0 +1,60 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import Margin from '../components/Margin.astro';
+import Portrait from '../components/Portrait.astro';
+import PostList from '../components/PostList.astro';
+import Bio from '../content/home.mdx';
+import { site } from '../site';
+import { allPosts } from '../lib/posts';
+import { longDate } from '../lib/date';
+import { lastUpdated } from '../lib/updated';
+
+const made = (await getCollection('projects', ({ data }) => data.featured && !data.draft)).sort(
+  (a, b) => a.data.order - b.data.order,
+);
+const posts = (await allPosts()).slice(0, 7);
+const updated = lastUpdated('src/content/home.mdx');
+---
+
+<Base hideName>
+  <section class="grid bio h-card">
+    <div class="masthead">
+      <h1 class="p-name">Arjun<br />Krishna</h1>
+      <p class="tagline p-note">Engineer / Tinkerer / Occasional writer</p>
+    </div>
+    <Portrait />
+    <Bio />
+    <Margin>Some things I've made</Margin>
+    <ul class="made span">
+      {
+        made.map(({ data }) => (
+          <li>
+            <a href={data.links.site ?? data.links.source}>{data.name}</a> — {data.homeLine}
+          </li>
+        ))
+      }
+      <li class="small">More on the <a href="/work/">work</a> page.</li>
+    </ul>
+    <p class="small span">
+      Last updated on {longDate(updated)}. I can be reached at{' '}
+      <a class="u-email" href={`mailto:${site.email}`}>{site.email}</a>, and I'm on{' '}
+      {
+        site.profiles.map((profile, i) => (
+          <>
+            {i > 0 && (i === site.profiles.length - 1 ? ' and ' : ', ')}
+            <a class="u-url" rel="me" href={profile.url}>{profile.name}</a>
+          </>
+        ))
+      }.
+    </p>
+  </section>
+
+  <div class="fleuron" aria-hidden="true">⁂</div>
+
+  <section class="grid" aria-labelledby="writing">
+    <h2 class="section-title" id="writing">Writing</h2>
+    <PostList posts={posts} />
+    <p class="small"><a href="/writing/">All writing, since 2019</a></p>
+  </section>
+</Base>
