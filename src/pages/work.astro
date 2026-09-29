@@ -1,0 +1,72 @@
+---
+import { getCollection, render } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import { monthYear } from '../lib/date';
+import { site } from '../site';
+
+const statusLabel = { active: 'Active', complete: 'Complete', maintained: 'Maintained', archived: 'Archived' };
+
+const entries = (await getCollection('projects', ({ data }) => !data.draft)).sort(
+  (a, b) => a.data.order - b.data.order,
+);
+const projects = await Promise.all(entries.map(async (entry) => ({ entry, ...(await render(entry)) })));
+const small = (await getCollection('small')).sort((a, b) => b.data.date.localeCompare(a.data.date));
+const linkedin = site.profiles.find((p) => p.name === 'LinkedIn')!.url;
+
+const linksOf = (links: { site?: string; source?: string; writeup?: string }) =>
+  [
+    links.site && { label: new URL(links.site).hostname, href: links.site },
+    links.source && { label: 'Source', href: links.source },
+    links.writeup && { label: 'Write-up', href: links.writeup },
+  ].filter(Boolean) as { label: string; href: string }[];
+---
+
+<Base title="Work" description="Things I have built outside my day job, by Arjun Krishna.">
+  <section class="grid">
+    <div class="intro">
+      <h1>Work</h1>
+      <p>
+        Things I have built outside my day job. Most were made to understand how something works; a few are
+        used by other people. For my employment history, see <a href={linkedin}>LinkedIn</a>.
+      </p>
+    </div>
+
+    <h2 class="section-title">Projects</h2>
+    <ol class="rows">
+      {
+        projects.map(({ entry, Content }) => (
+          <li class="row project" id={entry.id}>
+            <div class="when">
+              <span>{entry.data.years}</span>
+              <span class="status">{statusLabel[entry.data.status]}</span>
+            </div>
+            <div class="what">
+              <h3>{entry.data.name}</h3>
+              <Content />
+              <p class="source">{entry.data.stack}</p>
+              <p class="links">
+                {linksOf(entry.data.links).map((link) => (
+                  <a href={link.href}>{link.label}</a>
+                ))}
+              </p>
+            </div>
+          </li>
+        ))
+      }
+    </ol>
+
+    <h2 class="section-title">Smaller things</h2>
+    <ol class="rows">
+      {
+        small.map(({ data }) => (
+          <li class="row">
+            <span class="when">{monthYear(data.date)}</span>
+            <span class="what">
+              <a href={data.url}>{data.name}</a> — {data.line}
+            </span>
+          </li>
+        ))
+      }
+    </ol>
+  </section>
+</Base>
