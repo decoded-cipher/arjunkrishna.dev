@@ -1,6 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
+import Link from '../components/Link.astro';
 import Margin from '../components/Margin.astro';
 import Portrait from '../components/Portrait.astro';
 import PostList from '../components/PostList.astro';
@@ -9,6 +10,7 @@ import { site } from '../site';
 import { allPosts } from '../lib/posts';
 import { longDate } from '../lib/date';
 import { lastUpdated } from '../lib/updated';
+import { withRef } from '../lib/ref';
 
 const made = (await getCollection('projects', ({ data }) => data.featured && !data.draft)).sort(
   (a, b) => a.data.order - b.data.order,
@@ -24,13 +26,13 @@ const updated = lastUpdated('src/content/home.mdx');
       <p class="tagline p-note">Engineer / Tinkerer / Occasional writer</p>
     </div>
     <Portrait />
-    <Bio />
+    <Bio components={{ a: Link }} />
     <Margin>Some things I've made</Margin>
     <ul class="made">
       {
         made.map(({ id, data }) => (
           <li>
-            <a href={data.links.site ?? data.links.source ?? data.links.writeup ?? `/work/#${id}`}>{data.name}</a> —{' '}
+            <a href={withRef(data.links.site ?? data.links.source ?? data.links.writeup) ?? `/work/#${id}`}>{data.name}</a> —{' '}
             {data.homeLine}
           </li>
         ))

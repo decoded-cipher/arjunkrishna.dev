@@ -166,6 +166,10 @@ main {
   text-decoration: none;
 }
 
+.margin p {
+  display: contents;
+}
+
 /* Home */
 
 .masthead {

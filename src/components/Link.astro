@@ -1,0 +1,10 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+import { withRef } from '../lib/ref';
+
+type Props = HTMLAttributes<'a'>;
+
+const { href, ...rest } = Astro.props;
+---
+
+<a href={typeof href === 'string' ? withRef(href) : href} {...rest}><slot /></a>
