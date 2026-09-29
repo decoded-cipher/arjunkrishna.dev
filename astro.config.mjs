@@ -2,8 +2,13 @@ import { defineConfig, fontProviders } from 'astro/config';
 import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
 
+const site = process.env.SITE_URL ?? 'https://arjunkrishna.dev';
+const base = process.env.BASE_PATH ?? '/';
+const to = (path) => `${base.replace(/\/$/, '')}${path}`;
+
 export default defineConfig({
-  site: 'https://arjunkrishna.dev',
+  site,
+  base,
   trailingSlash: 'always',
   integrations: [mdx(), sitemap()],
   fonts: [
@@ -27,7 +32,7 @@ export default defineConfig({
     },
   ],
   redirects: {
-    '/projects': '/work/',
-    '/blog': '/writing/',
+    '/projects': to('/work/'),
+    '/blog': to('/writing/'),
   },
 });
