@@ -1,8 +1,3 @@
-- id: netmon
-  name: NetMon
-  date: "2026-02"
-  line: a home network monitor for a Raspberry Pi.
-  url: https://github.com/decoded-cipher/netmon
 - id: auto-changelog
   name: auto-changelog
   date: "2025-12"
@@ -18,11 +13,6 @@
   date: "2025-09"
   line: seasonal overlays, like snowfall, for any website.
   url: https://github.com/decoded-cipher/festive-js
-- id: inovus-ama
-  name: Inovus AMA
-  date: "2025-06"
-  line: answers questions about the lab from its own documents.
-  url: https://ama.inovuslabs.org
 - id: certificate-validator
   name: Certificate validator
   date: "2025-04"
