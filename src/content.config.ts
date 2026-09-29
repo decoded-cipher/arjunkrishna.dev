@@ -1,6 +1,7 @@
 import { defineCollection } from 'astro:content';
 import { file, glob } from 'astro/loaders';
 import { z } from 'astro/zod';
+import { loadInovusPosts } from './lib/ghost';
 
 const projects = defineCollection({
   loader: glob({ pattern: '*.md', base: './src/content/projects' }),
@@ -33,4 +34,21 @@ const small = defineCollection({
   }),
 });
 
-export const collections = { projects, small };
+const external = z.object({
+  title: z.string(),
+  date: z.coerce.date(),
+  url: z.url(),
+  excerpt: z.string(),
+});
+
+const inovus = defineCollection({
+  loader: loadInovusPosts,
+  schema: external,
+});
+
+const medium = defineCollection({
+  loader: file('src/content/medium.json'),
+  schema: external,
+});
+
+export const collections = { projects, small, inovus, medium };

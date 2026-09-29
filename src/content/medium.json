@@ -1,0 +1,44 @@
+[
+  {
+    "id": "the-hidden-life-of-an-email",
+    "title": "The Hidden Life of an Email: Alice Writes, Bob Reads",
+    "date": "2025-09-22",
+    "url": "https://medium.com/@decoded_cipher/the-hidden-life-of-an-email-dacfc73d4262",
+    "excerpt": "Ever wondered what happens when you hit the send button on your email?"
+  },
+  {
+    "id": "karate-the-most-awaited-guest",
+    "title": "Karate: The Most Awaited Guest to the Olympic Family",
+    "date": "2020-09-17",
+    "url": "https://medium.com/@decoded_cipher/karate-the-most-awaited-guest-to-the-olympic-family-d6b6b0449eab",
+    "excerpt": "I started practicing karate at the age of 7."
+  },
+  {
+    "id": "how-and-what-i-came-to-know-of-blockchain",
+    "title": "How & What I Came to Know of Blockchain?",
+    "date": "2020-04-16",
+    "url": "https://medium.com/inovus-labs-iedc/how-and-what-i-came-to-know-of-blockchain-e014448dda69",
+    "excerpt": "It would have probably been another boring rainy college day unless I managed to bunk my daily class schedule."
+  },
+  {
+    "id": "how-blockchain-can-transform-india",
+    "title": "How Blockchain Can Transform a Country Like India?",
+    "date": "2020-04-08",
+    "url": "https://medium.com/inovus-labs-iedc/how-blockchain-can-transform-a-country-like-india-2f3d62a0fc3a",
+    "excerpt": "Let's start with Agriculture."
+  },
+  {
+    "id": "introduction-to-quantum-computing",
+    "title": "Introduction to Quantum Computing",
+    "date": "2019-05-10",
+    "url": "https://medium.com/@decoded_cipher/introduction-to-quantum-computing-1f49d0c9732a",
+    "excerpt": "I am actually a beginner myself, and I am here to tell you that anyone can start learning quantum computing."
+  },
+  {
+    "id": "tensor-processing-units",
+    "title": "Tensor Processing Units: Both History and Applications",
+    "date": "2019-04-21",
+    "url": "https://medium.com/@decoded_cipher/tensor-processing-units-both-history-and-applications-b3479d92a61d",
+    "excerpt": "Google announced its Tensor Processing Units (TPU for short) in May 2016."
+  }
+]
