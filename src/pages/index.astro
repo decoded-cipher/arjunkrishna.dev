@@ -28,9 +28,10 @@ const updated = lastUpdated('src/content/home.mdx');
     <Margin>Some things I've made</Margin>
     <ul class="made">
       {
-        made.map(({ data }) => (
+        made.map(({ id, data }) => (
           <li>
-            <a href={data.links.site ?? data.links.source}>{data.name}</a> — {data.homeLine}
+            <a href={data.links.site ?? data.links.source ?? data.links.writeup ?? `/work/#${id}`}>{data.name}</a> —{' '}
+            {data.homeLine}
           </li>
         ))
       }
