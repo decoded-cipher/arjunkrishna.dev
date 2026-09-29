@@ -5,18 +5,7 @@
   --rule: #dedbd4;
   --accent: #c5370f;
   --placeholder: #d6d4cf;
-  color-scheme: light dark;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg: #1b1a18;
-    --text: #e9e6df;
-    --muted: #9d998f;
-    --rule: #34322e;
-    --accent: #ff6a3d;
-    --placeholder: #2c2a27;
-  }
+  color-scheme: light;
 }
 
 *,
