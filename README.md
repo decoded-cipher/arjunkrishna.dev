@@ -1,6 +1,8 @@
 # arjunkrishna.dev
 
-Set in Garamond, served without a byte of JavaScript.
+My personal site — work, writing, and zero JavaScript.
+
+Astro · Bun · GitHub Pages
 
 ## Run
 
@@ -19,10 +21,23 @@ bun run preview
 | `src/content/projects/*.md` | Projects — `featured` and `homeLine` put one on the home page |
 | `src/content/small.yaml` | Smaller things |
 | `src/content/medium.json` | Medium posts |
+| `src/site.ts` | Name, title, descriptions, profiles, topics |
 | `assets/portrait-1.jpg` | Portrait |
 
 Inovus Blogs posts are fetched at build time.
 
+## Generated
+
+| Output | From |
+|---|---|
+| `/og/*.png`, favicons, app icons | `src/lib/og.ts` — Cormorant, Crimson Pro and the portrait, via Satori and Sharp |
+| JSON-LD on every page | `src/lib/schema.ts` |
+| `/llms.txt`, `/llms-full.txt` | `src/lib/llms.ts` |
+| `/sitemap.xml`, `/robots.txt`, `/rss.xml`, `/manifest.webmanifest` | `src/pages/` |
+
 ## Deploy
 
-GitHub Pages, via Actions — on push to `master`, on publishing to Inovus Blogs, weekly, and on demand.
+GitHub Pages, via Actions — on push to `master`, on publishing to Inovus Blogs, weekly, and on demand. New URLs
+go to IndexNow after each deploy.
+
+`SITE_URL` and `BASE_PATH` set the origin and path; they default to `https://arjunkrishna.dev` and `/`.
