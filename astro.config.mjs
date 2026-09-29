@@ -1,6 +1,5 @@
 import { defineConfig, fontProviders } from 'astro/config';
 import mdx from '@astrojs/mdx';
-import sitemap from '@astrojs/sitemap';
 
 const site = process.env.SITE_URL ?? 'https://arjunkrishna.dev';
 const base = process.env.BASE_PATH ?? '/';
@@ -10,7 +9,7 @@ export default defineConfig({
   site,
   base,
   trailingSlash: 'always',
-  integrations: [mdx(), sitemap()],
+  integrations: [mdx()],
   fonts: [
     {
       provider: fontProviders.fontsource(),

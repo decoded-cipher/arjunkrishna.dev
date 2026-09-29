@@ -1,0 +1,140 @@
+import { readFile } from 'node:fs/promises';
+import { getCollection } from 'astro:content';
+import { site } from '../site';
+import { allPosts } from './posts';
+import { monthYear } from './date';
+import { absolute } from './url';
+
+const statusLabel = { active: 'Active', complete: 'Complete', maintained: 'Maintained', archived: 'Archived' };
+
+const isoDay = (date: Date) => date.toISOString().slice(0, 10);
+
+async function projects() {
+  return (await getCollection('projects', ({ data }) => !data.draft))
+    .sort((a, b) => a.data.order - b.data.order)
+    .map(({ id, data, body = '' }) => ({
+      ...data,
+      body: body.trim(),
+      url: data.links.site ?? data.links.source ?? data.links.writeup ?? absolute(`/work/#${id}`),
+    }));
+}
+
+async function bio() {
+  const mdx = await readFile('src/content/home.mdx', 'utf8');
+  return mdx
+    .replace(/^import .*$/gm, '')
+    .replace(/<Margin>[\s\S]*?<\/Margin>/g, '')
+    .replace(
+      /<Quote source="([^"]+)" href="([^"]+)" year=\{(\d+)\}>\s*([\s\S]*?)\s*<\/Quote>/g,
+      (_, source, href, year, text) => `> ${text}\n>\n> — from [${source}](${href}), ${year}`,
+    )
+    .replace(/\n{3,}/g, '\n\n')
+    .trim();
+}
+
+const facts = () =>
+  [
+    `- Role: ${site.jobTitle} at ${site.employer.name}; before that, software engineer at Airtory (2022–2024)`,
+    '- Based in: Kerala, India',
+    `- Community: mentor at [${site.community.name}](${site.community.url}), the innovation centre of ${site.college}, since 2018`,
+    `- Education: BCA and MCA, ${site.college}`,
+    `- Contact: ${site.email}`,
+  ].join('\n');
+
+const links = () =>
+  [...site.profiles, ...site.elsewhere].map((profile) => `- [${profile.name}](${profile.url})`).join('\n');
+
+export async function llms() {
+  const posts = await allPosts();
+  return `# ${site.name}
+
+> ${site.summary}
+
+${facts()}
+
+## Pages
+
+- [Home](${absolute('/')}): about me, a few things I've made, and recent writing
+- [Work](${absolute('/work/')}): projects built outside my day job
+- [Writing](${absolute('/writing/')}): essays and notes since 2019
+- [RSS](${absolute('/rss.xml')}): feed of all writing
+
+## Projects
+
+${(await projects()).map((project) => `- [${project.name}](${project.url}): ${project.body}`).join('\n')}
+
+## Recent writing
+
+${posts
+  .slice(0, 10)
+  .map((post) => `- [${post.title}](${post.url}): ${post.excerpt}`)
+  .join('\n')}
+
+## Elsewhere
+
+${links()}
+
+## Optional
+
+- [Everything on this site, in one file](${absolute('/llms-full.txt')})
+`;
+}
+
+export async function llmsFull() {
+  const posts = await allPosts();
+  const small = (await getCollection('small')).sort((a, b) => b.data.date.localeCompare(a.data.date));
+
+  const projectText = (await projects())
+    .map((project) =>
+      [
+        `### ${project.name}`,
+        '',
+        `${project.years} · ${statusLabel[project.status]} · ${project.stack}`,
+        '',
+        project.body,
+        '',
+        project.links.site && `- Site: ${project.links.site}`,
+        project.links.source && `- Source: ${project.links.source}`,
+        project.links.writeup && `- Write-up: ${project.links.writeup}`,
+      ]
+        .filter((line) => line !== undefined)
+        .join('\n')
+        .trim(),
+    )
+    .join('\n\n');
+
+  return `# ${site.name}
+
+> ${site.summary}
+
+Source: ${absolute('/')}
+
+${facts()}
+
+## About
+
+${await bio()}
+
+## Projects
+
+Things I have built outside my day job.
+
+${projectText}
+
+## Smaller things
+
+${small.map(({ data }) => `- [${data.name}](${data.url}) (${monthYear(data.date)}): ${data.line}`).join('\n')}
+
+## Writing
+
+Essays and notes, mostly about software, learning and the internet. Most are published on Inovus Blogs; the older ones on Medium.
+
+${posts
+  .map((post) => `- ${isoDay(post.date)} — [${post.title}](${post.url})${post.source ? ` (${post.source})` : ''}: ${post.excerpt}`)
+  .join('\n')}
+
+## Elsewhere
+
+${links()}
+`;
+}

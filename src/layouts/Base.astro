@@ -1,19 +1,38 @@
 ---
 import { Font } from 'astro:assets';
 import { site } from '../site';
-import { path } from '../lib/url';
+import { absolute, path } from '../lib/url';
+import { base, type Thing } from '../lib/schema';
 import '../styles/site.css';
 
 interface Props {
   title?: string;
   description?: string;
   hideName?: boolean;
+  og?: 'home' | 'work' | 'writing';
+  type?: 'website' | 'profile';
+  noindex?: boolean;
+  schema?: Thing[];
 }
 
-const { title, description = site.description, hideName = false } = Astro.props;
-const pageTitle = title ? `${title} — ${site.name}` : site.name;
+const {
+  title,
+  description = site.description,
+  hideName = false,
+  og = 'home',
+  type = 'website',
+  noindex = false,
+  schema = [],
+} = Astro.props;
+const pageTitle = title ? `${title} — ${site.name}` : site.title;
 const canonical = new URL(Astro.url.pathname, Astro.site);
 const current = Astro.url.pathname;
+const image = absolute(`/og/${og}.png`);
+const imageAlt = title ? `${title}, by ${site.name}` : `${site.name}: ${site.tagline}`;
+const graph = JSON.stringify({ '@context': 'https://schema.org', '@graph': [...(await base()), ...schema] }).replace(
+  /</g,
+  '\\u003c',
+);
 ---
 
 <!doctype html>
@@ -23,14 +42,51 @@ const current = Astro.url.pathname;
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{pageTitle}</title>
     <meta name="description" content={description} />
-    <link rel="canonical" href={canonical} />
+    <meta name="author" content={site.name} />
+    <meta
+      name="robots"
+      content={noindex ? 'noindex, follow' : 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1'}
+    />
+    {!noindex && <link rel="canonical" href={canonical} />}
     <link rel="alternate" type="application/rss+xml" title={site.name} href={path('/rss.xml')} />
+    <link rel="sitemap" type="application/xml" href={path('/sitemap.xml')} />
+    <link rel="icon" href={path('/favicon.ico')} sizes="48x48" />
+    <link rel="icon" href={path('/favicon.svg')} type="image/svg+xml" />
+    <link rel="apple-touch-icon" href={path('/apple-touch-icon.png')} />
+    <link rel="manifest" href={path('/manifest.webmanifest')} />
     <meta name="theme-color" content="#f3f2ee" />
-    <meta property="og:type" content="website" />
+    {site.profiles.map((profile) => <link rel="me" href={profile.url} />)}
+    <link rel="me" href={`mailto:${site.email}`} />
+
+    <meta property="og:type" content={type} />
     <meta property="og:site_name" content={site.name} />
-    <meta property="og:title" content={title ?? site.name} />
+    <meta property="og:locale" content={site.locale} />
+    <meta property="og:title" content={pageTitle} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={image} />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={imageAlt} />
+    {
+      type === 'profile' && (
+        <>
+          <meta property="profile:first_name" content="Arjun" />
+          <meta property="profile:last_name" content="Krishna" />
+          <meta property="profile:username" content={site.handle} />
+        </>
+      )
+    }
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content={site.x} />
+    <meta name="twitter:creator" content={site.x} />
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={image} />
+    <meta name="twitter:image:alt" content={imageAlt} />
+
+    <script is:inline type="application/ld+json" set:html={graph} />
     <Font cssVariable="--font-body" preload={[{ weight: 400, style: 'normal' }]} />
     <Font cssVariable="--font-display" />
     <slot name="head" />

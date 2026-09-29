@@ -21,15 +21,15 @@ const { posts, withYear = true } = Astro.props;
 <ol class="rows posts">
   {
     posts.map((post) => (
-      <li class="row">
-        <time class="when" datetime={post.date.toISOString()}>
+      <li class="row h-entry">
+        <time class="when dt-published" datetime={post.date.toISOString()}>
           {withYear ? shortDate(post.date) : dayMonth(post.date)}
         </time>
         <span class="what">
-          <a {...external(post.url)}>{post.title}</a>
+          <a class="u-url p-name" {...external(post.url)}>{post.title}</a>
           {post.source && <span class="source"> · {post.source}</span>}
         </span>
-        <span class="aside">{post.excerpt}</span>
+        <span class="aside p-summary">{post.excerpt}</span>
       </li>
     ))
   }

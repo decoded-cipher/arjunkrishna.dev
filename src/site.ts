@@ -1,12 +1,40 @@
 export const site = {
   name: 'Arjun Krishna',
+  title: 'Arjun Krishna — Software Engineer | System Design & Distributed Systems',
+  tagline: 'Engineer / Tinkerer / Occasional writer',
   description:
-    'Software engineer in Kerala. I write code for a living, build something of my own now and then, mentor at Inovus Labs, and write about craft.',
+    'Software engineer in Kerala, working on system design and distributed systems. I build things now and then, mentor at Inovus Labs, and write about craft.',
+  summary:
+    'Arjun Krishna is a senior software engineer at Johnson & Johnson, based in Kerala, India, working on system design and distributed systems. He mentors at Inovus Labs, builds things like Nodrix and Reelity now and then, and writes about software, learning and the internet.',
   email: 'mail@arjunkrishna.dev',
+  handle: 'decoded-cipher',
+  x: '@decoded_cipher',
+  locale: 'en_IN',
+  jobTitle: 'Senior Software Engineer',
+  employer: { name: 'Johnson & Johnson', url: 'https://www.jnj.com' },
+  community: { name: 'Inovus Labs', url: 'https://inovuslabs.org' },
+  college: 'Kristu Jyoti College of Management and Technology',
+  topics: [
+    'Software engineering',
+    'System design',
+    'Distributed systems',
+    'Web development',
+    'Internet of Things',
+    'Cloudflare Workers',
+    'Serverless computing',
+    'Large language models',
+    'TypeScript',
+    'Go',
+    'Vue.js',
+  ],
   profiles: [
     { name: 'GitHub', url: 'https://github.com/decoded-cipher' },
     { name: 'LinkedIn', url: 'https://www.linkedin.com/in/-arjunkrishna/' },
     { name: 'X', url: 'https://x.com/decoded_cipher' },
+  ],
+  elsewhere: [
+    { name: 'Inovus Blogs', url: 'https://blog.inovuslabs.org/author/arjun/' },
+    { name: 'Medium', url: 'https://medium.com/@decoded_cipher' },
   ],
   nav: [
     { name: 'Home', href: '/' },

@@ -38,9 +38,25 @@ jobs:
   deploy:
     needs: build
     runs-on: ubuntu-latest
+    outputs:
+      url: ${{ steps.deployment.outputs.page_url }}
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - id: deployment
         uses: actions/deploy-pages@v4
+
+  indexnow:
+    needs: deploy
+    if: github.event_name != 'schedule'
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    steps:
+      - run: |
+          urls=$(curl -fsSL "${{ needs.deploy.outputs.url }}sitemap.xml" | grep -o '<loc>[^<]*' | cut -c6- | jq -R . | jq -sc .)
+          jq -nc --arg site "${{ needs.deploy.outputs.url }}" --arg key "$KEY" --argjson urls "$urls" \
+            '{host: ($site | split("/")[2]), key: $key, keyLocation: "\($site)\($key).txt", urlList: $urls}' |
+            curl -fsS -X POST https://api.indexnow.org/indexnow -H 'Content-Type: application/json; charset=utf-8' -d @-
+        env:
+          KEY: 6d8419d8151fdcf2c7b861e9d94445ee

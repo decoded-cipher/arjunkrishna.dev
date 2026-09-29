@@ -4,13 +4,40 @@ import PostList from '../../components/PostList.astro';
 import { allPosts } from '../../lib/posts';
 import { yearOf } from '../../lib/date';
 import { external } from '../../lib/ref';
-import { path } from '../../lib/url';
+import { absolute, path } from '../../lib/url';
+import { author, breadcrumbs, itemList, page } from '../../lib/schema';
+import { site } from '../../site';
 
 const posts = await allPosts();
 const years = [...new Set(posts.map((post) => yearOf(post.date)))];
+const publisher = (source?: string) =>
+  source === 'Medium'
+    ? { '@type': 'Organization', name: 'Medium', url: 'https://medium.com' }
+    : { '@type': 'Organization', name: 'Inovus Labs', url: 'https://inovuslabs.org' };
+const description = 'Essays and notes by Arjun Krishna, mostly about software, learning and the internet.';
+
+const schema = [
+  page('CollectionPage', '/writing/', `Writing — ${site.name}`, description, {
+    breadcrumb: { '@id': absolute('/writing/#breadcrumbs') },
+    mainEntity: itemList(
+      posts.map((post) => ({
+        '@type': 'BlogPosting',
+        '@id': post.url,
+        url: post.url,
+        headline: post.title,
+        description: post.excerpt,
+        datePublished: post.date.toISOString(),
+        inLanguage: 'en',
+        author,
+        publisher: publisher(post.source),
+      })),
+    ),
+  }),
+  breadcrumbs('/writing/', 'Writing'),
+];
 ---
 
-<Base title="Writing" description="Essays and notes by Arjun Krishna, mostly about software, learning and the internet.">
+<Base title="Writing" description={description} og="writing" schema={schema}>
   <section class="grid">
     <div class="intro">
       <h1>Writing</h1>
