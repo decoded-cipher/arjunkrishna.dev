@@ -3,7 +3,7 @@ import { getCollection, render } from 'astro:content';
 import Base from '../layouts/Base.astro';
 import { monthYear } from '../lib/date';
 import { site } from '../site';
-import { withRef } from '../lib/ref';
+import { external } from '../lib/ref';
 
 const statusLabel = { active: 'Active', complete: 'Complete', maintained: 'Maintained', archived: 'Archived' };
 
@@ -28,7 +28,7 @@ const linksOf = (links: { site?: string; source?: string; writeup?: string }) =>
       <h1>Work</h1>
       <p>
         Things I have built outside my day job. Most were made to understand how something works; a few are
-        used by other people. For my employment history, see <a href={withRef(linkedin)}>LinkedIn</a>.
+        used by other people. For my employment history, see <a {...external(linkedin)}>LinkedIn</a>.
       </p>
     </div>
 
@@ -47,7 +47,7 @@ const linksOf = (links: { site?: string; source?: string; writeup?: string }) =>
               <p class="source">{entry.data.stack}</p>
               <p class="links">
                 {linksOf(entry.data.links).map((link) => (
-                  <a href={withRef(link.href)}>{link.label}</a>
+                  <a {...external(link.href)}>{link.label}</a>
                 ))}
               </p>
             </div>
@@ -63,7 +63,7 @@ const linksOf = (links: { site?: string; source?: string; writeup?: string }) =>
           <li class="row">
             <span class="when">{monthYear(data.date)}</span>
             <span class="what">
-              <a href={withRef(data.url)}>{data.name}</a> — {data.line}
+              <a {...external(data.url)}>{data.name}</a> — {data.line}
             </span>
           </li>
         ))

@@ -1,6 +1,6 @@
 ---
 import { dayMonth, shortDate } from '../lib/date';
-import { withRef } from '../lib/ref';
+import { external } from '../lib/ref';
 
 export interface Post {
   title: string;
@@ -26,7 +26,7 @@ const { posts, withYear = true } = Astro.props;
           {withYear ? shortDate(post.date) : dayMonth(post.date)}
         </time>
         <span class="what">
-          <a href={withRef(post.url)}>{post.title}</a>
+          <a {...external(post.url)}>{post.title}</a>
           {post.source && <span class="source"> · {post.source}</span>}
         </span>
         <span class="aside">{post.excerpt}</span>

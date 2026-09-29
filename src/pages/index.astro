@@ -10,7 +10,7 @@ import { site } from '../site';
 import { allPosts } from '../lib/posts';
 import { longDate } from '../lib/date';
 import { lastUpdated } from '../lib/updated';
-import { withRef } from '../lib/ref';
+import { external } from '../lib/ref';
 
 const made = (await getCollection('projects', ({ data }) => data.featured && !data.draft)).sort(
   (a, b) => a.data.order - b.data.order,
@@ -32,7 +32,7 @@ const updated = lastUpdated('src/content/home.mdx');
       {
         made.map(({ id, data }) => (
           <li>
-            <a href={withRef(data.links.site ?? data.links.source ?? data.links.writeup) ?? `/work/#${id}`}>{data.name}</a> —{' '}
+            <a {...external(data.links.site ?? data.links.source ?? data.links.writeup ?? `/work/#${id}`)}>{data.name}</a> —{' '}
             {data.homeLine}
           </li>
         ))
@@ -46,7 +46,7 @@ const updated = lastUpdated('src/content/home.mdx');
         site.profiles.map((profile, i) => (
           <>
             {i > 0 && (i === site.profiles.length - 1 ? ' and ' : ', ')}
-            <a class="u-url" rel="me" href={profile.url}>{profile.name}</a>
+            <a class="u-url" rel="me" {...external(profile.url, { ref: false })}>{profile.name}</a>
           </>
         ))
       }.
