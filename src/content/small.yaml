@@ -1,0 +1,35 @@
+- id: netmon
+  name: NetMon
+  date: "2026-02"
+  line: a home network monitor for a Raspberry Pi.
+  url: https://github.com/decoded-cipher/netmon
+- id: auto-changelog
+  name: auto-changelog
+  date: "2025-12"
+  line: changelogs generated in GitHub Actions, without API keys.
+  url: https://github.com/decoded-cipher/auto-changelog
+- id: gh2gl-mirror
+  name: gh2gl-mirror
+  date: "2025-10"
+  line: mirrors my GitHub repositories to GitLab and Tangled.
+  url: https://github.com/decoded-cipher/gh2gl-mirror
+- id: festive-js
+  name: festive-js
+  date: "2025-09"
+  line: seasonal overlays, like snowfall, for any website.
+  url: https://github.com/decoded-cipher/festive-js
+- id: inovus-ama
+  name: Inovus AMA
+  date: "2025-06"
+  line: answers questions about the lab from its own documents.
+  url: https://ama.inovuslabs.org
+- id: certificate-validator
+  name: Certificate validator
+  date: "2025-04"
+  line: verifies the lab's certificates against records on a blockchain.
+  url: https://certificate.inovuslabs.org
+- id: rpi-cluster
+  name: Raspberry Pi cluster
+  date: "2022-04"
+  line: a small cluster computer built from Raspberry Pis.
+  url: https://github.com/decoded-cipher/RPi4-Cluster-Computer
