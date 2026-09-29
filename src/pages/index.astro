@@ -11,6 +11,7 @@ import { allPosts } from '../lib/posts';
 import { longDate } from '../lib/date';
 import { lastUpdated } from '../lib/updated';
 import { external } from '../lib/ref';
+import { path } from '../lib/url';
 
 const made = (await getCollection('projects', ({ data }) => data.featured && !data.draft)).sort(
   (a, b) => a.data.order - b.data.order,
@@ -32,12 +33,12 @@ const updated = lastUpdated('src/content/home.mdx');
       {
         made.map(({ id, data }) => (
           <li>
-            <a {...external(data.links.site ?? data.links.source ?? data.links.writeup ?? `/work/#${id}`)}>{data.name}</a> —{' '}
+            <a {...external(data.links.site ?? data.links.source ?? data.links.writeup ?? path(`/work/#${id}`))}>{data.name}</a> —{' '}
             {data.homeLine}
           </li>
         ))
       }
-      <li class="small">More on the <a href="/work/">work</a> page.</li>
+      <li class="small">More on the <a href={path('/work/')}>work</a> page.</li>
     </ul>
     <p class="small">
       Last updated on {longDate(updated)}. I can be reached at{' '}
@@ -58,6 +59,6 @@ const updated = lastUpdated('src/content/home.mdx');
   <section class="grid" aria-labelledby="writing">
     <h2 class="section-title" id="writing">Writing</h2>
     <PostList posts={posts} />
-    <p class="small"><a href="/writing/">All writing, since 2019</a></p>
+    <p class="small"><a href={path('/writing/')}>All writing, since 2019</a></p>
   </section>
 </Base>

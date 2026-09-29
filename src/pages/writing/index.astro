@@ -4,6 +4,7 @@ import PostList from '../../components/PostList.astro';
 import { allPosts } from '../../lib/posts';
 import { yearOf } from '../../lib/date';
 import { external } from '../../lib/ref';
+import { path } from '../../lib/url';
 
 const posts = await allPosts();
 const years = [...new Set(posts.map((post) => yearOf(post.date)))];
@@ -16,7 +17,7 @@ const years = [...new Set(posts.map((post) => yearOf(post.date)))];
       <p>
         Essays and notes, mostly about software, learning, and the internet. Most are published on{' '}
         <a {...external('https://blog.inovuslabs.org/author/arjun/')}>Inovus Blogs</a>; the older ones are on Medium. There is an{' '}
-        <a href="/rss.xml">RSS feed</a>.
+        <a href={path('/rss.xml')}>RSS feed</a>.
       </p>
     </div>
     {

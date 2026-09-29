@@ -1,6 +1,7 @@
 ---
 import { Font } from 'astro:assets';
 import { site } from '../site';
+import { path } from '../lib/url';
 import '../styles/site.css';
 
 interface Props {
@@ -23,7 +24,7 @@ const current = Astro.url.pathname;
     <title>{pageTitle}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
-    <link rel="alternate" type="application/rss+xml" title={site.name} href="/rss.xml" />
+    <link rel="alternate" type="application/rss+xml" title={site.name} href={path('/rss.xml')} />
     <meta name="theme-color" content="#f3f2ee" />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content={site.name} />
@@ -38,11 +39,11 @@ const current = Astro.url.pathname;
     <a class="skip" href="#main">Skip to content</a>
     <div class="page">
       <header class="site-header">
-        {!hideName && <a class="name" href="/">{site.name}</a>}
+        {!hideName && <a class="name" href={path('/')}>{site.name}</a>}
         <nav aria-label="Main">
           {
             site.nav.map((item) => (
-              <a href={item.href} aria-current={current === item.href ? 'page' : undefined}>
+              <a href={path(item.href)} aria-current={current === path(item.href) ? 'page' : undefined}>
                 {item.name}
               </a>
             ))
@@ -53,7 +54,7 @@ const current = Astro.url.pathname;
         <slot />
       </main>
       <footer class="site-footer">
-        <span>© 2018–{new Date().getFullYear()} {site.name} · <a href="/rss.xml">RSS</a></span>
+        <span>© 2018–{new Date().getFullYear()} {site.name} · <a href={path('/rss.xml')}>RSS</a></span>
         <em>Set in Cormorant Garamond and Crimson Pro</em>
       </footer>
     </div>
