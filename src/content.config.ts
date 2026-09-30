@@ -38,6 +38,16 @@ const small = defineCollection({
   }),
 });
 
+const contributions = defineCollection({
+  loader: file('src/content/contributions.yaml'),
+  schema: z.object({
+    repo: z.string(),
+    date: z.string().regex(/^\d{4}-\d{2}$/),
+    line: z.string(),
+    url: z.url(),
+  }),
+});
+
 const external = z.object({
   title: z.string(),
   date: z.coerce.date(),
@@ -55,4 +65,4 @@ const medium = defineCollection({
   schema: external,
 });
 
-export const collections = { projects, small, inovus, medium };
+export const collections = { projects, small, contributions, inovus, medium };

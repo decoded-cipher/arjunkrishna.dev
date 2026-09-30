@@ -18,6 +18,7 @@ const entries = (await getCollection('projects', ({ data }) => !data.draft)).sor
 const projects = await Promise.all(entries.map(async (entry) => ({ entry, ...(await render(entry)) })));
 const sentence = (text: string) => text.charAt(0).toUpperCase() + text.slice(1);
 const childrenOf = (id: string) => projects.filter(({ entry }) => entry.data.parent === id);
+const contributions = (await getCollection('contributions')).sort((a, b) => b.data.date.localeCompare(a.data.date));
 const small = (await getCollection('small')).sort((a, b) => b.data.date.localeCompare(a.data.date));
 const updated = (await lastmod())['/projects'];
 const linkedin = site.profiles.find((p) => p.name === 'LinkedIn')!.url;
@@ -103,6 +104,20 @@ const schema = [
                 ))}
               </ol>
             )}
+          </li>
+        ))
+      }
+    </ol>
+
+    <h2 class="section-title">Contributions</h2>
+    <ol class="rows">
+      {
+        contributions.map(({ data }) => (
+          <li class="row">
+            <span class="when">{monthYear(data.date)}</span>
+            <span class="what">
+              <a {...external(data.url)}>{data.repo}</a> — {data.line}
+            </span>
           </li>
         ))
       }

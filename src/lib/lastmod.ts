@@ -9,7 +9,7 @@ export async function lastmod() {
   const released = (await allReleases())[0]?.date ?? lastUpdated('src/content/projects', 'src/content/small.yaml');
   return {
     '/': latest(lastUpdated('src/content/home.mdx', 'src/content/projects'), newest),
-    '/projects': lastUpdated('src/content/projects', 'src/content/small.yaml'),
+    '/projects': lastUpdated('src/content/projects', 'src/content/small.yaml', 'src/content/contributions.yaml'),
     '/blog': newest,
     '/releases': released,
     '/colophon': lastUpdated('src/pages/colophon.astro'),

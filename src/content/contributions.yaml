@@ -1,0 +1,10 @@
+- id: cirrus
+  repo: ascorbic/cirrus
+  date: "2026-09"
+  line: a single-user ATProto PDS that runs on a Cloudflare Worker.
+  url: https://github.com/ascorbic/cirrus/pull/250
+- id: nocodb
+  repo: nocodb/nocodb
+  date: "2026-06"
+  line: a free, self-hostable alternative to Airtable.
+  url: https://github.com/nocodb/nocodb/pull/14170
