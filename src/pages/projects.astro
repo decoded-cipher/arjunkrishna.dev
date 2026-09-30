@@ -4,7 +4,7 @@ import Base from '../layouts/Base.astro';
 import { monthYear } from '../lib/date';
 import { site } from '../site';
 import { external } from '../lib/ref';
-import { absolute } from '../lib/url';
+import { absolute, path } from '../lib/url';
 import { author, breadcrumbs, itemList, page } from '../lib/schema';
 import { lastmod } from '../lib/lastmod';
 
@@ -62,7 +62,8 @@ const schema = [
       <h1>Personal projects</h1>
       <p>
         Things I have built outside my day job. Most were made to understand how something works; a few are
-        used by other people. For my employment history, see <a {...external(linkedin)}>LinkedIn</a>.
+        used by other people. Tagged versions are listed under <a href={path('/releases')}>Releases</a>. For my
+        employment history, see <a {...external(linkedin)}>LinkedIn</a>.
       </p>
     </div>
 
