@@ -126,6 +126,15 @@ Things I have built outside my day job.
 
 ${projectText}
 
+## Contributions
+
+Other people's open-source projects I have contributed to.
+
+${(await getCollection('contributions'))
+  .sort((a, b) => b.data.date.localeCompare(a.data.date))
+  .map(({ data }) => `- [${data.repo}](${data.url}) (${monthYear(data.date)}): ${data.line}`)
+  .join('\n')}
+
 ## Tinkering
 
 ${small.map(({ data }) => `- [${data.name}](${data.url}) (${monthYear(data.date)}): ${data.line}`).join('\n')}
