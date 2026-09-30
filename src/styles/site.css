@@ -160,9 +160,14 @@ main {
   gap: 1.25rem;
 }
 
+.site-footer .mark,
+.site-footer time {
+  color: var(--accent);
+}
+
 .site-footer nav a {
   display: block;
-  color: var(--muted);
+  color: var(--accent);
 }
 
 .site-footer nav svg {
@@ -177,7 +182,7 @@ main {
 }
 
 .site-footer nav a:hover {
-  color: var(--accent);
+  color: var(--text);
 }
 
 /* The three-column page: margin notes, text, and an aside column. */

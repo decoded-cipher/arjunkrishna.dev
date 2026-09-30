@@ -118,7 +118,7 @@ const graph = JSON.stringify({ '@context': 'https://schema.org', '@graph': [...(
         <slot />
       </main>
       <footer class="site-footer">
-        <p class="copyright">{site.name} © 2018–{new Date().getFullYear()}</p>
+        <p class="copyright">{site.name} <span class="mark">©</span> 2018–{new Date().getFullYear()}</p>
         {
           updated && (
             <p class="updated">
