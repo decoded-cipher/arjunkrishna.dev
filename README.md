@@ -26,11 +26,20 @@ bun run preview
 
 Inovus Blogs posts are fetched at build time.
 
+## Images
+
+The preview cards, favicons, app icons and the signature logo are drawn by `scripts/assets.ts` (Satori, sharp,
+SVGO) and committed to `public/` and `assets/`. They are not part of the build; after changing the portrait,
+the tagline, a card or the icon, run:
+
+```sh
+bun run assets
+```
+
 ## Generated
 
 | Output | From |
 |---|---|
-| `/og/*.png`, favicons, app icons | `src/lib/og.ts` — EB Garamond and the portrait, via Satori and Sharp |
 | JSON-LD on every page | `src/lib/schema.ts` |
 | `/llms.txt`, `/llms-full.txt` | `src/lib/llms.ts` |
 | `/sitemap.xml`, `/robots.txt`, `/rss.xml`, `/manifest.webmanifest` | `src/pages/` |

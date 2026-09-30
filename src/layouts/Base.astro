@@ -4,7 +4,7 @@ import { site } from '../site';
 import { absolute, path } from '../lib/url';
 import { base, type Thing } from '../lib/schema';
 import { external } from '../lib/ref';
-import { logo } from '../lib/logo';
+import logo from '../../assets/logo.svg?raw';
 import { longDate } from '../lib/date';
 import { icons } from '../lib/icons';
 import '../styles/site.css';
@@ -33,7 +33,7 @@ const current = Astro.url.pathname.replace(/(index)?\.html$/, '');
 const canonical = new URL(current, Astro.site);
 const active = (href: string) =>
   current === path(href) ? 'page' : href !== '/' && current.startsWith(`${path(href)}/`) ? 'true' : undefined;
-const image = absolute(`/og/${og}.png`);
+const image = absolute(`/og/${og}.jpg`);
 const imageAlt = title ? `${title}, by ${site.name}` : `${site.name}: ${site.tagline}`;
 const elsewhere = [
   { name: 'Email', href: `mailto:${site.email}` },
@@ -76,7 +76,7 @@ const graph = JSON.stringify({ '@context': 'https://schema.org', '@graph': [...(
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
     <meta property="og:image" content={image} />
-    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:type" content="image/jpeg" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta property="og:image:alt" content={imageAlt} />
@@ -105,7 +105,7 @@ const graph = JSON.stringify({ '@context': 'https://schema.org', '@graph': [...(
     <a class="skip" href="#main">Skip to content</a>
     <div class="page">
       <header class:list={['site-header', { home: current === path('/') }]}>
-        <a class="logo" href={path('/')} aria-label={site.name} set:html={await logo()} />
+        <a class="logo" href={path('/')} aria-label={site.name} set:html={logo} />
         <nav aria-label="Main">
           {
             site.nav.map((item) => (
