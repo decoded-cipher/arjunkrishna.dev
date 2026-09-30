@@ -86,20 +86,27 @@ p {
 
 .site-header {
   display: flex;
-  align-items: baseline;
+  align-items: center;
   gap: 2rem;
   padding-bottom: 0.9rem;
   border-bottom: 1px solid var(--rule);
   font-size: 1.125rem;
 }
 
-.site-header .name {
-  font-family: var(--font-serif);
-  font-style: italic;
-  font-weight: 400;
-  font-size: 1.625rem;
+.site-header .logo {
+  display: block;
   color: var(--text);
-  text-decoration: none;
+}
+
+.site-header .logo svg {
+  display: block;
+  width: auto;
+  height: 4rem;
+  margin: 0.5rem 0;
+}
+
+.site-header .logo:hover {
+  color: var(--accent);
 }
 
 .site-header nav {
@@ -462,9 +469,17 @@ main {
   }
 
   .site-header {
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 0.25rem 1rem;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .site-header .logo svg {
+    height: 3.5rem;
+    margin: 0.75rem 0 0.5rem;
+  }
+
+  .site-header.home .logo {
+    display: none;
   }
 
   .site-header nav {

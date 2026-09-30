@@ -4,12 +4,12 @@ import { site } from '../site';
 import { absolute, path } from '../lib/url';
 import { base, type Thing } from '../lib/schema';
 import { external } from '../lib/ref';
+import { logo } from '../lib/logo';
 import '../styles/site.css';
 
 interface Props {
   title?: string;
   description?: string;
-  hideName?: boolean;
   og?: 'home' | 'work' | 'writing';
   type?: 'website' | 'profile';
   noindex?: boolean;
@@ -19,7 +19,6 @@ interface Props {
 const {
   title,
   description = site.description,
-  hideName = false,
   og = 'home',
   type = 'website',
   noindex = false,
@@ -94,8 +93,8 @@ const graph = JSON.stringify({ '@context': 'https://schema.org', '@graph': [...(
   <body>
     <a class="skip" href="#main">Skip to content</a>
     <div class="page">
-      <header class="site-header">
-        {!hideName && <a class="name" href={path('/')}>{site.name}</a>}
+      <header class:list={['site-header', { home: current === path('/') }]}>
+        <a class="logo" href={path('/')} aria-label={site.name} set:html={await logo()} />
         <nav aria-label="Main">
           {
             site.nav.map((item) => (
