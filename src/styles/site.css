@@ -432,6 +432,12 @@ main {
   font-style: italic;
 }
 
+.colophon .note {
+  font-size: 1rem;
+  font-style: italic;
+  color: var(--muted);
+}
+
 /* A single release: GitHub's notes, set in the text column. */
 
 .release .dateline {

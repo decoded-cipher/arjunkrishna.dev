@@ -7,12 +7,31 @@ import { lastmod } from '../lib/lastmod';
 import { site } from '../site';
 
 const updated = (await lastmod())['/colophon'];
-const description = 'How arjunkrishna.dev is built: a static site with no JavaScript.';
+const description = 'How arjunkrishna.dev is built: a static site with no JavaScript, and the numbers from its latest build.';
 const repo = 'https://github.com/decoded-cipher/arjunkrishna.dev';
 
 const schema = [
   page('WebPage', '/colophon', `Colophon — ${site.name}`, description, { dateModified: updated.toISOString() }),
   breadcrumbs('/colophon', 'Colophon'),
+];
+
+// Filled in after the build by src/integrations/stats.ts; the dash shows in dev.
+const numbers = [
+  ['Pages', 'pages'],
+  ['JavaScript', 'javascript'],
+  ['Stylesheet', 'css'],
+  ['Fonts', 'fonts'],
+  ['Whole site', 'total'],
+  ['Built', 'built'],
+  ['Commit', 'commit'],
+];
+
+const sizes = [
+  ['Home', 'page-home'],
+  ['Projects', 'page-projects'],
+  ['Blog', 'page-blog'],
+  ['Releases', 'page-releases'],
+  ['Colophon', 'page-colophon'],
 ];
 ---
 
@@ -80,6 +99,38 @@ const schema = [
           On <a {...external(repo)}>GitHub</a>.
         </dd>
       </div>
+    </dl>
+
+    <h2 class="section-title">This build</h2>
+    <dl class="rows">
+      {
+        numbers.map(([label, key]) => (
+          <div class="row">
+            <dt class="when">{label}</dt>
+            <dd class="what">
+              <span data-stat={key}>—</span>
+            </dd>
+          </div>
+        ))
+      }
+    </dl>
+
+    <h2 class="section-title">Page sizes</h2>
+    <p class="note">
+      The HTML of each page, compressed as it is sent. The stylesheet and fonts above are shared, and cached after the
+      first visit.
+    </p>
+    <dl class="rows">
+      {
+        sizes.map(([label, key]) => (
+          <div class="row">
+            <dt class="when">{label}</dt>
+            <dd class="what">
+              <span data-stat={key}>—</span>
+            </dd>
+          </div>
+        ))
+      }
     </dl>
   </section>
 </Base>
