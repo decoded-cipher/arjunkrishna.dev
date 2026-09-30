@@ -19,7 +19,7 @@ bun run preview
 |---|---|
 | `src/content/home.mdx` | Bio and margin notes |
 | `src/content/projects/*.md` | Projects — `featured` and `homeLine` put one on the home page |
-| `src/content/small.yaml` | Smaller things |
+| `src/content/small.yaml` | Tinkering |
 | `src/content/medium.json` | Medium posts |
 | `src/site.ts` | Name, title, descriptions, profiles, topics |
 | `assets/portrait-2.jpg` | Portrait |

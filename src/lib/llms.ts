@@ -121,7 +121,7 @@ Things I have built outside my day job.
 
 ${projectText}
 
-## Smaller things
+## Tinkering
 
 ${small.map(({ data }) => `- [${data.name}](${data.url}) (${monthYear(data.date)}): ${data.line}`).join('\n')}
 
