@@ -35,7 +35,7 @@ const image = absolute(`/og/${og}.png`);
 const imageAlt = title ? `${title}, by ${site.name}` : `${site.name}: ${site.tagline}`;
 const elsewhere = [
   { name: 'Email', href: `mailto:${site.email}` },
-  ...site.profiles.map((profile) => ({ name: profile.name, ...external(profile.url, { ref: false }) })),
+  ...site.profiles.filter((profile) => icons[profile.name]).map((profile) => ({ name: profile.name, ...external(profile.url, { ref: false }) })),
   { name: 'RSS', href: path('/rss.xml') },
 ];
 const graph = JSON.stringify({ '@context': 'https://schema.org', '@graph': [...(await base()), ...schema] }).replace(

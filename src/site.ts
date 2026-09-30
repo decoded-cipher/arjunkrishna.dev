@@ -36,6 +36,7 @@ export const site = {
     { name: 'LinkedIn', url: 'https://www.linkedin.com/in/-arjunkrishna/' },
     { name: 'X', url: 'https://x.com/decoded_cipher' },
     { name: 'Bluesky', url: 'https://bsky.app/profile/arjunkrishna.dev' },
+    { name: 'Tangled', url: 'https://tangled.org/arjunkrishna.dev' },
   ],
   elsewhere: [
     { name: 'Inovus Blogs', url: 'https://blog.inovuslabs.org/author/arjun/' },
