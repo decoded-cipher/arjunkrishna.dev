@@ -7,7 +7,7 @@ import { lastmod } from '../lib/lastmod';
 import { site } from '../site';
 
 const updated = (await lastmod())['/colophon'];
-const description = 'How arjunkrishna.dev is built: a static site with no JavaScript, and the numbers from its latest build.';
+const description = 'How arjunkrishna.dev is built: a static site with no JavaScript of its own, and the numbers from its latest build.';
 const repo = 'https://github.com/decoded-cipher/arjunkrishna.dev';
 
 const schema = [
@@ -40,8 +40,8 @@ const sizes = [
     <div class="intro">
       <h1>Colophon</h1>
       <p>
-        How this site is made. It is a static site with no JavaScript: every page is plain HTML with its styles
-        inlined, rebuilt whenever something changes.
+        How this site is made. It is a static site with no JavaScript of its own: every page is plain HTML with its
+        styles inlined, rebuilt whenever something changes.
       </p>
     </div>
 
@@ -51,7 +51,7 @@ const sizes = [
         <dt class="when">Framework</dt>
         <dd class="what">
           <a {...external('https://astro.build')}>Astro</a>, built with <a {...external('https://bun.sh')}>Bun</a>.
-          Nothing runs in the browser.
+          The only script is Cloudflare’s cookie-free Web Analytics.
         </dd>
       </div>
       <div class="row">
@@ -82,7 +82,7 @@ const sizes = [
       <div class="row">
         <dt class="when">Hosting</dt>
         <dd class="what">
-          GitHub Pages, with DNS on Cloudflare. GitHub Actions builds and deploys on every push, whenever a post is
+          GitHub Pages, behind Cloudflare’s cache. GitHub Actions builds and deploys on every push, whenever a post is
           published on Inovus Blogs, and every Sunday. Search engines hear about changes through IndexNow.
         </dd>
       </div>
