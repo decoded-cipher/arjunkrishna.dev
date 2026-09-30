@@ -35,6 +35,7 @@ export const site = {
     { name: 'GitHub', url: 'https://github.com/decoded-cipher' },
     { name: 'LinkedIn', url: 'https://www.linkedin.com/in/-arjunkrishna/' },
     { name: 'X', url: 'https://x.com/decoded_cipher' },
+    { name: 'Bluesky', url: 'https://bsky.app/profile/arjunkrishna.dev' },
   ],
   elsewhere: [
     { name: 'Inovus Blogs', url: 'https://blog.inovuslabs.org/author/arjun/' },
