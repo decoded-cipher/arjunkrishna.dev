@@ -88,8 +88,7 @@ const graph = JSON.stringify({ '@context': 'https://schema.org', '@graph': [...(
     <meta name="twitter:image:alt" content={imageAlt} />
 
     <script is:inline type="application/ld+json" set:html={graph} />
-    <Font cssVariable="--font-body" preload={[{ weight: 400, style: 'normal' }]} />
-    <Font cssVariable="--font-display" />
+    <Font cssVariable="--font-serif" preload={[{ weight: 400, style: 'normal' }]} />
     <slot name="head" />
   </head>
   <body>

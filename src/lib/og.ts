@@ -7,26 +7,17 @@ const colors = { bg: '#f3f2ee', text: '#2a2826', muted: '#6f6b64', rule: '#dedbd
 
 const woff = (pkg: string, file: string) => readFile(`node_modules/@fontsource/${pkg}/files/${file}.woff`);
 
-const fonts = Promise.all([
-  woff('cormorant-garamond', 'cormorant-garamond-latin-600-italic').then((data) => ({
-    name: 'Cormorant Garamond',
-    data,
-    weight: 600 as const,
-    style: 'italic' as const,
+const fonts = Promise.all(
+  [
+    [400, 'normal'],
+    [400, 'italic'],
+  ].map(async ([weight, style]) => ({
+    name: 'EB Garamond',
+    data: await woff('eb-garamond', `eb-garamond-latin-${weight}-${style}`),
+    weight: weight as 400,
+    style: style as 'normal' | 'italic',
   })),
-  woff('crimson-pro', 'crimson-pro-latin-400-normal').then((data) => ({
-    name: 'Crimson Pro',
-    data,
-    weight: 400 as const,
-    style: 'normal' as const,
-  })),
-  woff('crimson-pro', 'crimson-pro-latin-400-italic').then((data) => ({
-    name: 'Crimson Pro',
-    data,
-    weight: 400 as const,
-    style: 'italic' as const,
-  })),
-]);
+);
 
 const portrait = sharp('assets/portrait-2.jpg')
   .resize(392, 490, { fit: 'cover', position: 'centre' })
@@ -40,7 +31,7 @@ const h = (type: string, style: Record<string, unknown>, children?: unknown, pro
   props: { ...props, style: { display: 'flex', ...style }, children },
 });
 
-const display = { fontFamily: 'Cormorant Garamond', fontStyle: 'italic', fontWeight: 600 };
+const display = { fontFamily: 'EB Garamond', fontStyle: 'italic', fontWeight: 400 };
 
 async function svg(node: Node, width: number, height: number) {
   return satori(node as never, { width, height, fonts: await fonts });
@@ -80,7 +71,7 @@ export async function card({ title, line }: Card) {
       padding: 70,
       gap: 64,
       background: colors.bg,
-      fontFamily: 'Crimson Pro',
+      fontFamily: 'EB Garamond',
     },
     [
       h('div', { flex: 1, flexDirection: 'column', justifyContent: 'space-between' }, [
@@ -117,7 +108,7 @@ export async function iconSvg({ rounded = true } = {}) {
       background: colors.bg,
       borderRadius: rounded ? 14 : 0,
     },
-    h('div', { ...display, fontSize: 86, lineHeight: 1, marginTop: -18, color: colors.accent }, 'a'),
+    h('div', { ...display, fontSize: 76, lineHeight: 1, marginTop: -23, marginLeft: 5, color: colors.accent }, 'a'),
   );
   return svg(node, 64, 64);
 }
