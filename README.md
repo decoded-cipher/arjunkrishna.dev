@@ -29,8 +29,8 @@ Inovus Blogs posts are fetched at build time.
 ## Images
 
 The preview cards, favicons, app icons and the signature logo are drawn by `scripts/assets.ts` (Satori, sharp,
-SVGO) and committed to `public/` and `assets/`. They are not part of the build; after changing the portrait,
-the tagline, a card or the icon, run:
+SVGO) and committed to `public/` and `assets/`. They are not part of the build; after changing a card,
+the name or the icon, run:
 
 ```sh
 bun run assets

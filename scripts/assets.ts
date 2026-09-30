@@ -1,6 +1,6 @@
 // Draws the site's fixed images: preview cards, favicons, app icons and the signature logo.
 // They rarely change, so they live in the repository; run `bun run assets` after changing
-// the portrait, the tagline, a card or the icon, and commit what it writes.
+// a card, the name or the icon, and commit what it writes.
 
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import satori from 'satori';
@@ -11,11 +11,30 @@ import { site } from '../src/site';
 const colors = { bg: '#f3f2ee', text: '#2a2826', muted: '#6f6b64', rule: '#dedbd4', accent: '#c5370f' };
 
 const cards: Record<string, Card> = {
-  home: {},
-  projects: { title: 'Projects', line: 'Personal projects, built outside my day job.' },
-  blog: { title: 'Blog', line: 'Essays and notes, mostly about software, learning and the internet.' },
-  releases: { title: 'Releases', line: 'Tagged versions of the projects I still ship.' },
-  colophon: { title: 'Colophon', line: 'How this site is made.' },
+  home: {
+    line: 'Senior software engineer, working on system design and distributed systems.',
+    items: ['System design', 'Distributed systems', 'IoT', 'Cloudflare Workers'],
+  },
+  projects: {
+    title: 'Projects',
+    line: 'Personal projects, built outside my day job.',
+    items: ['Nodrix', 'BitNerve', 'Reelity', 'Zentro AI', 'NetMon'],
+  },
+  blog: {
+    title: 'Blog',
+    line: 'Essays and notes, mostly about software, learning and the internet.',
+    items: ['Engineering', 'Learning', 'AI', 'Since 2019'],
+  },
+  releases: {
+    title: 'Releases',
+    line: 'Tagged versions of the projects I still ship.',
+    items: ['nodrix', 'nodrix-sdk', 'netmon', 'auto-changelog'],
+  },
+  colophon: {
+    title: 'Colophon',
+    line: 'How this site is made.',
+    items: ['Astro', 'No JavaScript', 'EB Garamond', 'GitHub Pages'],
+  },
 };
 
 const woff = (pkg: string, file: string) => readFile(`node_modules/@fontsource/${pkg}/files/${file}.woff`);
@@ -34,12 +53,6 @@ const fonts = Promise.all(
   })),
 );
 
-const portrait = sharp('assets/portrait-2.jpg')
-  .resize(392, 490, { fit: 'cover', position: 'centre' })
-  .jpeg({ quality: 82 })
-  .toBuffer()
-  .then((buffer) => `data:image/jpeg;base64,${buffer.toString('base64')}`);
-
 type Node = { type: string; props: Record<string, unknown> & { style?: Record<string, unknown> } };
 const h = (type: string, style: Record<string, unknown>, children?: unknown, props = {}): Node => ({
   type,
@@ -54,23 +67,25 @@ async function svg(node: Node, width: number, height: number) {
 
 interface Card {
   title?: string;
-  line?: string;
+  line: string;
+  items: string[];
 }
 
-async function card({ title, line }: Card) {
-  const heading = title
+// Paper, the signature and the page's own words; no photograph.
+async function card({ title, line, items }: Card, signature: string) {
+  const ink = `data:image/svg+xml;base64,${Buffer.from(signature.replaceAll('currentColor', colors.text)).toString('base64')}`;
+  const [, , w, hgt] = signature.match(/viewBox="([^"]+)"/)![1].split(' ').map(Number);
+  const logo = (height: number) =>
+    h('img', {}, undefined, { src: ink, height, width: Math.round((height * w) / hgt) });
+
+  const middle = title
     ? [
-        h('div', { ...display, fontSize: 132, lineHeight: 1, color: colors.text }, title),
-        h('div', { paddingTop: 22, fontSize: 36, lineHeight: 1.3, color: colors.muted }, line),
+        h('div', { ...display, fontSize: 150, lineHeight: 1, color: colors.text }, title),
+        h('div', { paddingTop: 26, fontSize: 38, lineHeight: 1.3, color: colors.muted, maxWidth: 900 }, line),
       ]
     : [
-        h('div', { ...display, fontSize: 136, lineHeight: 0.92, color: colors.text }, 'Arjun'),
-        h('div', { ...display, fontSize: 136, lineHeight: 0.92, color: colors.text }, 'Krishna'),
-        h(
-          'div',
-          { paddingTop: 30, fontSize: 24, letterSpacing: '0.16em', textTransform: 'uppercase', color: colors.muted },
-          site.tagline,
-        ),
+        logo(190),
+        h('div', { paddingTop: 34, fontSize: 38, lineHeight: 1.3, color: colors.muted, maxWidth: 900 }, line),
       ];
 
   const node = h(
@@ -78,29 +93,26 @@ async function card({ title, line }: Card) {
     {
       width: '100%',
       height: '100%',
-      padding: 70,
-      gap: 64,
+      flexDirection: 'column',
+      justifyContent: 'space-between',
+      padding: '64px 80px',
       background: colors.bg,
       fontFamily: 'EB Garamond',
     },
     [
-      h('div', { flex: 1, flexDirection: 'column', justifyContent: 'space-between' }, [
-        h('div', { width: 64, height: 5, background: colors.accent }),
-        h('div', { flexDirection: 'column' }, heading),
-        h(
-          'div',
-          { justifyContent: 'space-between', paddingTop: 18, borderTop: `1px solid ${colors.rule}`, fontSize: 28 },
-          [
-            h('span', { ...display, color: colors.text }, title ? site.name : 'System design & distributed systems'),
-            h('span', { fontStyle: 'italic', color: colors.accent }, 'arjunkrishna.dev'),
-          ],
-        ),
+      h('div', { justifyContent: 'space-between', alignItems: 'center', height: 64 }, [
+        title ? logo(64) : h('div', { width: 72, height: 5, background: colors.accent }),
+        h('span', { ...display, fontSize: 30, color: colors.accent }, 'arjunkrishna.dev'),
       ]),
-      h('img', { width: 392, height: 490, objectFit: 'cover' }, undefined, {
-        src: await portrait,
-        width: 392,
-        height: 490,
-      }),
+      h('div', { flexDirection: 'column' }, middle),
+      h(
+        'div',
+        { gap: 18, paddingTop: 22, borderTop: `1px solid ${colors.rule}`, fontSize: 28, color: colors.text },
+        items.flatMap((item, i) => [
+          ...(i ? [h('span', { color: colors.accent }, '·')] : []),
+          h('span', {}, item),
+        ]),
+      ),
     ],
   );
 
@@ -186,7 +198,7 @@ const out: Record<string, Promise<string | Buffer>> = {
   'public/apple-touch-icon.png': iconPng(180, { rounded: false }),
   'public/icon-192.png': iconPng(192, { rounded: false }),
   'public/icon-512.png': iconPng(512, { rounded: false }),
-  ...Object.fromEntries(Object.entries(cards).map(([name, data]) => [`public/og/${name}.jpg`, card(data)])),
+  ...Object.fromEntries(Object.entries(cards).map(([name, data]) => [`public/og/${name}.jpg`, card(data, signature)])),
 };
 
 await mkdir('public/og', { recursive: true });
