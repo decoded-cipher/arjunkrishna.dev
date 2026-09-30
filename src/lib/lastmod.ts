@@ -7,7 +7,7 @@ export async function lastmod() {
   const newest = (await allPosts())[0].date;
   return {
     '/': latest(lastUpdated('src/content/home.mdx', 'src/content/projects'), newest),
-    '/projects/': lastUpdated('src/content/projects', 'src/content/small.yaml'),
-    '/blog/': newest,
+    '/projects': lastUpdated('src/content/projects', 'src/content/small.yaml'),
+    '/blog': newest,
   };
 }

@@ -17,7 +17,7 @@ const projects = await Promise.all(entries.map(async (entry) => ({ entry, ...(aw
 const sentence = (text: string) => text.charAt(0).toUpperCase() + text.slice(1);
 const childrenOf = (id: string) => projects.filter(({ entry }) => entry.data.parent === id);
 const small = (await getCollection('small')).sort((a, b) => b.data.date.localeCompare(a.data.date));
-const updated = (await lastmod())['/projects/'];
+const updated = (await lastmod())['/projects'];
 const linkedin = site.profiles.find((p) => p.name === 'LinkedIn')!.url;
 
 const linksOf = (links: { site?: string; source?: string; writeup?: string }) =>
@@ -31,26 +31,26 @@ const description =
   'Personal projects by Arjun Krishna, built outside his day job — Nodrix, an IoT platform for Cloudflare, Reelity, BitNerve, NetMon and more.';
 
 const schema = [
-  page('CollectionPage', '/projects/', `Personal projects — ${site.name}`, description, {
+  page('CollectionPage', '/projects', `Personal projects — ${site.name}`, description, {
     dateModified: updated.toISOString(),
-    breadcrumb: { '@id': absolute('/projects/#breadcrumbs') },
+    breadcrumb: { '@id': absolute('/projects#breadcrumbs') },
     mainEntity: itemList(
       entries.map(({ id, data, body = '' }) => ({
         '@type': data.links.source ? 'SoftwareSourceCode' : 'CreativeWork',
-        '@id': absolute(`/projects/#${id}`),
+        '@id': absolute(`/projects#${id}`),
         name: data.name,
         description: body.trim(),
-        url: data.links.site ?? absolute(`/projects/#${id}`),
+        url: data.links.site ?? absolute(`/projects#${id}`),
         ...(data.links.source && { codeRepository: data.links.source }),
         ...(data.links.writeup && { subjectOf: { '@type': 'BlogPosting', url: data.links.writeup } }),
-        ...(data.parent && { isPartOf: { '@id': absolute(`/projects/#${data.parent}`) } }),
+        ...(data.parent && { isPartOf: { '@id': absolute(`/projects#${data.parent}`) } }),
         keywords: data.stack,
         creativeWorkStatus: statusLabel[data.status],
         author,
       })),
     ),
   }),
-  breadcrumbs('/projects/', 'Projects'),
+  breadcrumbs('/projects', 'Projects'),
 ];
 ---
 

@@ -16,7 +16,7 @@ async function projects() {
       id,
       ...data,
       body: body.trim(),
-      url: data.links.site ?? data.links.source ?? data.links.writeup ?? absolute(`/projects/#${id}`),
+      url: data.links.site ?? data.links.source ?? data.links.writeup ?? absolute(`/projects#${id}`),
     }));
 }
 
@@ -56,8 +56,8 @@ ${facts()}
 ## Pages
 
 - [Home](${absolute('/')}): about me, a few things I've made, and recent posts
-- [Projects](${absolute('/projects/')}): personal projects, built outside my day job
-- [Blog](${absolute('/blog/')}): essays and notes since 2019
+- [Projects](${absolute('/projects')}): personal projects, built outside my day job
+- [Blog](${absolute('/blog')}): essays and notes since 2019
 - [RSS](${absolute('/rss.xml')}): feed of all posts
 
 ## Projects

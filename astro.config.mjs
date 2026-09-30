@@ -8,7 +8,8 @@ const to = (path) => `${base.replace(/\/$/, '')}${path}`;
 export default defineConfig({
   site,
   base,
-  trailingSlash: 'always',
+  trailingSlash: 'ignore',
+  build: { format: 'file' },
   integrations: [mdx()],
   fonts: [
     {
@@ -22,7 +23,7 @@ export default defineConfig({
     },
   ],
   redirects: {
-    '/work': to('/projects/'),
-    '/writing': to('/blog/'),
+    '/work': to('/projects'),
+    '/writing': to('/blog'),
   },
 });

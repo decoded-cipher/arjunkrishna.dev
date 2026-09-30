@@ -42,7 +42,7 @@ export const site = {
   ],
   nav: [
     { name: 'Home', href: '/' },
-    { name: 'Projects', href: '/projects/' },
-    { name: 'Blog', href: '/blog/' },
+    { name: 'Projects', href: '/projects' },
+    { name: 'Blog', href: '/blog' },
   ],
 };

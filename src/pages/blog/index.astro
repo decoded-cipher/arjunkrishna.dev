@@ -10,7 +10,7 @@ import { site } from '../../site';
 import { lastmod } from '../../lib/lastmod';
 
 const posts = await allPosts();
-const updated = (await lastmod())['/blog/'];
+const updated = (await lastmod())['/blog'];
 const years = [...new Set(posts.map((post) => yearOf(post.date)))];
 const publisher = (source?: string) =>
   source === 'Medium'
@@ -19,9 +19,9 @@ const publisher = (source?: string) =>
 const description = 'Blog posts by Arjun Krishna, mostly about software, learning and the internet.';
 
 const schema = [
-  page('CollectionPage', '/blog/', `Blog — ${site.name}`, description, {
+  page('CollectionPage', '/blog', `Blog — ${site.name}`, description, {
     dateModified: updated.toISOString(),
-    breadcrumb: { '@id': absolute('/blog/#breadcrumbs') },
+    breadcrumb: { '@id': absolute('/blog#breadcrumbs') },
     mainEntity: itemList(
       posts.map((post) => ({
         '@type': 'BlogPosting',
@@ -36,7 +36,7 @@ const schema = [
       })),
     ),
   }),
-  breadcrumbs('/blog/', 'Blog'),
+  breadcrumbs('/blog', 'Blog'),
 ];
 ---
 

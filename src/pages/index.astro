@@ -40,12 +40,12 @@ const schema = [
       {
         made.map(({ id, data }) => (
           <li>
-            <a {...external(data.links.site ?? data.links.source ?? data.links.writeup ?? path(`/projects/#${id}`))}>{data.name}</a> —{' '}
+            <a {...external(data.links.site ?? data.links.source ?? data.links.writeup ?? path(`/projects#${id}`))}>{data.name}</a> —{' '}
             {data.homeLine}
           </li>
         ))
       }
-      <li class="small">More on the <a href={path('/projects/')}>projects</a> page.</li>
+      <li class="small">More on the <a href={path('/projects')}>projects</a> page.</li>
     </ul>
     <p class="small">
       I can be reached at{' '}
@@ -66,6 +66,6 @@ const schema = [
   <section class="grid" aria-labelledby="blog">
     <h2 class="section-title" id="blog">Blog</h2>
     <PostList posts={posts} />
-    <p class="small"><a href={path('/blog/')}>All posts, since 2019</a></p>
+    <p class="small"><a href={path('/blog')}>All posts, since 2019</a></p>
   </section>
 </Base>
