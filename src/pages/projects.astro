@@ -76,28 +76,30 @@ const schema = [
             <div class="what">
               <h3>{entry.data.name}</h3>
               <Content />
+            </div>
+            <div class="meta">
               <p class="source">{entry.data.stack}</p>
               <p class="links">
                 {linksOf(entry.data.links).map((link) => (
                   <a {...external(link.href)}>{link.label}</a>
                 ))}
               </p>
-              {childrenOf(entry.id).length > 0 && (
-                <ol class="sub">
-                  {childrenOf(entry.id).map(({ entry: child }) => (
-                    <li id={child.id}>
-                      <h4>{child.data.name}</h4>
-                      <p>{sentence(child.data.line ?? '')}</p>
-                      <p class="links">
-                        {linksOf(child.data.links).map((link) => (
-                          <a {...external(link.href)}>{link.label}</a>
-                        ))}
-                      </p>
-                    </li>
-                  ))}
-                </ol>
-              )}
             </div>
+            {childrenOf(entry.id).length > 0 && (
+              <ol class="sub">
+                {childrenOf(entry.id).map(({ entry: child }) => (
+                  <li id={child.id}>
+                    <h4>{child.data.name}</h4>
+                    <p>{sentence(child.data.line ?? '')}</p>
+                    <p class="links">
+                      {linksOf(child.data.links).map((link) => (
+                        <a {...external(link.href)}>{link.label}</a>
+                      ))}
+                    </p>
+                  </li>
+                ))}
+              </ol>
+            )}
           </li>
         ))
       }

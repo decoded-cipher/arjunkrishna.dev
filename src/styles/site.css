@@ -432,6 +432,27 @@ main {
   font-style: italic;
 }
 
+.project > .meta {
+  grid-column: 3;
+  align-self: start;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding-top: 0.55rem;
+  font-size: 0.9375rem;
+  line-height: 1.45;
+}
+
+.project > .meta .links {
+  flex-direction: column;
+  gap: 0.15rem;
+  font-size: inherit;
+}
+
+.project > .sub {
+  grid-column: 2;
+}
+
 .project > .what {
   display: flex;
   flex-direction: column;
@@ -521,6 +542,22 @@ main {
   .row > .aside {
     display: none;
   }
+
+  .project > .meta {
+    grid-column: 2;
+    padding-top: 0.35rem;
+    font-size: inherit;
+  }
+
+  .project > .meta .source {
+    font-size: 0.9375rem;
+  }
+
+  .project > .meta .links {
+    flex-direction: row;
+    gap: 0.25rem 1.25rem;
+    font-size: 1.0625rem;
+  }
 }
 
 /* Phones and narrow windows: one column, notes above their paragraphs. */
@@ -572,7 +609,9 @@ main {
   .year,
   .row > .when,
   .row > .what,
-  .row > .aside {
+  .row > .aside,
+  .project > .meta,
+  .project > .sub {
     grid-column: 1;
     grid-row: auto;
   }
@@ -619,6 +658,21 @@ main {
   .rows,
   .row {
     row-gap: 0;
+  }
+
+  .project > .meta {
+    padding-top: 0.35rem;
+    font-size: inherit;
+  }
+
+  .project > .meta .source {
+    font-size: 0.9375rem;
+  }
+
+  .project > .meta .links {
+    flex-direction: row;
+    gap: 0.25rem 1.25rem;
+    font-size: 1.0625rem;
   }
 
   .sub {
