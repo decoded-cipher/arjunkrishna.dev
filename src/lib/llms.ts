@@ -35,7 +35,7 @@ async function bio() {
 
 const facts = () =>
   [
-    `- Role: ${site.jobTitle} at ${site.employer.name}; before that, software engineer at Airtory (2022–2024)`,
+    `- Role: ${site.jobTitle} at [${site.employer.name}](${site.employer.url}); before that, software engineer at [Airtory](https://www.airtory.com) (2022–2024)`,
     '- Based in: Kerala, India',
     `- Community: mentor at [${site.community.name}](${site.community.url}), the innovation centre of ${site.college}, since 2018`,
     `- Education: BCA and MCA, ${site.college}`,
