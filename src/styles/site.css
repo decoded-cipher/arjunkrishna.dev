@@ -119,7 +119,7 @@ p {
   text-decoration: none;
 }
 
-.site-header nav a[aria-current='page'] {
+.site-header nav a[aria-current] {
   color: var(--text);
 }
 

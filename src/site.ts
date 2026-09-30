@@ -46,5 +46,6 @@ export const site = {
     { name: 'Home', href: '/' },
     { name: 'Projects', href: '/projects' },
     { name: 'Blog', href: '/blog' },
+    { name: 'Releases', href: '/releases' },
   ],
 };

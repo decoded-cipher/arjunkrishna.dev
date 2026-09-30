@@ -31,6 +31,8 @@ const {
 const pageTitle = title ? `${title} — ${site.name}` : site.title;
 const current = Astro.url.pathname.replace(/(index)?\.html$/, '');
 const canonical = new URL(current, Astro.site);
+const active = (href: string) =>
+  current === path(href) ? 'page' : href !== '/' && current.startsWith(`${path(href)}/`) ? 'true' : undefined;
 const image = absolute(`/og/${og}.png`);
 const imageAlt = title ? `${title}, by ${site.name}` : `${site.name}: ${site.tagline}`;
 const elsewhere = [
@@ -107,7 +109,7 @@ const graph = JSON.stringify({ '@context': 'https://schema.org', '@graph': [...(
         <nav aria-label="Main">
           {
             site.nav.map((item) => (
-              <a href={path(item.href)} aria-current={current === path(item.href) ? 'page' : undefined}>
+              <a href={path(item.href)} aria-current={active(item.href)}>
                 {item.name}
               </a>
             ))
