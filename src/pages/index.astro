@@ -8,8 +8,7 @@ import PostList from '../components/PostList.astro';
 import Bio from '../content/home.mdx';
 import { site } from '../site';
 import { allPosts } from '../lib/posts';
-import { longDate } from '../lib/date';
-import { lastUpdated } from '../lib/updated';
+import { lastmod } from '../lib/lastmod';
 import { external } from '../lib/ref';
 import { absolute, path } from '../lib/url';
 import { author, page } from '../lib/schema';
@@ -18,7 +17,7 @@ const made = (await getCollection('projects', ({ data }) => data.featured && !da
   (a, b) => a.data.order - b.data.order,
 );
 const posts = (await allPosts()).slice(0, 7);
-const updated = lastUpdated('src/content/home.mdx');
+const updated = (await lastmod())['/'];
 const schema = [
   page('ProfilePage', '/', site.title, site.description, {
     mainEntity: author,
@@ -28,7 +27,7 @@ const schema = [
 ];
 ---
 
-<Base type="profile" schema={schema}>
+<Base type="profile" schema={schema} updated={updated}>
   <section class="grid bio h-card">
     <div class="masthead">
       <h1 class="p-name">Arjun{' '}<br />Krishna</h1>
@@ -49,7 +48,7 @@ const schema = [
       <li class="small">More on the <a href={path('/projects/')}>projects</a> page.</li>
     </ul>
     <p class="small">
-      Last updated on <time datetime={updated.toISOString()}>{longDate(updated)}</time>. I can be reached at{' '}
+      I can be reached at{' '}
       <a class="u-email" href={`mailto:${site.email}`}>{site.email}</a>, and I'm on{' '}
       {
         site.profiles.map((profile, i) => (

@@ -7,8 +7,10 @@ import { external } from '../../lib/ref';
 import { absolute, path } from '../../lib/url';
 import { author, breadcrumbs, itemList, page } from '../../lib/schema';
 import { site } from '../../site';
+import { lastmod } from '../../lib/lastmod';
 
 const posts = await allPosts();
+const updated = (await lastmod())['/blog/'];
 const years = [...new Set(posts.map((post) => yearOf(post.date)))];
 const publisher = (source?: string) =>
   source === 'Medium'
@@ -18,6 +20,7 @@ const description = 'Blog posts by Arjun Krishna, mostly about software, learnin
 
 const schema = [
   page('CollectionPage', '/blog/', `Blog — ${site.name}`, description, {
+    dateModified: updated.toISOString(),
     breadcrumb: { '@id': absolute('/blog/#breadcrumbs') },
     mainEntity: itemList(
       posts.map((post) => ({
@@ -37,7 +40,7 @@ const schema = [
 ];
 ---
 
-<Base title="Blog" description={description} og="blog" schema={schema}>
+<Base title="Blog" description={description} og="blog" schema={schema} updated={updated}>
   <section class="grid">
     <div class="intro">
       <h1>Blog</h1>

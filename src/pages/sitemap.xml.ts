@@ -1,20 +1,10 @@
 import type { APIRoute } from 'astro';
-import { allPosts } from '../lib/posts';
-import { lastUpdated } from '../lib/updated';
+import { lastmod } from '../lib/lastmod';
 import { absolute } from '../lib/url';
 
-const latest = (...dates: Date[]) => new Date(Math.max(...dates.map((date) => date.getTime())));
-
 export const GET: APIRoute = async () => {
-  const posts = await allPosts();
-  const pages = [
-    { loc: '/', lastmod: latest(lastUpdated('src/content/home.mdx', 'src/content/projects'), posts[0].date) },
-    { loc: '/projects/', lastmod: lastUpdated('src/content/projects', 'src/content/small.yaml') },
-    { loc: '/blog/', lastmod: posts[0].date },
-  ];
-
-  const urls = pages
-    .map(({ loc, lastmod }) => `<url><loc>${absolute(loc)}</loc><lastmod>${lastmod.toISOString()}</lastmod></url>`)
+  const urls = Object.entries(await lastmod())
+    .map(([loc, date]) => `<url><loc>${absolute(loc)}</loc><lastmod>${date.toISOString()}</lastmod></url>`)
     .join('');
 
   return new Response(

@@ -5,6 +5,7 @@ import { absolute, path } from '../lib/url';
 import { base, type Thing } from '../lib/schema';
 import { external } from '../lib/ref';
 import { logo } from '../lib/logo';
+import { longDate } from '../lib/date';
 import '../styles/site.css';
 
 interface Props {
@@ -13,6 +14,7 @@ interface Props {
   og?: 'home' | 'projects' | 'blog';
   type?: 'website' | 'profile';
   noindex?: boolean;
+  updated?: Date;
   schema?: Thing[];
 }
 
@@ -22,6 +24,7 @@ const {
   og = 'home',
   type = 'website',
   noindex = false,
+  updated,
   schema = [],
 } = Astro.props;
 const pageTitle = title ? `${title} — ${site.name}` : site.title;
@@ -109,7 +112,14 @@ const graph = JSON.stringify({ '@context': 'https://schema.org', '@graph': [...(
         <slot />
       </main>
       <footer class="site-footer">
-        <span>{site.name} © 2018–{new Date().getFullYear()}</span>
+        <p class="copyright">{site.name} © 2018–{new Date().getFullYear()}</p>
+        {
+          updated && (
+            <p class="updated">
+              Last updated <time datetime={updated.toISOString()}>{longDate(updated)}</time>
+            </p>
+          )
+        }
         <nav aria-label="Elsewhere">
           <a href={`mailto:${site.email}`}>Email</a>
           {site.profiles.map((profile) => <a {...external(profile.url, { ref: false })}>{profile.name}</a>)}
