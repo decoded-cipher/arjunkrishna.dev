@@ -463,11 +463,13 @@ main {
 
   .site-header {
     flex-wrap: wrap;
+    justify-content: center;
     gap: 0.25rem 1rem;
   }
 
   .site-header nav {
     gap: 1.25rem;
+    margin-left: 0;
   }
 
   main {
@@ -505,7 +507,11 @@ main {
   }
 
   .masthead h1 {
-    font-size: 4rem;
+    font-size: 3.5rem;
+  }
+
+  .masthead br {
+    display: none;
   }
 
   .tagline {
@@ -513,8 +519,16 @@ main {
     letter-spacing: 0.1em;
   }
 
+  .masthead {
+    grid-row: 2;
+    padding-top: 0;
+    text-align: center;
+  }
+
   .portrait {
-    max-width: 15rem;
+    grid-row: 1;
+    justify-self: center;
+    max-width: 10rem;
   }
 
   .quote blockquote {
