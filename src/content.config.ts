@@ -12,6 +12,8 @@ const projects = defineCollection({
     order: z.number(),
     draft: z.boolean().default(false),
     featured: z.boolean().default(false),
+    parent: z.string().optional(),
+    line: z.string().optional(),
     homeLine: z.string().optional(),
     stack: z.string(),
     links: z

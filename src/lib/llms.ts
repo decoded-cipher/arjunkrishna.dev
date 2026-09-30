@@ -13,6 +13,7 @@ async function projects() {
   return (await getCollection('projects', ({ data }) => !data.draft))
     .sort((a, b) => a.data.order - b.data.order)
     .map(({ id, data, body = '' }) => ({
+      id,
       ...data,
       body: body.trim(),
       url: data.links.site ?? data.links.source ?? data.links.writeup ?? absolute(`/projects/#${id}`),
@@ -84,12 +85,13 @@ export async function llmsFull() {
   const posts = await allPosts();
   const small = (await getCollection('small')).sort((a, b) => b.data.date.localeCompare(a.data.date));
 
-  const projectText = (await projects())
+  const all = await projects();
+  const projectText = all
     .map((project) =>
       [
         `### ${project.name}`,
         '',
-        `${project.years} · ${statusLabel[project.status]} · ${project.stack}`,
+        `${project.years} · ${statusLabel[project.status]} · ${project.stack}${project.parent ? ` · part of ${all.find((p) => p.id === project.parent)?.name}` : ''}`,
         '',
         project.body,
         '',

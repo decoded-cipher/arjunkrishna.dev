@@ -14,6 +14,8 @@ const entries = (await getCollection('projects', ({ data }) => !data.draft)).sor
   (a, b) => a.data.order - b.data.order,
 );
 const projects = await Promise.all(entries.map(async (entry) => ({ entry, ...(await render(entry)) })));
+const sentence = (text: string) => text.charAt(0).toUpperCase() + text.slice(1);
+const childrenOf = (id: string) => projects.filter(({ entry }) => entry.data.parent === id);
 const small = (await getCollection('small')).sort((a, b) => b.data.date.localeCompare(a.data.date));
 const updated = (await lastmod())['/projects/'];
 const linkedin = site.profiles.find((p) => p.name === 'LinkedIn')!.url;
@@ -41,6 +43,7 @@ const schema = [
         url: data.links.site ?? absolute(`/projects/#${id}`),
         ...(data.links.source && { codeRepository: data.links.source }),
         ...(data.links.writeup && { subjectOf: { '@type': 'BlogPosting', url: data.links.writeup } }),
+        ...(data.parent && { isPartOf: { '@id': absolute(`/projects/#${data.parent}`) } }),
         keywords: data.stack,
         creativeWorkStatus: statusLabel[data.status],
         author,
@@ -64,7 +67,7 @@ const schema = [
     <h2 class="section-title">Projects</h2>
     <ol class="rows">
       {
-        projects.map(({ entry, Content }) => (
+        projects.filter(({ entry }) => !entry.data.parent).map(({ entry, Content }) => (
           <li class="row project" id={entry.id}>
             <div class="when">
               <span>{entry.data.years}</span>
@@ -79,6 +82,21 @@ const schema = [
                   <a {...external(link.href)}>{link.label}</a>
                 ))}
               </p>
+              {childrenOf(entry.id).length > 0 && (
+                <ol class="sub">
+                  {childrenOf(entry.id).map(({ entry: child }) => (
+                    <li id={child.id}>
+                      <h4>{child.data.name}</h4>
+                      <p>{sentence(child.data.line ?? '')}</p>
+                      <p class="links">
+                        {linksOf(child.data.links).map((link) => (
+                          <a {...external(link.href)}>{link.label}</a>
+                        ))}
+                      </p>
+                    </li>
+                  ))}
+                </ol>
+              )}
             </div>
           </li>
         ))

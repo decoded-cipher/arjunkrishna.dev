@@ -443,6 +443,40 @@ main {
   font-size: 1.75rem;
 }
 
+.sub {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.5rem 2.5rem;
+  margin: 1.25rem 0 0.25rem;
+  padding: 0;
+  list-style: none;
+}
+
+.sub li {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  padding-top: 0.9rem;
+  border-top: 1px solid var(--rule);
+}
+
+.sub h4 {
+  margin: 0;
+  font-style: italic;
+  font-weight: 400;
+  font-size: 1.375rem;
+  line-height: 1.2;
+}
+
+.sub p {
+  font-size: 1.125rem;
+  line-height: 1.5;
+}
+
+.sub .links {
+  font-size: 1rem;
+}
+
 .links {
   display: flex;
   flex-wrap: wrap;
@@ -580,6 +614,11 @@ main {
   .rows,
   .row {
     row-gap: 0;
+  }
+
+  .sub {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 1.25rem;
   }
 
   .project > .when {
