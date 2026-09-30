@@ -6,6 +6,7 @@ import { base, type Thing } from '../lib/schema';
 import { external } from '../lib/ref';
 import { logo } from '../lib/logo';
 import { longDate } from '../lib/date';
+import { icons } from '../lib/icons';
 import '../styles/site.css';
 
 interface Props {
@@ -32,6 +33,11 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
 const current = Astro.url.pathname;
 const image = absolute(`/og/${og}.png`);
 const imageAlt = title ? `${title}, by ${site.name}` : `${site.name}: ${site.tagline}`;
+const elsewhere = [
+  { name: 'Email', href: `mailto:${site.email}` },
+  ...site.profiles.map((profile) => ({ name: profile.name, ...external(profile.url, { ref: false }) })),
+  { name: 'RSS', href: path('/rss.xml') },
+];
 const graph = JSON.stringify({ '@context': 'https://schema.org', '@graph': [...(await base()), ...schema] }).replace(
   /</g,
   '\\u003c',
@@ -121,9 +127,13 @@ const graph = JSON.stringify({ '@context': 'https://schema.org', '@graph': [...(
           )
         }
         <nav aria-label="Elsewhere">
-          <a href={`mailto:${site.email}`}>Email</a>
-          {site.profiles.map((profile) => <a {...external(profile.url, { ref: false })}>{profile.name}</a>)}
-          <a href={path('/rss.xml')}>RSS</a>
+          {
+            elsewhere.map(({ name, ...link }) => (
+              <a {...link} aria-label={name} title={name}>
+                <svg viewBox="0 0 24 24" aria-hidden="true" set:html={icons[name]} />
+              </a>
+            ))
+          }
         </nav>
       </footer>
     </div>
