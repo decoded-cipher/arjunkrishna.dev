@@ -2,6 +2,7 @@ import { readFile } from 'node:fs/promises';
 import { getCollection } from 'astro:content';
 import { site } from '../site';
 import { allPosts } from './posts';
+import { allReleases } from './releases';
 import { monthYear } from './date';
 import { absolute } from './url';
 
@@ -57,6 +58,7 @@ ${facts()}
 
 - [Home](${absolute('/')}): about me, a few things I've made, and recent posts
 - [Projects](${absolute('/projects')}): personal projects, built outside my day job
+- [Releases](${absolute('/releases')}): tagged versions of those projects, newest first
 - [Blog](${absolute('/blog')}): essays and notes since 2019
 - [RSS](${absolute('/rss.xml')}): feed of all posts
 
@@ -126,6 +128,12 @@ ${projectText}
 ## Tinkering
 
 ${small.map(({ data }) => `- [${data.name}](${data.url}) (${monthYear(data.date)}): ${data.line}`).join('\n')}
+
+## Releases
+
+${(await allReleases())
+  .map((release) => `- ${isoDay(release.date)} — [${release.name} ${release.tag}](${absolute(`/releases/${release.slug}`)})${release.summary ? `: ${release.summary}` : ''}`)
+  .join('\n')}
 
 ## Blog
 
