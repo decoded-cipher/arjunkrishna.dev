@@ -20,11 +20,16 @@ const cards: Record<string, Card> = {
 
 const woff = (pkg: string, file: string) => readFile(`node_modules/@fontsource/${pkg}/files/${file}.woff`);
 
+// Regular and italic for the cards; bold italic for the monogram, so it holds up at 16 pixels.
 const fonts = Promise.all(
-  (['normal', 'italic'] as const).map(async (style) => ({
+  ([
+    [400, 'normal'],
+    [400, 'italic'],
+    [700, 'italic'],
+  ] as const).map(async ([weight, style]) => ({
     name: 'EB Garamond',
-    data: await woff('eb-garamond', `eb-garamond-latin-400-${style}`),
-    weight: 400 as const,
+    data: await woff('eb-garamond', `eb-garamond-latin-${weight}-${style}`),
+    weight,
     style,
   })),
 );
@@ -104,6 +109,7 @@ async function card({ title, line }: Card) {
     .toBuffer();
 }
 
+// The AK monogram: bold italic EB Garamond in paper, on the vermilion accent.
 async function iconSvg({ rounded = true } = {}) {
   const node = h(
     'div',
@@ -112,10 +118,14 @@ async function iconSvg({ rounded = true } = {}) {
       height: '100%',
       alignItems: 'center',
       justifyContent: 'center',
-      background: colors.bg,
+      background: colors.accent,
       borderRadius: rounded ? 14 : 0,
     },
-    h('div', { ...display, fontSize: 76, lineHeight: 1, marginTop: -23, marginLeft: 5, color: colors.accent }, 'a'),
+    h(
+      'div',
+      { ...display, fontWeight: 700, fontSize: 37, letterSpacing: '-0.04em', marginTop: -4, marginLeft: -2, color: colors.bg },
+      'AK',
+    ),
   );
   return svg(node, 64, 64);
 }
