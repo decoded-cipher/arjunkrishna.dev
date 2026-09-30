@@ -126,6 +126,7 @@ main {
 .site-footer {
   display: flex;
   justify-content: space-between;
+  align-items: baseline;
   flex-wrap: wrap;
   gap: 0.5rem 2rem;
   margin-top: 4rem;
@@ -133,6 +134,21 @@ main {
   border-top: 1px solid var(--rule);
   font-size: 1rem;
   color: var(--muted);
+}
+
+.site-footer nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 1.5rem;
+}
+
+.site-footer nav a {
+  color: var(--muted);
+  text-decoration: none;
+}
+
+.site-footer nav a:hover {
+  color: var(--accent);
 }
 
 /* The three-column page: margin notes, text, and an aside column. */

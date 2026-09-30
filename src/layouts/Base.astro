@@ -3,6 +3,7 @@ import { Font } from 'astro:assets';
 import { site } from '../site';
 import { absolute, path } from '../lib/url';
 import { base, type Thing } from '../lib/schema';
+import { external } from '../lib/ref';
 import '../styles/site.css';
 
 interface Props {
@@ -110,7 +111,12 @@ const graph = JSON.stringify({ '@context': 'https://schema.org', '@graph': [...(
         <slot />
       </main>
       <footer class="site-footer">
-        <span>© 2018–{new Date().getFullYear()} {site.name} · <a href={path('/rss.xml')}>RSS</a></span>
+        <span>© 2018–{new Date().getFullYear()} {site.name}</span>
+        <nav aria-label="Elsewhere">
+          <a href={`mailto:${site.email}`}>Email</a>
+          {site.profiles.map((profile) => <a {...external(profile.url, { ref: false })}>{profile.name}</a>)}
+          <a href={path('/rss.xml')}>RSS</a>
+        </nav>
       </footer>
     </div>
   </body>
