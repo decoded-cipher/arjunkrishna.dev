@@ -124,7 +124,9 @@ const graph = JSON.stringify({ '@context': 'https://schema.org', '@graph': [...(
         {
           updated && (
             <p class="updated">
-              Last updated <time datetime={updated.toISOString()}>{longDate(updated)}</time>
+              <a href={path('/colophon')}>
+                Last updated <time datetime={updated.toISOString()}>{longDate(updated)}</time>
+              </a>
             </p>
           )
         }
