@@ -10,7 +10,7 @@ export default defineConfig({
   site,
   base,
   trailingSlash: 'ignore',
-  build: { format: 'file' },
+  build: { format: 'file', inlineStylesheets: 'always' },
   integrations: [mdx(), stats()],
   fonts: [
     {

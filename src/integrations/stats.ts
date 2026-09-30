@@ -60,12 +60,18 @@ export default function stats(): AstroIntegration {
           Object.entries(WEIGHED).map(async ([name, file]) => [`page-${name}`, `${kb(await gzipped(join(root, file)))}`]),
         );
         const total = await size(all, async (path) => (await stat(path)).size);
+        // Styles are inlined into each page; measure them from the home page.
+        const inline = [...(await readFile(join(root, 'index.html'), 'utf8')).matchAll(/<style[^>]*>([\s\S]*?)<\/style>/g)]
+          .map((match) => match[1])
+          .join('');
         const built = new Date();
 
         const values: Record<string, string> = {
           pages: String(pages),
           javascript: scripts.length ? kb(await size(scripts, async (path) => (await stat(path)).size)) : 'None',
-          css: `${styles.length} ${styles.length === 1 ? 'file' : 'files'}, ${kb(await size(styles, gzipped))} compressed`,
+          css: styles.length
+            ? `${styles.length} ${styles.length === 1 ? 'file' : 'files'}, ${kb(await size(styles, gzipped))} compressed`
+            : `Inlined in each page, ${kb(gzipSync(inline).length)} compressed`,
           fonts: `${fonts.length} files, ${kb(await size(fonts, async (path) => (await stat(path)).size))}`,
           total: `${kb(total)} across ${all.length} files`,
           ...Object.fromEntries(weights),
