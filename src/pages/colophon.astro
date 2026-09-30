@@ -1,0 +1,85 @@
+---
+import Base from '../layouts/Base.astro';
+import { external } from '../lib/ref';
+import { path } from '../lib/url';
+import { breadcrumbs, page } from '../lib/schema';
+import { lastmod } from '../lib/lastmod';
+import { site } from '../site';
+
+const updated = (await lastmod())['/colophon'];
+const description = 'How arjunkrishna.dev is built: a static site with no JavaScript.';
+const repo = 'https://github.com/decoded-cipher/arjunkrishna.dev';
+
+const schema = [
+  page('WebPage', '/colophon', `Colophon — ${site.name}`, description, { dateModified: updated.toISOString() }),
+  breadcrumbs('/colophon', 'Colophon'),
+];
+---
+
+<Base title="Colophon" description={description} og="colophon" schema={schema} updated={updated}>
+  <section class="grid colophon">
+    <div class="intro">
+      <h1>Colophon</h1>
+      <p>
+        How this site is made. It is a static site with no JavaScript: every page is plain HTML and one stylesheet,
+        rebuilt whenever something changes.
+      </p>
+    </div>
+
+    <h2 class="section-title">Made with</h2>
+    <dl class="rows">
+      <div class="row">
+        <dt class="when">Framework</dt>
+        <dd class="what">
+          <a {...external('https://astro.build')}>Astro</a>, built with <a {...external('https://bun.sh')}>Bun</a>.
+          Nothing runs in the browser.
+        </dd>
+      </div>
+      <div class="row">
+        <dt class="when">Type</dt>
+        <dd class="what">
+          EB Garamond, regular and italic, served from this domain. The signature at the top is set in Allison and
+          turned into an SVG when the site is built.
+        </dd>
+      </div>
+      <div class="row">
+        <dt class="when">Content</dt>
+        <dd class="what">
+          Projects are Markdown files in the repository. Posts come from Inovus Blogs through the Ghost API, releases
+          from the GitHub API; both are fetched at build time.
+        </dd>
+      </div>
+      <div class="row">
+        <dt class="when">Dates</dt>
+        <dd class="what">“Last updated” is read from the git history of each page’s content, not written by hand.</dd>
+      </div>
+      <div class="row">
+        <dt class="when">Images</dt>
+        <dd class="what">
+          The preview cards and icons are drawn at build time with Satori and sharp, from the same type as the pages.
+        </dd>
+      </div>
+      <div class="row">
+        <dt class="when">Hosting</dt>
+        <dd class="what">
+          GitHub Pages, with DNS on Cloudflare. GitHub Actions builds and deploys on every push, whenever a post is
+          published on Inovus Blogs, and every Sunday. Search engines hear about changes through IndexNow.
+        </dd>
+      </div>
+      <div class="row">
+        <dt class="when">For machines</dt>
+        <dd class="what">
+          A <a href={path('/sitemap.xml')}>sitemap</a>, RSS feeds for <a href={path('/rss.xml')}>posts</a> and{' '}
+          <a href={path('/releases/rss.xml')}>releases</a>, structured data on every page, and{' '}
+          <a href={path('/llms.txt')}>llms.txt</a> for language models.
+        </dd>
+      </div>
+      <div class="row">
+        <dt class="when">Source</dt>
+        <dd class="what">
+          On <a {...external(repo)}>GitHub</a>.
+        </dd>
+      </div>
+    </dl>
+  </section>
+</Base>

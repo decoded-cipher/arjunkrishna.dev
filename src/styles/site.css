@@ -416,6 +416,22 @@ main {
   color: var(--text);
 }
 
+/* Colophon: label and text rows. */
+
+.colophon dd {
+  margin: 0;
+}
+
+.colophon .row > .what {
+  padding: 0.45rem 0;
+  font-size: 1.125rem;
+  line-height: 1.55;
+}
+
+.colophon .row > .when {
+  font-style: italic;
+}
+
 /* A single release: GitHub's notes, set in the text column. */
 
 .release .dateline {
@@ -830,6 +846,14 @@ main {
 
   .posts .aside {
     display: none;
+  }
+
+  .colophon .row {
+    row-gap: 0.1rem;
+  }
+
+  .colophon .row > .what {
+    padding-top: 0;
   }
 
   .releases .row {

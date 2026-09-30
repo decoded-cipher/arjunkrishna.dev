@@ -5,6 +5,7 @@ const cards: Record<string, Card> = {
   home: {},
   projects: { title: 'Projects', line: 'Personal projects, built outside my day job.' },
   releases: { title: 'Releases', line: 'Tagged versions of the projects I still ship.' },
+  colophon: { title: 'Colophon', line: 'How this site is made.' },
   blog: { title: 'Blog', line: 'Essays and notes, mostly about software, learning and the internet.' },
 };
 

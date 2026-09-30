@@ -12,5 +12,6 @@ export async function lastmod() {
     '/projects': lastUpdated('src/content/projects', 'src/content/small.yaml'),
     '/blog': newest,
     '/releases': released,
+    '/colophon': lastUpdated('src/pages/colophon.astro'),
   };
 }
