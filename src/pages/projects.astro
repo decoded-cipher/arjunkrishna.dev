@@ -8,10 +8,12 @@ import { absolute } from '../lib/url';
 import { author, breadcrumbs, itemList, page } from '../lib/schema';
 import { lastmod } from '../lib/lastmod';
 
-const statusLabel = { active: 'Active', complete: 'Complete', maintained: 'Maintained', archived: 'Archived' };
+const statusLabel = { active: 'Active', maintained: 'Maintained', complete: 'Complete', archived: 'Archived' };
+
+const statusRank = Object.keys(statusLabel);
 
 const entries = (await getCollection('projects', ({ data }) => !data.draft)).sort(
-  (a, b) => a.data.order - b.data.order,
+  (a, b) => statusRank.indexOf(a.data.status) - statusRank.indexOf(b.data.status) || a.data.order - b.data.order,
 );
 const projects = await Promise.all(entries.map(async (entry) => ({ entry, ...(await render(entry)) })));
 const sentence = (text: string) => text.charAt(0).toUpperCase() + text.slice(1);
