@@ -60,6 +60,7 @@ ${facts()}
 - [Projects](${absolute('/projects')}): personal projects, built outside my day job
 - [Releases](${absolute('/releases')}): tagged versions of those projects, newest first
 - [Blog](${absolute('/blog')}): essays and notes since 2019
+- [Colophon](${absolute('/colophon')}): how this site is built, with numbers from the latest build
 - [RSS](${absolute('/rss.xml')}): feed of all posts
 
 ## Projects
