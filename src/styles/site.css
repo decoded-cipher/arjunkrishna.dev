@@ -388,6 +388,99 @@ main {
   opacity: 1;
 }
 
+.releases .what {
+  display: grid;
+  grid-template-columns: 14rem auto;
+  align-items: baseline;
+  justify-content: start;
+  column-gap: 1.5rem;
+}
+
+.releases .what a {
+  font-size: 1.25rem;
+  line-height: 1.4;
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.releases .what .repo {
+  font-size: 1.0625rem;
+}
+
+.releases .aside {
+  font-size: 1rem;
+}
+
+.releases .what a:hover,
+.releases .what a:focus-visible {
+  color: var(--text);
+}
+
+/* A single release: GitHub's notes, set in the text column. */
+
+.release .dateline {
+  padding-bottom: 0.5rem;
+  font-style: italic;
+  color: var(--muted);
+}
+
+.release .dateline a {
+  color: inherit;
+}
+
+.release .source {
+  padding-top: 0.75rem;
+}
+
+.notes {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--rule);
+}
+
+.notes h2 {
+  padding-top: 0.75rem;
+  font-size: 1.75rem;
+}
+
+.notes h3,
+.notes h4 {
+  padding-top: 0.5rem;
+  font-size: 1.375rem;
+}
+
+.notes ul,
+.notes ol {
+  margin: 0;
+  padding-left: 1.25rem;
+}
+
+.notes li + li {
+  margin-top: 0.4rem;
+}
+
+.notes code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.85em;
+}
+
+.notes pre {
+  margin: 0;
+  padding: 1rem;
+  overflow-x: auto;
+  background: color-mix(in srgb, var(--rule) 50%, transparent);
+  font-size: 0.9375rem;
+  line-height: 1.5;
+}
+
+.notes hr {
+  width: 100%;
+  border: 0;
+  border-top: 1px solid var(--rule);
+}
+
 .source {
   font-size: 0.9375rem;
   color: var(--muted);
@@ -541,6 +634,12 @@ main {
 
   .row > .aside {
     display: none;
+  }
+
+  .releases .row > .aside {
+    display: block;
+    grid-column: 2;
+    padding-top: 0;
   }
 
   .project > .meta {
@@ -732,6 +831,35 @@ main {
   .posts .aside {
     display: none;
   }
+
+  .releases .row {
+    row-gap: 0.15rem;
+    padding: 0.9rem 0;
+    border-top: 1px solid var(--rule);
+  }
+
+  .releases .row:first-child {
+    border-top: 0;
+  }
+
+  .releases .row > .when {
+    padding: 0;
+  }
+
+  .releases .what {
+    grid-template-columns: minmax(0, 1fr);
+    padding: 0;
+  }
+
+  .releases .what .repo {
+    font-size: 0.9375rem;
+  }
+
+  .releases .row > .aside {
+    padding: 0.35rem 0 0;
+    font-size: 0.9375rem;
+  }
+
 
   .section-title,
   .year {

@@ -16,6 +16,7 @@ const projects = defineCollection({
     line: z.string().optional(),
     homeLine: z.string().optional(),
     stack: z.string(),
+    releases: z.boolean().default(false),
     links: z
       .object({
         site: z.url().optional(),
@@ -33,6 +34,7 @@ const small = defineCollection({
     date: z.string().regex(/^\d{4}-\d{2}$/),
     line: z.string(),
     url: z.url(),
+    releases: z.boolean().default(false),
   }),
 });
 

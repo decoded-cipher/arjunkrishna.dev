@@ -6,6 +6,7 @@ order: 1
 featured: true
 homeLine: an IoT platform that runs in your own Cloudflare account. The idea waited years for me to be able to build it.
 stack: Cloudflare Workers, D1, R2, Durable Objects, C++
+releases: true
 links:
   site: https://nodrix.live
   source: https://github.com/decoded-cipher/nodrix

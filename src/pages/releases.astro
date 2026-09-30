@@ -1,0 +1,63 @@
+---
+import Base from '../layouts/Base.astro';
+import { shortDate } from '../lib/date';
+import { external } from '../lib/ref';
+import { absolute, path } from '../lib/url';
+import { author, breadcrumbs, itemList, page } from '../lib/schema';
+import { allReleases } from '../lib/releases';
+import { lastmod } from '../lib/lastmod';
+import { site } from '../site';
+
+const releases = await allReleases();
+const updated = (await lastmod())['/releases'];
+const description = 'Releases of the open-source projects Arjun Krishna maintains, newest first.';
+
+const schema = [
+  page('CollectionPage', '/releases', `Releases — ${site.name}`, description, {
+    dateModified: updated.toISOString(),
+    breadcrumb: { '@id': absolute('/releases#breadcrumbs') },
+    mainEntity: itemList(
+      releases.map((release) => ({
+        '@type': 'SoftwareSourceCode',
+        '@id': absolute(`/releases/${release.slug}`),
+        url: absolute(`/releases/${release.slug}`),
+        name: `${release.name} ${release.tag}`,
+        version: release.tag,
+        description: release.summary,
+        codeRepository: `https://github.com/${release.repo}`,
+        datePublished: release.date.toISOString(),
+        author,
+      })),
+    ),
+  }),
+  breadcrumbs('/releases', 'Releases'),
+];
+---
+
+<Base title="Releases" description={description} og="releases" schema={schema} updated={updated}>
+  <section class="grid">
+    <div class="intro">
+      <h1>Releases</h1>
+      <p>
+        Tagged versions of the <a href={path('/projects')}>projects</a> I still ship, newest first, with their notes from
+        GitHub.
+      </p>
+    </div>
+    <ol class="rows releases">
+      {
+        releases.map((release) => (
+          <li class="row">
+            <time class="when" datetime={release.date.toISOString()}>
+              {shortDate(release.date)}
+            </time>
+            <span class="what">
+              <a href={path(`/releases/${release.slug}`)}>{release.name} {release.tag}</a>
+              <a class="repo" {...external(`https://github.com/${release.repo}`)}>@{release.repo}</a>
+            </span>
+            {release.summary && <span class="aside">{release.summary}</span>}
+          </li>
+        ))
+      }
+    </ol>
+  </section>
+</Base>

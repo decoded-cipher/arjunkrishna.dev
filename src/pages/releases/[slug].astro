@@ -1,0 +1,59 @@
+---
+import type { GetStaticPaths } from 'astro';
+import Base from '../../layouts/Base.astro';
+import { longDate } from '../../lib/date';
+import { external } from '../../lib/ref';
+import { absolute, path } from '../../lib/url';
+import { author, page } from '../../lib/schema';
+import { allReleases, type Release } from '../../lib/releases';
+import { site } from '../../site';
+
+export const getStaticPaths = (async () =>
+  (await allReleases()).map((release) => ({ params: { slug: release.slug }, props: { release } }))) satisfies GetStaticPaths;
+
+const { release } = Astro.props as { release: Release };
+const title = `${release.name} ${release.tag}`;
+const url = `/releases/${release.slug}`;
+const repo = `https://github.com/${release.repo}`;
+const description = release.summary ?? `${title}, released ${longDate(release.date)}.`;
+
+const schema = [
+  page('WebPage', url, `${title} — ${site.name}`, description, {
+    datePublished: release.date.toISOString(),
+    breadcrumb: { '@id': absolute(`${url}#breadcrumbs`) },
+    mainEntity: {
+      '@type': 'SoftwareSourceCode',
+      name: title,
+      version: release.tag,
+      codeRepository: repo,
+      url: release.url,
+      datePublished: release.date.toISOString(),
+      author,
+    },
+  }),
+  {
+    '@type': 'BreadcrumbList',
+    '@id': absolute(`${url}#breadcrumbs`),
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: absolute('/') },
+      { '@type': 'ListItem', position: 2, name: 'Releases', item: absolute('/releases') },
+      { '@type': 'ListItem', position: 3, name: title, item: absolute(url) },
+    ],
+  },
+];
+---
+
+<Base title={title} description={description} og="releases" type="article" schema={schema} updated={release.date}>
+  <article class="grid release">
+    <div class="intro">
+      <p class="dateline">
+        <a href={path('/releases')}>Releases</a> · <time datetime={release.date.toISOString()}>{longDate(release.date)}</time>
+      </p>
+      <h1>{title}</h1>
+      <p class="source">
+        <a {...external(repo)}>@{release.repo}</a> · <a {...external(release.url)}>Release on GitHub</a>
+      </p>
+    </div>
+    {release.notes ? <div class="notes" set:html={release.notes} /> : <p class="notes">No notes for this release.</p>}
+  </article>
+</Base>
