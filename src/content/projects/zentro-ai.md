@@ -9,4 +9,4 @@ links:
   source: https://github.com/decoded-cipher/zentro-ai
 ---
 
-A platform for building, customising and deploying applications from plain-language descriptions.
+A SaaS platform that turns a plain-English description into a working app — generated, previewed and edited in the browser, then deployed. Each build runs in its own container.
