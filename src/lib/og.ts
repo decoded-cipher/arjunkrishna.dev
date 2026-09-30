@@ -28,8 +28,8 @@ const fonts = Promise.all([
   })),
 ]);
 
-const portrait = sharp('assets/portrait-1.jpg')
-  .resize(392, 490, { fit: 'cover', position: 'attention' })
+const portrait = sharp('assets/portrait-2.jpg')
+  .resize(392, 490, { fit: 'cover', position: 'centre' })
   .jpeg({ quality: 82 })
   .toBuffer()
   .then((buffer) => `data:image/jpeg;base64,${buffer.toString('base64')}`);

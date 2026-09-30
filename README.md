@@ -22,7 +22,7 @@ bun run preview
 | `src/content/small.yaml` | Smaller things |
 | `src/content/medium.json` | Medium posts |
 | `src/site.ts` | Name, title, descriptions, profiles, topics |
-| `assets/portrait-1.jpg` | Portrait |
+| `assets/portrait-2.jpg` | Portrait |
 
 Inovus Blogs posts are fetched at build time.
 

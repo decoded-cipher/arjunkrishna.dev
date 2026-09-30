@@ -2,7 +2,7 @@
 import { Picture } from 'astro:assets';
 import type { ImageMetadata } from 'astro';
 
-const images = import.meta.glob<{ default: ImageMetadata }>('/assets/portrait-1.{jpg,jpeg,png,webp}', {
+const images = import.meta.glob<{ default: ImageMetadata }>('/assets/portrait-2.{jpg,jpeg,png,webp}', {
   eager: true,
 });
 const portrait = Object.values(images)[0]?.default;

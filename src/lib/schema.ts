@@ -1,5 +1,5 @@
 import { getImage } from 'astro:assets';
-import portrait from '../../assets/portrait-1.jpg';
+import portrait from '../../assets/portrait-2.jpg';
 import { site } from '../site';
 import { absolute } from './url';
 
