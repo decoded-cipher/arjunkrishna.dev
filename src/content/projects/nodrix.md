@@ -12,4 +12,4 @@ links:
   writeup: https://blog.inovuslabs.org/nodrix-a-dream-that-refused-to-leave/
 ---
 
-An IoT platform for ESP32 and ESP8266 boards that deploys into your own Cloudflare account — telemetry, live dashboards and automations, with an Arduino library and a local build agent so boards can be flashed from the browser.
+An IoT platform for ESP32 and ESP8266 boards that deploys into your own Cloudflare account — telemetry, live dashboards and automations, with an Arduino library for the boards.
