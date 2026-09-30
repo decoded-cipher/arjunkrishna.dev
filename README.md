@@ -1,6 +1,6 @@
 # arjunkrishna.dev
 
-My personal site — work, writing, and zero JavaScript.
+My personal site — projects, blog, and zero JavaScript.
 
 Astro · Bun · GitHub Pages
 

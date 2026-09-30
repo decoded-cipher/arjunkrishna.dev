@@ -3,8 +3,8 @@ import { card, type Card } from '../../lib/og';
 
 const cards: Record<string, Card> = {
   home: {},
-  work: { title: 'Work', line: 'Things I have built outside my day job.' },
-  writing: { title: 'Writing', line: 'Essays and notes, mostly about software, learning and the internet.' },
+  projects: { title: 'Projects', line: 'Personal projects, built outside my day job.' },
+  blog: { title: 'Blog', line: 'Essays and notes, mostly about software, learning and the internet.' },
 };
 
 export const getStaticPaths = () => Object.keys(cards).map((page) => ({ params: { page } }));

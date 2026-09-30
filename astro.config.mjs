@@ -22,7 +22,7 @@ export default defineConfig({
     },
   ],
   redirects: {
-    '/projects': to('/work/'),
-    '/blog': to('/writing/'),
+    '/work': to('/projects/'),
+    '/writing': to('/blog/'),
   },
 });

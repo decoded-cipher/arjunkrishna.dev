@@ -15,7 +15,7 @@ async function projects() {
     .map(({ id, data, body = '' }) => ({
       ...data,
       body: body.trim(),
-      url: data.links.site ?? data.links.source ?? data.links.writeup ?? absolute(`/work/#${id}`),
+      url: data.links.site ?? data.links.source ?? data.links.writeup ?? absolute(`/projects/#${id}`),
     }));
 }
 
@@ -54,16 +54,16 @@ ${facts()}
 
 ## Pages
 
-- [Home](${absolute('/')}): about me, a few things I've made, and recent writing
-- [Work](${absolute('/work/')}): projects built outside my day job
-- [Writing](${absolute('/writing/')}): essays and notes since 2019
-- [RSS](${absolute('/rss.xml')}): feed of all writing
+- [Home](${absolute('/')}): about me, a few things I've made, and recent posts
+- [Projects](${absolute('/projects/')}): personal projects, built outside my day job
+- [Blog](${absolute('/blog/')}): essays and notes since 2019
+- [RSS](${absolute('/rss.xml')}): feed of all posts
 
 ## Projects
 
 ${(await projects()).map((project) => `- [${project.name}](${project.url}): ${project.body}`).join('\n')}
 
-## Recent writing
+## Recent posts
 
 ${posts
   .slice(0, 10)
@@ -125,7 +125,7 @@ ${projectText}
 
 ${small.map(({ data }) => `- [${data.name}](${data.url}) (${monthYear(data.date)}): ${data.line}`).join('\n')}
 
-## Writing
+## Blog
 
 Essays and notes, mostly about software, learning and the internet. Most are published on Inovus Blogs; the older ones on Medium.
 

@@ -14,11 +14,11 @@ const publisher = (source?: string) =>
   source === 'Medium'
     ? { '@type': 'Organization', name: 'Medium', url: 'https://medium.com' }
     : { '@type': 'Organization', name: 'Inovus Labs', url: 'https://inovuslabs.org' };
-const description = 'Essays and notes by Arjun Krishna, mostly about software, learning and the internet.';
+const description = 'Blog posts by Arjun Krishna, mostly about software, learning and the internet.';
 
 const schema = [
-  page('CollectionPage', '/writing/', `Writing — ${site.name}`, description, {
-    breadcrumb: { '@id': absolute('/writing/#breadcrumbs') },
+  page('CollectionPage', '/blog/', `Blog — ${site.name}`, description, {
+    breadcrumb: { '@id': absolute('/blog/#breadcrumbs') },
     mainEntity: itemList(
       posts.map((post) => ({
         '@type': 'BlogPosting',
@@ -33,14 +33,14 @@ const schema = [
       })),
     ),
   }),
-  breadcrumbs('/writing/', 'Writing'),
+  breadcrumbs('/blog/', 'Blog'),
 ];
 ---
 
-<Base title="Writing" description={description} og="writing" schema={schema}>
+<Base title="Blog" description={description} og="blog" schema={schema}>
   <section class="grid">
     <div class="intro">
-      <h1>Writing</h1>
+      <h1>Blog</h1>
       <p>
         Essays and notes, mostly about software, learning, and the internet. Most are published on{' '}
         <a {...external('https://blog.inovuslabs.org/author/arjun/')}>Inovus Blogs</a>; the older ones are on Medium. There is an{' '}

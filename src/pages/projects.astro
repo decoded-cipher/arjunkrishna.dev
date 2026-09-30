@@ -24,18 +24,18 @@ const linksOf = (links: { site?: string; source?: string; writeup?: string }) =>
   ].filter(Boolean) as { label: string; href: string }[];
 
 const description =
-  'Things Arjun Krishna has built outside his day job — Nodrix, an IoT platform for Cloudflare, Reelity, BitNerve, NetMon and more.';
+  'Personal projects by Arjun Krishna, built outside his day job — Nodrix, an IoT platform for Cloudflare, Reelity, BitNerve, NetMon and more.';
 
 const schema = [
-  page('CollectionPage', '/work/', `Work — ${site.name}`, description, {
-    breadcrumb: { '@id': absolute('/work/#breadcrumbs') },
+  page('CollectionPage', '/projects/', `Personal projects — ${site.name}`, description, {
+    breadcrumb: { '@id': absolute('/projects/#breadcrumbs') },
     mainEntity: itemList(
       entries.map(({ id, data, body = '' }) => ({
         '@type': data.links.source ? 'SoftwareSourceCode' : 'CreativeWork',
-        '@id': absolute(`/work/#${id}`),
+        '@id': absolute(`/projects/#${id}`),
         name: data.name,
         description: body.trim(),
-        url: data.links.site ?? absolute(`/work/#${id}`),
+        url: data.links.site ?? absolute(`/projects/#${id}`),
         ...(data.links.source && { codeRepository: data.links.source }),
         ...(data.links.writeup && { subjectOf: { '@type': 'BlogPosting', url: data.links.writeup } }),
         keywords: data.stack,
@@ -44,14 +44,14 @@ const schema = [
       })),
     ),
   }),
-  breadcrumbs('/work/', 'Work'),
+  breadcrumbs('/projects/', 'Projects'),
 ];
 ---
 
-<Base title="Work" description={description} og="work" schema={schema}>
+<Base title="Personal projects" description={description} og="projects" schema={schema}>
   <section class="grid">
     <div class="intro">
-      <h1>Work</h1>
+      <h1>Personal projects</h1>
       <p>
         Things I have built outside my day job. Most were made to understand how something works; a few are
         used by other people. For my employment history, see <a {...external(linkedin)}>LinkedIn</a>.
