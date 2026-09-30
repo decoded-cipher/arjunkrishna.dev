@@ -109,7 +109,7 @@ const graph = JSON.stringify({ '@context': 'https://schema.org', '@graph': [...(
         <slot />
       </main>
       <footer class="site-footer">
-        <span>© 2018–{new Date().getFullYear()} {site.name}</span>
+        <span>{site.name} © 2018–{new Date().getFullYear()}</span>
         <nav aria-label="Elsewhere">
           <a href={`mailto:${site.email}`}>Email</a>
           {site.profiles.map((profile) => <a {...external(profile.url, { ref: false })}>{profile.name}</a>)}
