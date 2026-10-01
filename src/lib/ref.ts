@@ -9,7 +9,7 @@ function withRef(href: string): string {
   return url.toString();
 }
 
-export function external(href: string, { ref = true } = {}) {
-  if (!isExternal(href)) return { href };
-  return { href: ref ? withRef(href) : href, target: '_blank' };
+export function external(href: string, { ref = true, rel = '' } = {}) {
+  if (!isExternal(href)) return rel ? { href, rel } : { href };
+  return { href: ref ? withRef(href) : href, target: '_blank', rel: `${rel} noopener`.trim() };
 }

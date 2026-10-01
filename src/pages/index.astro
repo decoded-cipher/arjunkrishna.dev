@@ -54,7 +54,7 @@ const schema = [
         site.profiles.map((profile, i) => (
           <>
             {i > 0 && (i === site.profiles.length - 1 ? ' and ' : ', ')}
-            <a class="u-url" rel="me" {...external(profile.url, { ref: false })}>{profile.name}</a>
+            <a class="u-url" {...external(profile.url, { ref: false, rel: 'me' })}>{profile.name}</a>
           </>
         ))
       }.
