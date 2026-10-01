@@ -23,6 +23,7 @@ export default defineConfig({
       fallbacks: ['Georgia', 'serif'],
     },
   ],
+  vite: { build: { cssTarget: ['chrome100', 'firefox100', 'safari15'] } },
   redirects: {
     '/work': to('/projects'),
     '/writing': to('/blog'),
