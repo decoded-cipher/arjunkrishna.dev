@@ -860,8 +860,20 @@ main {
     padding-top: 0;
   }
 
+  .posts .what a {
+    color: var(--accent);
+  }
+
+  .posts .row {
+    row-gap: 0.3rem;
+    padding-bottom: 0.9rem;
+  }
+
   .posts .aside {
-    display: none;
+    display: block;
+    height: auto;
+    padding: 0;
+    opacity: 1;
   }
 
   .colophon .row {
