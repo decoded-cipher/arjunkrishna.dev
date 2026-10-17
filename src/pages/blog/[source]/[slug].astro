@@ -2,7 +2,7 @@
 import type { GetStaticPaths } from 'astro';
 import Base from '../../../layouts/Base.astro';
 import type { Post } from '../../../components/PostList.astro';
-import { documentUri } from '../../../lib/atproto';
+import { documentUri, publication } from '../../../lib/atproto';
 import { longDate } from '../../../lib/date';
 import { allPosts, postPath } from '../../../lib/posts';
 import { external } from '../../../lib/ref';
@@ -28,6 +28,7 @@ const publisher = post.source ?? 'Inovus Blogs';
     <meta http-equiv="refresh" content={`0;url=${href}`} />
     <link rel="canonical" href={post.url} />
     <link rel="site.standard.document" href={documentUri(post.date, postPath(post))} />
+    <link rel="site.standard.publication" href={publication} />
   </Fragment>
   <article class="forward">
     <div class="intro">
