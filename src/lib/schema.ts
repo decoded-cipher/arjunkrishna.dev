@@ -54,6 +54,7 @@ export async function base(): Promise<Thing[]> {
       nationality: { '@type': 'Country', name: 'India' },
       knowsLanguage: 'en',
       sameAs: [...site.profiles, ...site.elsewhere].map((profile) => profile.url),
+      identifier: { '@type': 'PropertyValue', propertyID: 'atproto', value: site.atproto.did },
     },
   ];
 }

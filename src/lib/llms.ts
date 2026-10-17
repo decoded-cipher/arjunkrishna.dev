@@ -41,6 +41,7 @@ const facts = () =>
     `- Community: mentor at [${site.community.name}](${site.community.url}), the innovation centre of ${site.college}, since 2018`,
     `- Education: BCA and MCA, ${site.college}`,
     `- Contact: ${site.email}`,
+    `- On the AT Protocol: @arjunkrishna.dev (${site.atproto.did}), on my own PDS at ${site.atproto.pds}`,
   ].join('\n');
 
 const links = () =>
