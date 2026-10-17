@@ -12,6 +12,7 @@ import { lastmod } from '../lib/lastmod';
 import { external } from '../lib/ref';
 import { absolute, path } from '../lib/url';
 import { author, page } from '../lib/schema';
+import { publication } from '../lib/atproto';
 
 const made = (await getCollection('projects', ({ data }) => data.featured && !data.draft)).sort(
   (a, b) => a.data.order - b.data.order,
@@ -28,6 +29,7 @@ const schema = [
 ---
 
 <Base type="profile" schema={schema} updated={updated}>
+  <link slot="head" rel="site.standard.publication" href={publication} />
   <section class="grid bio h-card">
     <div class="masthead">
       <h1 class="p-name">Arjun{' '}<br />Krishna</h1>
