@@ -43,10 +43,15 @@ bun run assets
 | JSON-LD on every page | `src/lib/schema.ts` |
 | `/llms.txt`, `/llms-full.txt` | `src/lib/llms.ts` |
 | `/sitemap.xml`, `/robots.txt`, `/rss.xml`, `/manifest.webmanifest` | `src/pages/` |
+| `/.well-known/site.standard.publication`, Standard.site records | `src/lib/atproto.ts`, `src/pages/site.standard.json.ts` |
+| `/blog/inovus/<slug>`, `/blog/medium/<slug>` — forward to each post | `src/pages/blog/[source]/[slug].astro` |
 
 ## Deploy
 
 GitHub Pages, via Actions — on push to `master`, on publishing to Inovus Blogs, weekly, and on demand. New URLs
 go to IndexNow after each deploy.
+
+Each build also syncs the publication and a document per post to my PDS as Standard.site records
+(`bun run atproto`; a dry run without `ATPROTO_APP_PASSWORD`).
 
 `SITE_URL` and `BASE_PATH` set the origin and path; they default to `https://arjunkrishna.dev` and `/`.
