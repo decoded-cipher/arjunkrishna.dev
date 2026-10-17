@@ -458,20 +458,30 @@ main {
   color: var(--muted);
 }
 
-/* A single release: GitHub's notes, set in the text column. */
+/* A single release: GitHub's notes, set in the text column. A post's page here only points to where it was
+   published, with the same dateline and source line. */
 
-.release .dateline {
+.release .dateline,
+.forward .dateline {
   padding-bottom: 0.5rem;
   font-style: italic;
   color: var(--muted);
 }
 
-.release .dateline a {
+.release .dateline a,
+.forward .dateline a {
   color: inherit;
 }
 
-.release .source {
+.release .source,
+.forward .source {
   padding-top: 0.75rem;
+}
+
+/* Shown only for a moment before the redirect, so it sits in the middle of the page. */
+.forward {
+  margin: auto;
+  text-align: center;
 }
 
 .notes {

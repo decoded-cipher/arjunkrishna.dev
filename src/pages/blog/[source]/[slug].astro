@@ -1,9 +1,12 @@
 ---
 import type { GetStaticPaths } from 'astro';
+import Base from '../../../layouts/Base.astro';
 import type { Post } from '../../../components/PostList.astro';
 import { documentUri } from '../../../lib/atproto';
+import { longDate } from '../../../lib/date';
 import { allPosts, postPath } from '../../../lib/posts';
-import { site } from '../../../site';
+import { external } from '../../../lib/ref';
+import { path } from '../../../lib/url';
 
 // A stand-in for each post: it forwards to where the post was published, and links to the post's Standard.site
 // record so atproto apps can tell the post is mine. A server redirect would hide that link from them.
@@ -15,17 +18,25 @@ export const getStaticPaths = (async () =>
   })) satisfies GetStaticPaths;
 
 const { post } = Astro.props as { post: Post };
+// Visitors arrive with the same ref as links from the Blog list; search engines get the plain URL.
+const { href } = external(post.url);
+const publisher = post.source ?? 'Inovus Blogs';
 ---
 
-<!doctype html>
-<meta charset="utf-8" />
-<title>{post.title} — {site.name}</title>
-<meta http-equiv="refresh" content={`0;url=${post.url}`} />
-<meta name="robots" content="noindex" />
-<link rel="canonical" href={post.url} />
-<link rel="site.standard.document" href={documentUri(post.date, postPath(post))} />
-<meta property="og:title" content={post.title} />
-<meta property="og:description" content={post.excerpt} />
-<body>
-  <a href={post.url}>{post.title}</a>
-</body>
+<Base title={post.title} description={post.excerpt} og="blog" cover={post.image} type="article" noindex>
+  <Fragment slot="head">
+    <meta http-equiv="refresh" content={`0;url=${href}`} />
+    <link rel="canonical" href={post.url} />
+    <link rel="site.standard.document" href={documentUri(post.date, postPath(post))} />
+  </Fragment>
+  <article class="forward">
+    <div class="intro">
+      <p class="dateline">
+        <a href={path('/blog')}>Blog</a> · <time datetime={post.date.toISOString()}>{longDate(post.date)}</time>
+      </p>
+      <h1>{post.title}</h1>
+      <p>{post.excerpt}</p>
+      <p class="source">Published on {publisher}. <a href={href}>Read it there</a>.</p>
+    </div>
+  </article>
+</Base>
