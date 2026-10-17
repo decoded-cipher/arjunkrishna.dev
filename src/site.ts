@@ -38,6 +38,11 @@ export const site = {
     { name: 'Bluesky', url: 'https://bsky.app/profile/arjunkrishna.dev' },
     { name: 'Tangled', url: 'https://tangled.org/arjunkrishna.dev' },
   ],
+  atproto: {
+    did: 'did:plc:xeekykjmi3phlx6ld3erw5xw',
+    pds: 'https://pds.arjunkrishna.dev',
+    publication: '3my2plqjc4s22',
+  },
   elsewhere: [
     { name: 'Inovus Blogs', url: 'https://blog.inovuslabs.org/author/arjun/' },
     { name: 'Medium', url: 'https://medium.com/@decoded_cipher' },
