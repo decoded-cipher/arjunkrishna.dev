@@ -11,6 +11,7 @@ type GhostPost = {
   custom_excerpt: string | null;
   excerpt: string;
   published_at: string;
+  feature_image: string | null;
   tags?: { name: string }[];
 };
 
@@ -18,7 +19,7 @@ export async function loadInovusPosts() {
   const url = new URL(API);
   url.searchParams.set('key', KEY);
   url.searchParams.set('filter', 'authors:arjun');
-  url.searchParams.set('fields', 'slug,title,url,custom_excerpt,excerpt,published_at');
+  url.searchParams.set('fields', 'slug,title,url,custom_excerpt,excerpt,published_at,feature_image');
   url.searchParams.set('include', 'tags');
   url.searchParams.set('limit', 'all');
 
@@ -34,6 +35,7 @@ export async function loadInovusPosts() {
       url: post.url,
       date: post.published_at,
       excerpt: clip(post.custom_excerpt ?? post.excerpt),
+      image: post.feature_image ?? undefined,
       tags: post.tags?.map((tag) => tag.name) ?? [],
     }));
 }

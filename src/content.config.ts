@@ -53,6 +53,7 @@ const external = z.object({
   date: z.coerce.date(),
   url: z.url(),
   excerpt: z.string(),
+  image: z.url().optional(),
 });
 
 const inovus = defineCollection({

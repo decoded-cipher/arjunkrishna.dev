@@ -8,6 +8,8 @@ export interface Post {
   date: Date;
   excerpt: string;
   source?: string;
+  // The post's cover image, shown in link previews of its address here.
+  image?: string;
   // Only Inovus Blogs provides tags; they go into the post's Standard.site record.
   tags?: string[];
 }
