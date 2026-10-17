@@ -5,6 +5,7 @@ import { fileURLToPath } from 'node:url';
 import { gzipSync } from 'node:zlib';
 import type { AstroIntegration } from 'astro';
 import { longDate } from '../lib/date';
+import { site } from '../site';
 
 // Fills the colophon's <span data-stat="…"> placeholders with numbers from the finished build.
 
@@ -31,6 +32,17 @@ function commit() {
 function time(date: Date) {
   const ist = new Date(date.getTime() + 330 * 60 * 1000);
   return `${String(ist.getUTCHours()).padStart(2, '0')}:${String(ist.getUTCMinutes()).padStart(2, '0')} IST`;
+}
+
+// The PDS reports its version as "cirrus 0.19.0". If it can't be reached, the colophon just names it.
+async function pds() {
+  try {
+    const res = await fetch(new URL('/xrpc/_health', site.atproto.pds), { signal: AbortSignal.timeout(5000) });
+    const { version } = (await res.json()) as { version?: string };
+    return version ? ` ${version.replace(/^cirrus\s*/i, '')}` : '';
+  } catch {
+    return '';
+  }
 }
 
 export default function stats(): AstroIntegration {
@@ -77,6 +89,7 @@ export default function stats(): AstroIntegration {
           ...Object.fromEntries(weights),
           built: `${longDate(built)}, ${time(built)}, in ${(performance.now() / 1000).toFixed(1)} s`,
           commit: commit(),
+          pds: await pds(),
         };
 
         const source = await readFile(page, 'utf8');

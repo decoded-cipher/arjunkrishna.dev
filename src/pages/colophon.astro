@@ -87,11 +87,23 @@ const sizes = [
         </dd>
       </div>
       <div class="row">
+        <dt class="when">Identity</dt>
+        <dd class="what">
+          On the <a {...external('https://atproto.com')}>AT Protocol</a> I am @arjunkrishna.dev, verified by this
+          domain: one identity for Bluesky, Tangled and every other app built on it. Everything I post, follow or
+          publish there lives on my own server,{' '}
+          <a {...external('https://github.com/ascorbic/cirrus')}>Cirrus</a><span data-stat="pds"></span>, a
+          single-user PDS running on a Cloudflare Worker.
+        </dd>
+      </div>
+      <div class="row">
         <dt class="when">For machines</dt>
         <dd class="what">
           A <a href={path('/sitemap.xml')}>sitemap</a>, RSS feeds for <a href={path('/rss.xml')}>posts</a> and{' '}
           <a href={path('/releases/rss.xml')}>releases</a>, structured data on every page, and{' '}
-          <a href={path('/llms.txt')}>llms.txt</a> for language models.
+          <a href={path('/llms.txt')}>llms.txt</a> for language models. Each post is also a{' '}
+          <a {...external('https://standard.site')}>Standard.site</a> record on that server, so atproto apps can
+          read it, with an address here that forwards to where it was published.
         </dd>
       </div>
       <div class="row">
