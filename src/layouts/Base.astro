@@ -13,6 +13,8 @@ interface Props {
   title?: string;
   description?: string;
   og?: 'home' | 'projects' | 'blog' | 'releases' | 'colophon';
+  // A preview image from elsewhere, used instead of the card for `og`.
+  cover?: string;
   type?: 'website' | 'profile';
   noindex?: boolean;
   updated?: Date;
@@ -23,6 +25,7 @@ const {
   title,
   description = site.description,
   og = 'home',
+  cover,
   type = 'website',
   noindex = false,
   updated,
@@ -33,7 +36,7 @@ const current = Astro.url.pathname.replace(/(index)?\.html$/, '');
 const canonical = new URL(current, Astro.site);
 const active = (href: string) =>
   current === path(href) ? 'page' : href !== '/' && current.startsWith(`${path(href)}/`) ? 'true' : undefined;
-const image = absolute(`/og/${og}.jpg`);
+const image = cover ?? absolute(`/og/${og}.jpg`);
 const imageAlt = title ? `${title}, by ${site.name}` : `${site.name}: ${site.tagline}`;
 const elsewhere = [
   { name: 'Email', href: `mailto:${site.email}` },
@@ -76,9 +79,15 @@ const graph = JSON.stringify({ '@context': 'https://schema.org', '@graph': [...(
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
     <meta property="og:image" content={image} />
-    <meta property="og:image:type" content="image/jpeg" />
-    <meta property="og:image:width" content="1200" />
-    <meta property="og:image:height" content="630" />
+    {
+      !cover && (
+        <>
+          <meta property="og:image:type" content="image/jpeg" />
+          <meta property="og:image:width" content="1200" />
+          <meta property="og:image:height" content="630" />
+        </>
+      )
+    }
     <meta property="og:image:alt" content={imageAlt} />
     {
       type === 'profile' && (
