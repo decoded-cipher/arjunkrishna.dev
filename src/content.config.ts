@@ -57,7 +57,7 @@ const external = z.object({
 
 const inovus = defineCollection({
   loader: loadInovusPosts,
-  schema: external,
+  schema: external.extend({ tags: z.array(z.string()).default([]) }),
 });
 
 const medium = defineCollection({
