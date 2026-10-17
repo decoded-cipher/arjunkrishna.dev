@@ -6,7 +6,8 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "assets": "bun scripts/assets.ts"
+    "assets": "bun scripts/assets.ts",
+    "atproto": "bun scripts/atproto.ts"
   },
   "dependencies": {
     "@astrojs/mdx": "^8.0.2",
