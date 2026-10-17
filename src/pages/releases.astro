@@ -24,7 +24,7 @@ const schema = [
         name: `${release.name} ${release.tag}`,
         version: release.tag,
         description: release.summary,
-        codeRepository: `https://github.com/${release.repo}`,
+        ...(!release.private && { codeRepository: `https://github.com/${release.repo}` }),
         datePublished: release.date.toISOString(),
         author,
       })),
@@ -52,7 +52,11 @@ const schema = [
             </time>
             <span class="what">
               <a href={path(`/releases/${release.slug}`)}>{release.name} {release.tag}</a>
-              <a class="repo" {...external(`https://github.com/${release.repo}`)}>@{release.repo}</a>
+              {release.private ? (
+                <span class="repo">@{release.repo}</span>
+              ) : (
+                <a class="repo" {...external(`https://github.com/${release.repo}`)}>@{release.repo}</a>
+              )}
             </span>
             {release.summary && <span class="aside">{release.summary}</span>}
           </li>

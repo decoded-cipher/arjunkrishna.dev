@@ -25,8 +25,7 @@ const schema = [
       '@type': 'SoftwareSourceCode',
       name: title,
       version: release.tag,
-      codeRepository: repo,
-      url: release.url,
+      ...(!release.private && { codeRepository: repo, url: release.url }),
       datePublished: release.date.toISOString(),
       author,
     },
@@ -51,7 +50,15 @@ const schema = [
       </p>
       <h1>{title}</h1>
       <p class="source">
-        <a {...external(repo)}>@{release.repo}</a> · <a {...external(release.url)}>Release on GitHub</a>
+        {
+          release.private ? (
+            <>@{release.repo} · Private repository</>
+          ) : (
+            <>
+              <a {...external(repo)}>@{release.repo}</a> · <a {...external(release.url)}>Release on GitHub</a>
+            </>
+          )
+        }
       </p>
     </div>
     {release.notes ? <div class="notes" set:html={release.notes} /> : <p class="notes">No notes for this release.</p>}

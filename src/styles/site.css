@@ -417,6 +417,11 @@ main {
   font-size: 1.0625rem;
 }
 
+.releases .what span.repo {
+  line-height: 1.4;
+  color: var(--muted);
+}
+
 .releases .aside {
   font-size: 1rem;
 }

@@ -11,6 +11,8 @@ export type Release = {
   date: Date;
   summary?: string;
   notes: string;
+  // Visitors can't open a private repository, so its pages don't link to GitHub.
+  private: boolean;
 };
 
 type GitHubRelease = {
@@ -39,6 +41,13 @@ const tidy = (html = '') =>
     .replace(/<(\/?)tt>/g, '<$1code>')
     .trim();
 
+// Links into a private repository, such as compare and blob links, reduced to their text.
+const unlink = (html: string, repo: string) =>
+  html.replace(
+    new RegExp(`<a\\s[^>]*href="https://github\\.com/${repo.replaceAll('.', '\\.')}(?:[/?#][^"]*)?"[^>]*>([\\s\\S]*?)</a>`, 'gi'),
+    '$1',
+  );
+
 // The part of the release name after "—", unless it is only a date; otherwise the first paragraph of the notes.
 function summary({ name, body }: GitHubRelease) {
   const subtitle = name?.split(' — ')[1];
@@ -62,18 +71,23 @@ function token() {
 
 const auth = token();
 
-async function fetchReleases(project: string, url: string): Promise<Release[]> {
-  const repo = url.match(/^https:\/\/github\.com\/([^/]+\/[^/]+)/)?.[1];
-  if (!repo) throw new Error(`[releases] ${project}: not a GitHub repository (${url})`);
-
-  const res = await fetch(`https://api.github.com/repos/${repo}/releases?per_page=100`, {
+const github = (path: string) =>
+  fetch(`https://api.github.com/repos/${path}`, {
     headers: {
       Accept: 'application/vnd.github.full+json',
       ...(auth && { Authorization: `Bearer ${auth}` }),
     },
   });
-  if (!res.ok) {
-    const message = `[releases] ${repo}: GitHub returned ${res.status}`;
+
+async function fetchReleases(project: string, url: string): Promise<Release[]> {
+  const repo = url.match(/^https:\/\/github\.com\/([^/]+\/[^/]+)/)?.[1];
+  if (!repo) throw new Error(`[releases] ${project}: not a GitHub repository (${url})`);
+
+  // Private repositories need a token that can read them; CI's default token only covers this one.
+  const [meta, res] = await Promise.all([github(repo), github(`${repo}/releases?per_page=100`)]);
+  const failed = [meta, res].find((r) => !r.ok);
+  if (failed) {
+    const message = `[releases] ${repo}: GitHub returned ${failed.status}`;
     // A failed fetch shouldn't take the dev server down; a production build should stop instead.
     if (import.meta.env.DEV) {
       console.warn(message);
@@ -82,6 +96,7 @@ async function fetchReleases(project: string, url: string): Promise<Release[]> {
     throw new Error(message);
   }
 
+  const { private: hidden } = (await meta.json()) as { private: boolean };
   return ((await res.json()) as GitHubRelease[])
     .filter((release) => !release.draft)
     .map((release) => ({
@@ -92,7 +107,8 @@ async function fetchReleases(project: string, url: string): Promise<Release[]> {
       url: release.html_url,
       date: new Date(release.published_at),
       summary: summary(release),
-      notes: tidy(release.body_html),
+      notes: hidden ? unlink(tidy(release.body_html), repo) : tidy(release.body_html),
+      private: hidden,
     }));
 }
 
