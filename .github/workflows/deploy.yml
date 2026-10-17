@@ -30,9 +30,14 @@ jobs:
       - run: bun run build
         env:
           GITHUB_TOKEN: ${{ secrets.RELEASES_TOKEN || github.token }}
-      - uses: actions/upload-pages-artifact@v4
+      - run: bun run atproto
+        continue-on-error: true
+        env:
+          ATPROTO_APP_PASSWORD: ${{ secrets.ATPROTO_APP_PASSWORD }}
+      - uses: actions/upload-pages-artifact@v5
         with:
           path: dist
+          include-hidden-files: true
 
   deploy:
     needs: build
