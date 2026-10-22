@@ -656,6 +656,10 @@ main {
 }
 
 @media (prefers-reduced-motion: no-preference) {
+  @view-transition {
+    navigation: auto;
+  }
+
   a,
   .posts .aside {
     transition:
