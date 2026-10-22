@@ -3,7 +3,7 @@ name: Weblyft
 years: 2024 – 2025
 status: archived
 order: 11
-stack: TypeScript, Docker, Kafka, PostgreSQL
+stack: TypeScript, Docker, Kafka, RabbitMQ, PostgreSQL, Redis, ClickHouse
 links:
   source: https://github.com/decoded-cipher/weblyft
 ---
