@@ -2,7 +2,7 @@
 name: Inovus AMA
 date: "2025-06"
 order: 8
-stack: TypeScript, retrieval-augmented generation
+stack: TypeScript, Cloudflare Workers, Hono, Gemini, Pinecone, Nuxt
 links:
   site: https://ama.inovuslabs.org
   source: https://github.com/decoded-cipher/inovus-ama

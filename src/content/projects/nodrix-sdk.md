@@ -3,7 +3,7 @@ name: nodrix-sdk
 date: "2026-07"
 order: 2
 parent: nodrix
-stack: C++, Arduino
+stack: C++, Arduino, ESP-IDF, PlatformIO
 releases: true
 links:
   site: https://nodrix.live/products/arduino-library

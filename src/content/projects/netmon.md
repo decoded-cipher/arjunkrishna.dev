@@ -2,7 +2,7 @@
 name: NetMon
 date: "2026-02"
 order: 10
-stack: Go, SQLite, Vue
+stack: Go, SQLite, Vue, Docker
 releases: true
 links:
   source: https://github.com/decoded-cipher/netmon

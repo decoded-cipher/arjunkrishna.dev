@@ -2,7 +2,7 @@
 name: Zentro AI
 date: "2025-11"
 order: 6
-stack: Nuxt, Hono, Docker, Redis
+stack: Nuxt, Hono, RabbitMQ, Docker, Redis, Claude API
 links:
   site: https://zentro.arjunkrishna.dev
   source: https://github.com/decoded-cipher/zentro-ai

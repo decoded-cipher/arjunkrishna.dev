@@ -4,7 +4,7 @@ date: "2025-10"
 order: 5
 featured: true
 homeLine: an AI trading engine that lets Claude trade crypto futures through the Model Context Protocol, and records every decision it makes.
-stack: TypeScript, Claude, Model Context Protocol
+stack: TypeScript, Claude Code via MCP, PostgreSQL, Nuxt
 releases: true
 links:
   site: https://bitnerve.arjunkrishna.dev
