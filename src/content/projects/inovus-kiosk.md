@@ -2,7 +2,6 @@
 name: Inovus Kiosk
 date: "2026-04"
 order: 7
-line: an old lobby TV turned into a live display of the lab’s blog, rebuilt whenever a post goes up.
 stack: Cloudflare Workers, EmDash, GitHub Actions, Ghost
 links:
   site: https://kiosk.inovuslabs.org

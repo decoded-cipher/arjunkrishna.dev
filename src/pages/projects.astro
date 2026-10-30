@@ -1,5 +1,5 @@
 ---
-import { getCollection, render } from 'astro:content';
+import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
 import { monthYear } from '../lib/date';
 import { site } from '../site';
@@ -7,22 +7,14 @@ import { external } from '../lib/ref';
 import { absolute, path } from '../lib/url';
 import { author, breadcrumbs, itemList, page } from '../lib/schema';
 import { lastmod } from '../lib/lastmod';
+import { homeOf, restOf } from '../lib/projects';
 
 const entries = (await getCollection('projects', ({ data }) => !data.draft)).sort((a, b) => a.data.order - b.data.order);
-const projects = await Promise.all(entries.map(async (entry) => ({ entry, ...(await render(entry)) })));
 const sentence = (text: string) => text.charAt(0).toUpperCase() + text.slice(1);
-const childrenOf = (id: string) => projects.filter(({ entry }) => entry.data.parent === id);
 const contributions = (await getCollection('contributions')).sort((a, b) => b.data.date.localeCompare(a.data.date));
 const small = (await getCollection('small')).sort((a, b) => b.data.date.localeCompare(a.data.date));
 const updated = (await lastmod())['/projects'];
 const linkedin = site.profiles.find((p) => p.name === 'LinkedIn')!.url;
-
-const linksOf = (links: { site?: string; source?: string; writeup?: string }) =>
-  [
-    links.site && { label: new URL(links.site).hostname, href: links.site },
-    links.source && { label: 'Source', href: links.source },
-    links.writeup && { label: 'Write-up', href: links.writeup },
-  ].filter(Boolean) as { label: string; href: string }[];
 
 const description =
   'Personal projects by Arjun Krishna, built outside his day job — Nodrix, an IoT platform for Cloudflare, Reelity, BitNerve, NetMon and more.';
@@ -51,7 +43,7 @@ const schema = [
 ---
 
 <Base title="Personal projects" description={description} og="projects" schema={schema} updated={updated}>
-  <section class="grid">
+  <section class="grid wide">
     <div class="intro">
       <h1>Personal projects</h1>
       <p>
@@ -61,68 +53,56 @@ const schema = [
       </p>
     </div>
 
-    <h2 class="section-title">Projects</h2>
-    <ol class="rows">
+    <ol class="rows things works">
       {
-        projects.filter(({ entry }) => !entry.data.parent).map(({ entry, Content }) => (
-          <li class="row project" id={entry.id}>
-            <div class="when">
-              <span>{monthYear(entry.data.date)}</span>
-            </div>
-            <div class="what">
-              <h3>{entry.data.name}</h3>
-              <Content />
-            </div>
-            <div class="meta">
-              <p class="source">{entry.data.stack}</p>
-              <p class="links">
-                {linksOf(entry.data.links).map((link) => (
-                  <a {...external(link.href)}>{link.label}</a>
-                ))}
-              </p>
-            </div>
-            {childrenOf(entry.id).length > 0 && (
-              <ol class="sub">
-                {childrenOf(entry.id).map(({ entry: child }) => (
-                  <li id={child.id}>
-                    <h4>{child.data.name}</h4>
-                    <p>{sentence(child.data.line ?? '')}</p>
-                    <p class="links">
-                      {linksOf(child.data.links).map((link) => (
-                        <a {...external(link.href)}>{link.label}</a>
-                      ))}
-                    </p>
-                  </li>
-                ))}
-              </ol>
-            )}
-          </li>
-        ))
-      }
-    </ol>
-
-    <h2 class="section-title">Contributions</h2>
-    <ol class="rows">
-      {
-        contributions.map(({ data }) => (
-          <li class="row">
-            <span class="when">{monthYear(data.date)}</span>
+        entries.map((entry) => (
+          <li class="row" id={entry.id}>
+            <span class="when">{monthYear(entry.data.date)}</span>
             <span class="what">
-              <a {...external(data.url)}>{data.repo}</a> — {data.line}
+              <a {...external(homeOf(entry))}>{entry.data.name}</a>
+              <span>{(entry.body ?? '').trim()}</span>
+            </span>
+            <span class="aside">
+              <span>{entry.data.stack}</span>
+              {restOf(entry).length > 0 && (
+                <span class="links">
+                  {restOf(entry).map((link) => (
+                    <a {...external(link.href)}>{link.label}</a>
+                  ))}
+                </span>
+              )}
             </span>
           </li>
         ))
       }
     </ol>
 
-    <h2 class="section-title">Tinkering</h2>
-    <ol class="rows">
+    <div class="fleuron" aria-hidden="true">* * *</div>
+
+    <h2 class="list-title">Tinkering</h2>
+    <ol class="rows things">
       {
         small.map(({ data }) => (
           <li class="row">
             <span class="when">{monthYear(data.date)}</span>
             <span class="what">
-              <a {...external(data.url)}>{data.name}</a> — {data.line}
+              <a {...external(data.url)}>{data.name}</a>
+              <span>{sentence(data.line)}</span>
+            </span>
+          </li>
+        ))
+      }
+    </ol>
+
+    <h2 class="list-title">Contributions</h2>
+    <ol class="rows things">
+      {
+        contributions.map(({ data }) => (
+          <li class="row">
+            <span class="when">{monthYear(data.date)}</span>
+            <span class="what">
+              <a {...external(data.url)}>{data.repo}</a>
+              <span>{sentence(data.line)}</span>
             </span>
           </li>
         ))

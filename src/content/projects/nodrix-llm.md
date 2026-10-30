@@ -3,7 +3,6 @@ name: nodrix-llm
 date: "2026-07"
 order: 3
 parent: nodrix
-line: a 7B coding model fine-tuned into a build assistant for Nodrix, with an honest account of what fine-tuning couldn’t fix.
 stack: Python, Unsloth, QLoRA, Hugging Face
 links:
   site: https://huggingface.co/spaces/decoded-cipher/nodrix-build-assistant

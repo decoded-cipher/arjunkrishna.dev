@@ -3,7 +3,6 @@ name: nodrix-sdk
 date: "2026-07"
 order: 2
 parent: nodrix
-line: the Arduino library that connects ESP32 and ESP8266 boards to Nodrix — control, telemetry and events over WebSocket or HTTP.
 stack: C++, Arduino
 releases: true
 links:

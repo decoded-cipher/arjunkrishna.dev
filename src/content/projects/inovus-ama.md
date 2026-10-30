@@ -2,7 +2,6 @@
 name: Inovus AMA
 date: "2025-06"
 order: 8
-line: a self-hosted assistant that answers questions from ten years of the lab’s own documents.
 stack: TypeScript, retrieval-augmented generation
 links:
   site: https://ama.inovuslabs.org
