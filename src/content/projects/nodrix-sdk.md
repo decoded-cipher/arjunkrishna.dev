@@ -1,5 +1,5 @@
 ---
-name: nodrix-sdk
+name: Nodrix SDK
 date: "2026-07"
 order: 2
 parent: nodrix

@@ -1,5 +1,5 @@
 ---
-name: nodrix-llm
+name: Nodrix LLM
 date: "2026-07"
 order: 3
 parent: nodrix
