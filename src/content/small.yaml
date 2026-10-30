@@ -29,11 +29,6 @@
   date: "2025-04"
   line: verifies the lab's certificates against records on a blockchain.
   url: https://certificate.inovuslabs.org
-- id: rpi-cluster
-  name: Raspberry Pi cluster
-  date: "2022-04"
-  line: a small cluster computer built from Raspberry Pis.
-  url: https://github.com/decoded-cipher/RPi4-Cluster-Computer
 - id: chacko-mash
   name: chacko-mash
   date: "2021-05"
