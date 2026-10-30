@@ -817,6 +817,19 @@ main {
     padding-bottom: 0.9rem;
   }
 
+  .works .row {
+    padding: 0.9rem 0;
+    border-top: 1px solid var(--rule);
+  }
+
+  .works .row:first-child {
+    border-top: 0;
+  }
+
+  .works .row > .when {
+    padding: 0;
+  }
+
   .works .aside {
     height: auto;
     padding: 0.2rem 0 0;
