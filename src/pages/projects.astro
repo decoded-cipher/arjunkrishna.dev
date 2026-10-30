@@ -4,7 +4,7 @@ import Base from '../layouts/Base.astro';
 import { monthYear } from '../lib/date';
 import { site } from '../site';
 import { external } from '../lib/ref';
-import { absolute, path } from '../lib/url';
+import { absolute } from '../lib/url';
 import { author, breadcrumbs, itemList, page } from '../lib/schema';
 import { lastmod } from '../lib/lastmod';
 import { homeOf, restOf } from '../lib/projects';
@@ -14,7 +14,6 @@ const sentence = (text: string) => text.charAt(0).toUpperCase() + text.slice(1);
 const contributions = (await getCollection('contributions')).sort((a, b) => b.data.date.localeCompare(a.data.date));
 const small = (await getCollection('small')).sort((a, b) => b.data.date.localeCompare(a.data.date));
 const updated = (await lastmod())['/projects'];
-const linkedin = site.profiles.find((p) => p.name === 'LinkedIn')!.url;
 
 const description =
   'Personal projects by Arjun Krishna, built outside his day job — Nodrix, an IoT platform for Cloudflare, Reelity, BitNerve, NetMon and more.';
@@ -47,9 +46,8 @@ const schema = [
     <div class="intro">
       <h1>Personal projects</h1>
       <p>
-        Things I have built outside my day job. Most were made to understand how something works; a few are
-        used by other people. Tagged versions are listed under <a href={path('/releases')}>Releases</a>. For my
-        employment history, see <a {...external(linkedin)}>LinkedIn</a>.
+        What I build when the workday is done. Most began as a question I couldn't let go of, and a few turned into
+        things other people now use.
       </p>
     </div>
 
