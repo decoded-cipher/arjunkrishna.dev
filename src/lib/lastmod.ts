@@ -6,10 +6,10 @@ const latest = (...dates: Date[]) => new Date(Math.max(...dates.map((date) => da
 
 export async function lastmod() {
   const newest = (await allPosts())[0].date;
-  const released = (await allReleases())[0]?.date ?? lastUpdated('src/content/projects', 'src/content/small.yaml');
+  const released = (await allReleases())[0]?.date ?? lastUpdated('src/content/projects', 'src/content/small.json');
   return {
     '/': latest(lastUpdated('src/content/home.mdx', 'src/content/projects'), newest),
-    '/projects': lastUpdated('src/content/projects', 'src/content/small.yaml', 'src/content/contributions.yaml'),
+    '/projects': lastUpdated('src/content/projects', 'src/content/small.json', 'src/content/contributions.json'),
     '/blog': newest,
     '/releases': released,
     '/colophon': lastUpdated('src/pages/colophon.astro'),
