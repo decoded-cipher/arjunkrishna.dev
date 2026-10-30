@@ -8,4 +8,4 @@ links:
   source: https://github.com/decoded-cipher/netmon
 ---
 
-A lightweight home network monitor with a live dashboard for latency, packet loss, jitter, DNS and bandwidth. Runs on a Raspberry Pi, in Docker, or on any machine.
+A self-contained home network monitor in a single Go binary. Continuous latency, jitter, packet loss and DNS checks, Cloudflare speed tests that fire when the connection degrades, and a live dashboard, on anything from a Raspberry Pi to Docker.

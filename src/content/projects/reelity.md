@@ -11,4 +11,4 @@ links:
   writeup: https://blog.inovuslabs.org/building-reelity-with-ffmpeg-wasm/
 ---
 
-Paste a product pitch and a link, and get a short vertical video, rendered in the browser with ffmpeg compiled to WebAssembly.
+An AI video studio that turns a product pitch and a link into a vertical reel. An LLM directs, stock footage, GIFs and music fill the frame, and ffmpeg compiled to WebAssembly renders the MP4 right in the browser.

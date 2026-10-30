@@ -9,4 +9,4 @@ links:
   writeup: https://blog.inovuslabs.org/mgu-result-scrapper/
 ---
 
-Fetched exam results from the university's portal, emailed each student their result as a secure PDF, and produced mark lists for teachers.
+An automation pipeline that pulls a whole batch's university results in about a minute. Headless Playwright scraping, password-protected PDFs emailed to every student, and ready-made mark lists and analytics for teachers, queued on RabbitMQ.

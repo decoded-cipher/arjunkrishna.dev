@@ -10,4 +10,4 @@ links:
   source: https://github.com/decoded-cipher/nodrix-sdk
 ---
 
-An Arduino library for ESP32 and ESP8266 boards that connects hardware to Nodrix in a few lines — control, telemetry and events over WebSocket or HTTP.
+The Arduino library that puts ESP32 and ESP8266 boards on Nodrix in a few lines. Typed control handlers and batched telemetry over a persistent WebSocket, with an HTTP mode for deep-sleep nodes, TLS pinning and multi-network failover.

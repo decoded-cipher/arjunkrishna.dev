@@ -9,4 +9,4 @@ links:
   source: https://github.com/decoded-cipher/nodrix-llm
 ---
 
-A study in fine-tuning: a 7B coding model trained into a build assistant for Nodrix, with the dataset, three training runs, and an honest account of what fine-tuning fixed and what it couldn't.
+A fine-tuning study that turns Qwen2.5-Coder into a Nodrix build assistant. Three LoRA runs across 1.5B and 7B models on a hand-built dataset, scored against a sealed test set, with an honest account of what fine-tuning fixed and what it couldn't.

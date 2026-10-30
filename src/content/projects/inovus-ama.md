@@ -9,4 +9,4 @@ links:
   writeup: https://blog.inovuslabs.org/meet-inovus-ama/
 ---
 
-A self-hosted assistant that answers questions about the lab from ten years of its own documents, and stays on topic.
+A retrieval-augmented assistant that knows Inovus Labs inside out. Gemini embeddings and a Pinecone vector index ground every answer in the lab's own knowledge base, and it politely refuses to go off-topic.

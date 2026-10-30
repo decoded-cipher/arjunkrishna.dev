@@ -7,4 +7,4 @@ links:
   source: https://github.com/decoded-cipher/weblyft
 ---
 
-An open-source, container-based platform-as-a-service for deploying apps on free cloud services.
+A self-hosted, Vercel-style deployment platform built entirely on free tiers. Builds run in ephemeral Docker containers off a RabbitMQ queue, logs stream through Kafka, and every project goes live on its own subdomain.

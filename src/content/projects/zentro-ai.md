@@ -8,4 +8,4 @@ links:
   source: https://github.com/decoded-cipher/zentro-ai
 ---
 
-A SaaS platform that turns a plain-English description into a working app — generated, previewed and edited in the browser, then deployed. Each build runs in its own container.
+An AI app builder that turns a plain-English prompt into a running app. Every project gets its own Docker sandbox with a live preview and VS Code in the browser, orchestrated over RabbitMQ and Redis.
