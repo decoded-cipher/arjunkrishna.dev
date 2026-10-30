@@ -1,7 +1,6 @@
 ---
 name: Zentro AI
 date: "2025-11"
-status: complete
 order: 6
 stack: Nuxt, Hono, Docker, Redis
 links:

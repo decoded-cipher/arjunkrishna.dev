@@ -573,10 +573,6 @@ main {
   padding-top: 0.3rem;
 }
 
-.project .status {
-  font-style: italic;
-}
-
 .project > .meta {
   grid-column: 3;
   align-self: start;
@@ -839,12 +835,6 @@ main {
     flex-direction: row;
     gap: 0.5rem;
     padding: 0 0 0.25rem;
-  }
-
-  .project .status::before {
-    content: '·';
-    margin-right: 0.5rem;
-    font-style: normal;
   }
 
   .site-footer {

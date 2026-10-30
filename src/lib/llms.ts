@@ -6,8 +6,6 @@ import { allReleases } from './releases';
 import { monthYear } from './date';
 import { absolute } from './url';
 
-const statusLabel = { active: 'Active', complete: 'Complete', maintained: 'Maintained', archived: 'Archived' };
-
 const isoDay = (date: Date) => date.toISOString().slice(0, 10);
 
 async function projects() {
@@ -95,7 +93,7 @@ export async function llmsFull() {
       [
         `### ${project.name}`,
         '',
-        `${monthYear(project.date)} · ${statusLabel[project.status]} · ${project.stack}${project.parent ? ` · part of ${all.find((p) => p.id === project.parent)?.name}` : ''}`,
+        `${monthYear(project.date)} · ${project.stack}${project.parent ? ` · part of ${all.find((p) => p.id === project.parent)?.name}` : ''}`,
         '',
         project.body,
         '',

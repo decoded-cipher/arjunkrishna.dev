@@ -1,7 +1,6 @@
 ---
 name: BitNerve
 date: "2025-10"
-status: active
 order: 5
 featured: true
 homeLine: an AI trading engine that lets Claude trade crypto futures through the Model Context Protocol, and records every decision it makes.

@@ -1,7 +1,6 @@
 ---
 name: Weblyft
 date: "2024-08"
-status: archived
 order: 11
 stack: TypeScript, Docker, Kafka, RabbitMQ, PostgreSQL, Redis, ClickHouse
 links:

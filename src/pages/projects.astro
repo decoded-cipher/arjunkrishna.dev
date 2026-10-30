@@ -8,13 +8,7 @@ import { absolute, path } from '../lib/url';
 import { author, breadcrumbs, itemList, page } from '../lib/schema';
 import { lastmod } from '../lib/lastmod';
 
-const statusLabel = { active: 'Active', maintained: 'Maintained', complete: 'Complete', archived: 'Archived' };
-
-const statusRank = Object.keys(statusLabel);
-
-const entries = (await getCollection('projects', ({ data }) => !data.draft)).sort(
-  (a, b) => statusRank.indexOf(a.data.status) - statusRank.indexOf(b.data.status) || a.data.order - b.data.order,
-);
+const entries = (await getCollection('projects', ({ data }) => !data.draft)).sort((a, b) => a.data.order - b.data.order);
 const projects = await Promise.all(entries.map(async (entry) => ({ entry, ...(await render(entry)) })));
 const sentence = (text: string) => text.charAt(0).toUpperCase() + text.slice(1);
 const childrenOf = (id: string) => projects.filter(({ entry }) => entry.data.parent === id);
@@ -48,7 +42,6 @@ const schema = [
         ...(data.links.writeup && { subjectOf: { '@type': 'BlogPosting', url: data.links.writeup } }),
         ...(data.parent && { isPartOf: { '@id': absolute(`/projects#${data.parent}`) } }),
         keywords: data.stack,
-        creativeWorkStatus: statusLabel[data.status],
         author,
       })),
     ),
@@ -75,7 +68,6 @@ const schema = [
           <li class="row project" id={entry.id}>
             <div class="when">
               <span>{monthYear(entry.data.date)}</span>
-              <span class="status">{statusLabel[entry.data.status]}</span>
             </div>
             <div class="what">
               <h3>{entry.data.name}</h3>

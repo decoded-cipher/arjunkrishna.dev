@@ -1,7 +1,6 @@
 ---
 name: Nodrix
 date: "2026-05"
-status: active
 order: 1
 featured: true
 homeLine: an IoT platform that runs in your own Cloudflare account. The idea waited years for me to be able to build it.
