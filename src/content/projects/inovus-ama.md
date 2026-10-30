@@ -3,7 +3,6 @@ name: Inovus AMA
 years: "2025"
 status: maintained
 order: 8
-parent: inovus-labs
 line: a self-hosted assistant that answers questions from ten years of the lab’s own documents.
 stack: TypeScript, retrieval-augmented generation
 links:

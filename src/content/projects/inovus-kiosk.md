@@ -3,7 +3,6 @@ name: Inovus Kiosk
 years: 2025 – now
 status: maintained
 order: 7
-parent: inovus-labs
 line: an old lobby TV turned into a live display of the lab’s blog, rebuilt whenever a post goes up.
 stack: Cloudflare Workers, GitHub Actions, Ghost
 links:
