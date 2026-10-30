@@ -3,7 +3,7 @@ name: BitNerve
 date: "2025-10"
 order: 5
 featured: true
-homeLine: an AI trading engine that lets Claude trade crypto futures through the Model Context Protocol, and records every decision it makes.
+homeLine: an agentic trading system where Claude agents trade perpetual futures over MCP, inside a deterministic risk engine, they can't override.
 stack: TypeScript, Claude Code via MCP, PostgreSQL, Nuxt
 releases: true
 links:

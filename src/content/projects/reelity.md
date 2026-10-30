@@ -3,7 +3,7 @@ name: Reelity
 date: "2026-06"
 order: 4
 featured: true
-homeLine: paste a product pitch and a link, and get a short vertical video, rendered in the browser.
+homeLine: an AI video studio that turns a product pitch and a link into a vertical reel, rendered right in the browser.
 stack: Cloudflare Workers, Hono, Vue, AI SDK, ffmpeg.wasm, R2
 links:
   site: https://reelity.arjunkrishna.dev
