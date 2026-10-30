@@ -1,5 +1,6 @@
 import { defineConfig, fontProviders } from 'astro/config';
 import mdx from '@astrojs/mdx';
+import csp from './src/integrations/csp';
 import standard from './src/integrations/standard';
 import stats from './src/integrations/stats';
 
@@ -12,7 +13,7 @@ export default defineConfig({
   base,
   trailingSlash: 'ignore',
   build: { format: 'file', inlineStylesheets: 'always' },
-  integrations: [mdx(), standard(), stats()],
+  integrations: [mdx(), standard(), csp(), stats()],
   fonts: [
     {
       provider: fontProviders.fontsource(),
