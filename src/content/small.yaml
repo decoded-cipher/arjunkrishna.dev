@@ -1,3 +1,13 @@
+- id: inovus-email-worker
+  name: inovus-email-worker
+  date: "2026-05"
+  line: answers every message to the lab with a reply drafted by Workers AI.
+  url: https://github.com/decoded-cipher/inovus-email-worker
+- id: watch_bro
+  name: watch_bro
+  date: "2026-03"
+  line: a Telegram bot that keeps track of the films and shows you watch.
+  url: https://github.com/decoded-cipher/watch_bro
 - id: auto-changelog
   name: auto-changelog
   date: "2025-12"
@@ -24,3 +34,13 @@
   date: "2022-04"
   line: a small cluster computer built from Raspberry Pis.
   url: https://github.com/decoded-cipher/RPi4-Cluster-Computer
+- id: chacko-mash
+  name: chacko-mash
+  date: "2021-05"
+  line: the custom Discord bot that runs the Inovus Labs server.
+  url: https://github.com/decoded-cipher/chacko-mash
+- id: colab-crypto-mining
+  name: Colab-Crypto-Mining
+  date: "2021-05"
+  line: mining Ethereum, Monero and Duino-Coin on Google Colab notebooks.
+  url: https://github.com/decoded-cipher/Colab-Crypto-Mining
