@@ -1,3 +1,8 @@
+- id: bridgy-fed
+  repo: snarfed/bridgy-fed
+  date: "2026-10"
+  line: a bridge between the fediverse and Bluesky.
+  url: https://github.com/snarfed/bridgy-fed/pull/2750
 - id: cirrus
   repo: ascorbic/cirrus
   date: "2026-09"
