@@ -1,6 +1,6 @@
 ---
 name: Nodrix
-years: "2026"
+date: "2026-05"
 status: active
 order: 1
 featured: true

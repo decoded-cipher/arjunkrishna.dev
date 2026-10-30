@@ -1,6 +1,6 @@
 ---
 name: nodrix-sdk
-years: "2026"
+date: "2026-07"
 status: active
 order: 2
 parent: nodrix

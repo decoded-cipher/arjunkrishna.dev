@@ -74,7 +74,7 @@ const schema = [
         projects.filter(({ entry }) => !entry.data.parent).map(({ entry, Content }) => (
           <li class="row project" id={entry.id}>
             <div class="when">
-              <span>{entry.data.years}</span>
+              <span>{monthYear(entry.data.date)}</span>
               <span class="status">{statusLabel[entry.data.status]}</span>
             </div>
             <div class="what">

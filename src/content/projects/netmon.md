@@ -1,6 +1,6 @@
 ---
 name: NetMon
-years: "2026"
+date: "2026-02"
 status: complete
 order: 10
 stack: Go, SQLite, Vue

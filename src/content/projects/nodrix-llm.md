@@ -1,6 +1,6 @@
 ---
 name: nodrix-llm
-years: "2026"
+date: "2026-07"
 status: complete
 order: 3
 parent: nodrix

@@ -1,6 +1,6 @@
 ---
 name: Zentro AI
-years: 2025 – 2026
+date: "2025-11"
 status: complete
 order: 6
 stack: Nuxt, Hono, Docker, Redis

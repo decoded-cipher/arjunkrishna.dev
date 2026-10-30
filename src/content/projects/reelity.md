@@ -1,6 +1,6 @@
 ---
 name: Reelity
-years: "2026"
+date: "2026-06"
 status: complete
 order: 4
 featured: true

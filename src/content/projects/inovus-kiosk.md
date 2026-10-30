@@ -1,6 +1,6 @@
 ---
 name: Inovus Kiosk
-years: 2025 – now
+date: "2026-04"
 status: maintained
 order: 7
 line: an old lobby TV turned into a live display of the lab’s blog, rebuilt whenever a post goes up.

@@ -1,6 +1,6 @@
 ---
 name: Inovus AMA
-years: "2025"
+date: "2025-06"
 status: maintained
 order: 8
 line: a self-hosted assistant that answers questions from ten years of the lab’s own documents.

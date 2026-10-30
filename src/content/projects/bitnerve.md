@@ -1,6 +1,6 @@
 ---
 name: BitNerve
-years: 2025 – now
+date: "2025-10"
 status: active
 order: 5
 featured: true

@@ -7,7 +7,7 @@ const projects = defineCollection({
   loader: glob({ pattern: '*.md', base: './src/content/projects' }),
   schema: z.object({
     name: z.string(),
-    years: z.string(),
+    date: z.string().regex(/^\d{4}-\d{2}$/),
     status: z.enum(['active', 'complete', 'maintained', 'archived']),
     order: z.number(),
     draft: z.boolean().default(false),

@@ -95,7 +95,7 @@ export async function llmsFull() {
       [
         `### ${project.name}`,
         '',
-        `${project.years} · ${statusLabel[project.status]} · ${project.stack}${project.parent ? ` · part of ${all.find((p) => p.id === project.parent)?.name}` : ''}`,
+        `${monthYear(project.date)} · ${statusLabel[project.status]} · ${project.stack}${project.parent ? ` · part of ${all.find((p) => p.id === project.parent)?.name}` : ''}`,
         '',
         project.body,
         '',
