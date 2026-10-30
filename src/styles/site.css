@@ -573,6 +573,27 @@ main {
   .grid.wide {
     grid-template-columns: 170px minmax(0, 46rem) minmax(0, 1fr);
   }
+
+  .grid.narrow {
+    grid-template-columns: 170px max-content max-content minmax(0, 1fr);
+    column-gap: 3.5rem;
+  }
+
+  .grid.narrow > .intro {
+    grid-column: 2 / -1;
+  }
+
+  .grid.narrow .releases .what {
+    display: contents;
+  }
+
+  .grid.narrow .releases .what > * {
+    padding: 0.35rem 0;
+  }
+
+  .grid.narrow .releases .row > .aside {
+    grid-column: 4;
+  }
 }
 
 .things .row > .what {
