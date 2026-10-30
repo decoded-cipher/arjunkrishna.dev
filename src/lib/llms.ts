@@ -100,6 +100,7 @@ export async function llmsFull() {
         project.links.site && `- Site: ${project.links.site}`,
         project.links.source && `- Source: ${project.links.source}`,
         project.links.writeup && `- Write-up: ${project.links.writeup}`,
+        ...project.links.more.map(({ label, url }) => `- ${label}: ${url}`),
       ]
         .filter((line) => line !== undefined)
         .join('\n')

@@ -9,4 +9,5 @@ export const restOf = ({ data }: Project) =>
   [
     data.links.site && data.links.source && { label: 'Source', href: data.links.source },
     data.links.writeup && (data.links.site || data.links.source) && { label: 'Write-up', href: data.links.writeup },
+    ...data.links.more.map(({ label, url }) => ({ label, href: url })),
   ].filter(Boolean) as Link[];

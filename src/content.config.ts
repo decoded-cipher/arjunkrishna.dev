@@ -20,6 +20,7 @@ const projects = defineCollection({
         site: z.url().optional(),
         source: z.url().optional(),
         writeup: z.url().optional(),
+        more: z.array(z.object({ label: z.string(), url: z.url() })).default([]),
       })
       .default({}),
   }),
