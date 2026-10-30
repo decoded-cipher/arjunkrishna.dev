@@ -46,6 +46,7 @@ bun run assets
 | `/sitemap.xml`, `/robots.txt`, `/rss.xml`, `/manifest.webmanifest` | `src/pages/` |
 | `/.well-known/site.standard.publication`, Standard.site records | `src/lib/atproto.ts`, `src/pages/site.standard.json.ts` |
 | Content security policy on every page, with hashes of its inline styles and scripts | `src/integrations/csp.ts` |
+| `/.well-known/security.txt` | `src/pages/.well-known/security.txt.ts` |
 | `/blog/inovus/<slug>`, `/blog/medium/<slug>` — forward to each post | `src/pages/blog/[source]/[slug].astro` |
 
 ## Deploy
