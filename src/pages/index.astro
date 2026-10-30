@@ -37,7 +37,7 @@ const schema = [
     </div>
     <Portrait />
     <Bio components={{ a: Link }} />
-    <Margin>Some things I've made</Margin>
+    <Margin>Some things I’ve made</Margin>
     <ul class="made">
       {
         made.map(({ id, data }) => (
@@ -51,7 +51,7 @@ const schema = [
     </ul>
     <p class="small">
       I can be reached at{' '}
-      <a class="u-email" href={`mailto:${site.email}`}>{site.email}</a>, and I'm on{' '}
+      <a class="u-email" href={`mailto:${site.email}`}>{site.email}</a>, and I’m on{' '}
       {
         site.profiles.map((profile, i) => (
           <>
