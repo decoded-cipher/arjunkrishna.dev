@@ -13,6 +13,7 @@ export async function GET(context: APIContext) {
     xmlns: { atom: 'http://www.w3.org/2005/Atom', dc: 'http://purl.org/dc/elements/1.1/' },
     customData: [
       '<language>en</language>',
+      `<copyright>© 2018–${new Date().getFullYear()} ${site.name}, ${site.licence.name}</copyright>`,
       `<lastBuildDate>${new Date().toUTCString()}</lastBuildDate>`,
       `<atom:link href="${absolute('/rss.xml')}" rel="self" type="application/rss+xml"/>`,
       `<image><url>${absolute('/icon-512.png')}</url><title>${site.name}</title><link>${absolute('/')}</link></image>`,

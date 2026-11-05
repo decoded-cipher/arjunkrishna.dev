@@ -9,6 +9,7 @@ import { site } from '../site';
 const updated = (await lastmod())['/colophon'];
 const description = 'How arjunkrishna.dev is built: a static site with no JavaScript of its own, and the numbers from its latest build.';
 const repo = 'https://github.com/decoded-cipher/arjunkrishna.dev';
+const elsewhere = (name: string) => [...site.elsewhere, ...site.profiles].find((profile) => profile.name === name)!.url;
 
 const schema = [
   page('WebPage', '/colophon', `Colophon — ${site.name}`, description, { dateModified: updated.toISOString() }),
@@ -113,6 +114,16 @@ const sizes = [
         <dt class="when">Source</dt>
         <dd class="what">
           On <a {...external(repo)}>GitHub</a>.
+        </dd>
+      </div>
+      <div class="row" id="licence">
+        <dt class="when">Licence</dt>
+        <dd class="what">
+          Everything I write — here, on <a {...external(elsewhere('Inovus Blogs'))}>Inovus Blogs</a>,{' '}
+          <a {...external(elsewhere('Medium'))}>Medium</a> and <a {...external(elsewhere('LinkedIn'))}>LinkedIn</a> — and
+          this site’s design and code are under{' '}
+          <a {...external(site.licence.url, { ref: false, rel: 'license' })}>{site.licence.name}</a>. Share and adapt
+          them with credit, but not for commercial use. Photos of me are not included.
         </dd>
       </div>
     </dl>

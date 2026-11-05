@@ -22,6 +22,7 @@ export async function base(): Promise<Thing[]> {
       name: site.name,
       description: site.description,
       inLanguage: 'en',
+      license: site.licence.url,
       author: person,
       publisher: person,
     },

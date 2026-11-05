@@ -71,6 +71,7 @@ const graph = JSON.stringify({ '@context': 'https://schema.org', '@graph': [...(
     <link rel="icon" href={path('/favicon.svg')} type="image/svg+xml" />
     <link rel="apple-touch-icon" href={path('/apple-touch-icon.png')} />
     <link rel="manifest" href={path('/manifest.webmanifest')} />
+    <link rel="license" href={site.licence.url} />
     <meta name="theme-color" content="#f3f2ee" />
     {site.profiles.map((profile) => <link rel="me" href={profile.url} />)}
     <link rel="me" href={`mailto:${site.email}`} />
@@ -133,7 +134,10 @@ const graph = JSON.stringify({ '@context': 'https://schema.org', '@graph': [...(
         <slot />
       </main>
       <footer class="site-footer">
-        <p class="copyright">{site.name} <span class="mark">©</span> 2018–{new Date().getFullYear()}</p>
+        <p class="copyright">
+          <a href={`${path('/colophon')}#licence`}>{site.licence.name}</a> · <span class="mark">©</span>{' '}
+          2018–{new Date().getFullYear()}
+        </p>
         {
           updated && (
             <p class="updated">

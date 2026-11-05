@@ -7,6 +7,7 @@ export const site = {
   summary:
     'Arjun Krishna is a senior software engineer at Johnson & Johnson, based in Kerala, India, working on system design and distributed systems. He mentors at Inovus Labs, builds things like Nodrix and Reelity now and then, and writes about software, learning and the internet.',
   email: 'mail@arjunkrishna.dev',
+  licence: { name: 'CC BY-NC 4.0', url: 'https://creativecommons.org/licenses/by-nc/4.0/' },
   handle: 'decoded-cipher',
   x: '@decoded_cipher',
   locale: 'en_IN',

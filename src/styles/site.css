@@ -156,11 +156,13 @@ main {
   font-style: italic;
 }
 
+.site-footer .copyright a,
 .site-footer .updated a {
   color: inherit;
   text-decoration: none;
 }
 
+.site-footer .copyright a:hover,
 .site-footer .updated a:hover {
   text-decoration: underline;
   text-decoration-color: var(--rule);
