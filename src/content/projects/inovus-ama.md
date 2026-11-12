@@ -1,7 +1,7 @@
 ---
 name: Inovus AMA
 date: "2025-06"
-order: 8
+order: 9
 stack: TypeScript, Cloudflare Workers, Hono, Gemini, Pinecone, Nuxt
 links:
   site: https://ama.inovuslabs.org

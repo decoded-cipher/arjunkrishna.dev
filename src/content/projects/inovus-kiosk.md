@@ -1,7 +1,7 @@
 ---
 name: Inovus Kiosk
 date: "2026-04"
-order: 7
+order: 8
 stack: Cloudflare Workers, EmDash, GitHub Actions, Ghost
 links:
   site: https://kiosk.inovuslabs.org

@@ -1,7 +1,7 @@
 ---
 name: Nodrix
 date: "2026-05"
-order: 1
+order: 2
 featured: true
 homeLine: the IoT platform Cloudflare didn't build. Telemetry, realtime dashboards and automations, all running in your own Cloudflare account.
 stack: TypeScript, Cloudflare Workers, Durable Objects, D1, R2, Vue

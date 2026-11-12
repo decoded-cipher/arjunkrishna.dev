@@ -1,7 +1,7 @@
 ---
 name: Nodrix SDK
 date: "2026-07"
-order: 2
+order: 3
 parent: nodrix
 stack: C++, Arduino, ESP-IDF, PlatformIO
 releases: true

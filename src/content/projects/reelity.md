@@ -1,7 +1,7 @@
 ---
 name: Reelity
 date: "2026-06"
-order: 4
+order: 5
 featured: true
 homeLine: an AI video studio that turns a product pitch and a link into a vertical reel, rendered right in the browser.
 stack: Cloudflare Workers, Hono, Vue, AI SDK, ffmpeg.wasm, R2

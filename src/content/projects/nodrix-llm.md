@@ -1,7 +1,7 @@
 ---
 name: Nodrix LLM
 date: "2026-07"
-order: 3
+order: 4
 parent: nodrix
 stack: Python, Unsloth, LoRA, Qwen2.5-Coder, Gradio
 links:

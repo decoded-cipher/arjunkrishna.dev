@@ -1,7 +1,7 @@
 ---
 name: Zentro AI
 date: "2025-11"
-order: 6
+order: 7
 stack: Nuxt, Hono, RabbitMQ, Docker, Redis, Claude API
 links:
   site: https://zentro.arjunkrishna.dev

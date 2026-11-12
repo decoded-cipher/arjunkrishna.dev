@@ -1,7 +1,7 @@
 ---
 name: Makleen
 date: "2026-10"
-order: 0
+order: 1
 stack: zsh, Homebrew
 releases: true
 links:

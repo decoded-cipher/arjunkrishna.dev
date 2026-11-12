@@ -1,7 +1,7 @@
 ---
 name: BitNerve
 date: "2025-10"
-order: 5
+order: 6
 featured: true
 homeLine: an agentic trading system where Claude agents trade perpetual futures over MCP, inside a deterministic risk engine, they can't override.
 stack: TypeScript, Claude Code via MCP, PostgreSQL, Nuxt

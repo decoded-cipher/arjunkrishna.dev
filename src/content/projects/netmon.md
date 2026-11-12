@@ -1,7 +1,7 @@
 ---
 name: NetMon
 date: "2026-02"
-order: 10
+order: 11
 stack: Go, SQLite, Vue, Docker
 releases: true
 links:
