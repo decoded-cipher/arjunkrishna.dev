@@ -43,8 +43,10 @@ const elsewhere = [
   ...site.profiles.filter((profile) => icons[profile.name]).map((profile) => ({ name: profile.name, ...external(profile.url, { ref: false }) })),
   { name: 'RSS', href: path('/rss.xml') },
 ];
+const pages = { and: [{ href_matches: '/*' }, { not: { href_matches: '/*.*' } }] };
 const speculation = JSON.stringify({
-  prefetch: [{ where: { and: [{ href_matches: '/*' }, { not: { href_matches: '/*.*' } }] }, eagerness: 'moderate' }],
+  prefetch: [{ where: pages, eagerness: 'moderate' }],
+  prerender: [{ where: pages, eagerness: 'conservative' }],
 });
 const graph = JSON.stringify({ '@context': 'https://schema.org', '@graph': [...(await base()), ...schema] }).replace(
   /</g,
