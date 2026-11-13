@@ -132,7 +132,7 @@ ${projectText}
 Other people's open-source projects I have contributed to.
 
 ${(await getCollection('contributions'))
-  .sort((a, b) => b.data.date.localeCompare(a.data.date))
+  .sort((a, b) => a.data.order - b.data.order)
   .map(({ data }) => `- [${data.repo}](${data.url}) (${monthYear(data.date)}): ${data.line}`)
   .join('\n')}
 

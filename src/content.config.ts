@@ -42,6 +42,7 @@ const contributions = defineCollection({
   schema: z.object({
     repo: z.string(),
     date: z.string().regex(/^\d{4}-\d{2}$/),
+    order: z.number(),
     line: z.string(),
     url: z.url(),
   }),

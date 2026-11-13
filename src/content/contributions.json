@@ -3,6 +3,7 @@
     "id": "bridgy-fed",
     "repo": "snarfed/bridgy-fed",
     "date": "2026-10",
+    "order": 1,
     "line": "a bridge between the fediverse and Bluesky.",
     "url": "https://github.com/snarfed/bridgy-fed/pull/2750"
   },
@@ -10,6 +11,7 @@
     "id": "cirrus",
     "repo": "ascorbic/cirrus",
     "date": "2026-09",
+    "order": 2,
     "line": "a single-user ATProto PDS that runs on a Cloudflare Worker.",
     "url": "https://github.com/ascorbic/cirrus/pull/250"
   },
@@ -17,6 +19,7 @@
     "id": "nocodb",
     "repo": "nocodb/nocodb",
     "date": "2026-06",
+    "order": 3,
     "line": "a free, self-hostable alternative to Airtable.",
     "url": "https://github.com/nocodb/nocodb/pull/14170"
   }
