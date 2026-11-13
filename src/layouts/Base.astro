@@ -112,7 +112,13 @@ const graph = JSON.stringify({ '@context': 'https://schema.org', '@graph': [...(
 
     <script is:inline type="application/ld+json" set:html={graph} />
     <script is:inline type="speculationrules" set:html={speculation} />
-    <Font cssVariable="--font-serif" preload={[{ weight: 400, style: 'normal' }]} />
+    <Font
+      cssVariable="--font-serif"
+      preload={[
+        { weight: 400, style: 'normal' },
+        { weight: 400, style: 'italic' },
+      ]}
+    />
     <slot name="head" />
   </head>
   <body>
