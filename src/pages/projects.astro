@@ -8,6 +8,7 @@ import { absolute } from '../lib/url';
 import { author, breadcrumbs, itemList, page } from '../lib/schema';
 import { lastmod } from '../lib/lastmod';
 import { homeOf, restOf } from '../lib/projects';
+import { linked } from '../lib/text';
 
 const entries = (await getCollection('projects', ({ data }) => !data.draft)).sort((a, b) => a.data.order - b.data.order);
 const sentence = (text: string) => text.charAt(0).toUpperCase() + text.slice(1);
@@ -100,7 +101,11 @@ const schema = [
             <span class="when">{monthYear(data.date)}</span>
             <span class="what">
               <a {...external(data.url)}>{data.repo}</a>
-              <span>{sentence(data.line)}</span>
+              <span>
+                {linked(sentence(data.line)).map((part) =>
+                  part.href ? <a {...external(part.href)}>{part.text}</a> : part.text,
+                )}
+              </span>
             </span>
           </li>
         ))
