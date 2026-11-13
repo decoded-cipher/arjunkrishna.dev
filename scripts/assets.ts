@@ -167,26 +167,27 @@ function ico(images: { size: number; data: Buffer }[]) {
   return Buffer.concat([header, ...images.map((image) => image.data)]);
 }
 
-// The name in Allison, as a single path that takes the text colour. SVGO rewrites the path with
-// relative, shortened commands at a tenth of a unit, far below a pixel at the size it is shown.
+// The name in Allison, as a single path that takes the text colour. It is drawn at three times the
+// size it was set at, so SVGO can round the path to whole units, still far below a pixel when shown.
 async function logo() {
   const data = await woff('allison', 'allison-latin-400-normal');
+  const scale = 3;
   const drawn = await satori(
-    h('div', { width: '100%', height: '100%', alignItems: 'center', paddingLeft: 60 }, [
-      h('div', { fontFamily: 'Signature', fontSize: 96, color: 'black' }, site.name.replace(' ', '')),
+    h('div', { width: '100%', height: '100%', alignItems: 'center', paddingLeft: 60 * scale }, [
+      h('div', { fontFamily: 'Signature', fontSize: 96 * scale, color: 'black' }, site.name.replace(' ', '')),
     ]) as never,
-    { width: 800, height: 200, fonts: [{ name: 'Signature', data, weight: 400, style: 'normal' }] },
+    { width: 800 * scale, height: 200 * scale, fonts: [{ name: 'Signature', data, weight: 400, style: 'normal' }] },
   );
 
   const { info } = await sharp(Buffer.from(drawn)).trim().toBuffer({ resolveWithObject: true });
-  const pad = 3;
+  const pad = 3 * scale;
   const box = [-info.trimOffsetLeft! - pad, -info.trimOffsetTop! - pad, info.width + pad * 2, info.height + pad * 2];
   const path = drawn.match(/ d="([^"]+)"/)![1];
 
   const svg =
     `<svg xmlns="http://www.w3.org/2000/svg" viewBox="${box.join(' ')}" aria-hidden="true">` +
-    `<path fill="currentColor" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" d="${path}"/></svg>`;
-  return `${optimize(svg, { floatPrecision: 1 }).data}\n`;
+    `<path fill="currentColor" stroke="currentColor" stroke-width="${1.6 * scale}" stroke-linejoin="round" d="${path}"/></svg>`;
+  return `${optimize(svg, { floatPrecision: 0 }).data}\n`;
 }
 
 const signature = await logo();
