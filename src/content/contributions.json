@@ -1,5 +1,13 @@
 [
   {
+    "id": "federated-ads",
+    "repo": "federated-ads/spec",
+    "date": "2026-10",
+    "order": 0,
+    "line": "an open, federated, owner-controlled protocol for advertising on the open web, co-authored with [Suneesh Rajan](https://www.linkedin.com/in/suneeshtr/).",
+    "url": "https://github.com/federated-ads/spec"
+  },
+  {
     "id": "bridgy-fed",
     "repo": "snarfed/bridgy-fed",
     "date": "2026-10",
