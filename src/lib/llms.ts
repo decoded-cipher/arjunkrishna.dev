@@ -39,7 +39,7 @@ const facts = () =>
     `- Community: mentor at [${site.community.name}](${site.community.url}), the innovation centre of ${site.college}, since 2018`,
     `- Education: BCA and MCA, ${site.college}`,
     `- Contact: ${site.email}`,
-    `- Licence: my writing, here and elsewhere, and this site are ${site.licence.name} (${site.licence.url}); reuse with credit, not commercially; photos of me excluded`,
+    `- Licence: my writing, here and elsewhere, and this site are ${site.licence.name} (${site.licence.url}); reuse with credit, commercially too, and share adaptations under the same licence; photos of me excluded`,
     `- On the AT Protocol: @arjunkrishna.dev (${site.atproto.did}), on my own PDS at ${site.atproto.pds}`,
   ].join('\n');
 
